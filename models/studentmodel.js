@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const Dbschema = mongoose.Schema({
+const studentSchema = mongoose.Schema({
     name : String,
     id : Number,
     department : String,
@@ -10,4 +10,4 @@ const Dbschema = mongoose.Schema({
     dues : Number 
 })
 
-module.exports = mongoose.model('Student', Dbschema);
+module.exports = mongoose.model('students', studentSchema);

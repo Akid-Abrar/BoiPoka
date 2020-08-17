@@ -1,11 +1,11 @@
 const express= require('express');
-const Post = require('../models/dbmodels')
+const Finder = require('../models/studentmodel')
 
 const router=express.Router();
 
 router.get('/' , async (req,res) =>{
     try{
-        const loggedStudents=await Post.find();
+        const loggedStudents=await Finder.find();
         res.json(loggedStudents)
     }catch(err)
     {
@@ -17,7 +17,7 @@ router.get('/' , async (req,res) =>{
 
 router.get('/:postId' , async (req,res) =>{
     try{
-        const loggedStudents=await Post.findById(req.params.postId);
+        const loggedStudents=await Finder.findById(req.params.postId);
         res.json(loggedStudents)
     }catch(err)
     {
@@ -25,13 +25,8 @@ router.get('/:postId' , async (req,res) =>{
     }
 })
 
-router.get('/special' , (req,res) =>{
-    res.send('In The Special Post Here');
-})
-
 router.post('/' , async (req,res) =>{
-    //console.log(req.body);
-    const Student = new Post({
+    const Student = new Finder({
         name : req.body.name,
         id : req.body.id,
         department : req.body.department,
@@ -55,7 +50,7 @@ router.post('/' , async (req,res) =>{
 
 router.delete('/:postId' , async (req,res) =>{
     try{
-        const removedStudent=await Post.remove({_id : req.params.postId});
+        const removedStudent=await Finder.remove({_id : req.params.postId});
         res.json(removedStudent)
     }catch(err)
     {
@@ -68,7 +63,7 @@ router.delete('/:postId' , async (req,res) =>{
 
 router.patch('/:postId' , async (req,res) =>{
     try{
-        const removedStudent=await Post.updateOne(
+        const removedStudent=await Finder.updateOne(
             {_id : req.params.postId} ,
             {$set: {
                 Result:{

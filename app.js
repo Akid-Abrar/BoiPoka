@@ -8,8 +8,16 @@ app.use(bodyParser.json());
 
 //Import Routes
 
-const postRoute=require('./routes/posts');
-app.use('/posts',postRoute);
+const studentRoute=require('./routes/students');
+app.use('/students',studentRoute);
+
+const teacherRoute=require('./routes/teachers');
+app.use('/teachers',teacherRoute);
+
+const resultRoute=require('./routes/results');
+app.use('/results',resultRoute);
+
+
 //can use different routes for /user /admin etc
 
 //Routes
@@ -20,7 +28,7 @@ app.get('/', (req,res) =>{
 
 //DB connection
 
-mongoose.connect('mongodb://localhost/BIIS' , { useNewUrlParser: true } , ()=>{
+mongoose.connect('mongodb+srv://Akid:Akid@biis.lvoz1.mongodb.net/BIIS-Model?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
     console.log('Database connected');
 })
 
