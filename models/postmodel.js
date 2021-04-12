@@ -2,7 +2,14 @@ const mongoose=require('mongoose');
 
 const postSchema=mongoose.Schema({
     _id:Number,
-    text:String
+    type:Number,
+    like:Number,
+    bookid:Number,
+    creatorid:Number,
+    content:String,
+    date:Date,
+    commentsIds:[Number],
+    approved:Boolean
 })
 
 

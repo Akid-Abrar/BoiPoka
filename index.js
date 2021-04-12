@@ -8,9 +8,6 @@ app.use(bodyParser.json());
 
 //Import Routes
 
-const teacherRoute=require('./routes/teachers');
-app.use('/teachers',teacherRoute);
-
 const postRoute=require('./routes/posts');
 app.use('/posts',postRoute);
 

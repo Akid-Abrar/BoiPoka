@@ -27,7 +27,14 @@ router.post('/' , async (req,res) =>{
     const NewPost = new Finder({
 
         _id:req.body._id,
-        text:req.body.text
+        type:req.body.type,
+        like:req.body.like,
+        bookid:req.body.bookid,
+        creatorid:req.body.creatorid,
+        content:req.body.content,
+        date:req.body.date,
+        commentsIds:req.body.commentsIds,
+        approved:req.body.approved
     });
 
     try{
@@ -56,7 +63,7 @@ router.patch('/:postId' , async (req,res) =>{
         const updatedPost=await Finder.updateOne(
             {_id : req.params.postId} ,
             {$set: {
-                text : req.body.text
+                content : req.body.content
                 }
             }
         );
