@@ -8,14 +8,12 @@ app.use(bodyParser.json());
 
 //Import Routes
 
-const studentRoute=require('./routes/students');
-app.use('/students',studentRoute);
 
-const teacherRoute=require('./routes/teachers');
-app.use('/teachers',teacherRoute);
+const authorRoute=require('./routes/authors');
+app.use('/authors',authorRoute);
 
-const resultRoute=require('./routes/results');
-app.use('/results',resultRoute);
+const bookRoute=require('./routes/books');
+app.use('/books',bookRoute);
 
 
 //can use different routes for /user /admin etc
@@ -28,7 +26,7 @@ app.get('/', (req,res) =>{
 
 //DB connection
 
-mongoose.connect('mongodb+srv://Akid:Akid@biis.lvoz1.mongodb.net/BIIS-Model?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
+mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net/BoiPoka?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
     console.log('Database connected');
 })
 
