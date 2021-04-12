@@ -1,0 +1,31 @@
+Teacher:{
+    name:String , id:Number ,
+    advisee:[Student] , currentCourses:[Course] ,
+    experties:[Course]
+}
+
+Officer:{
+    name:String , id:Number
+}
+
+Student:{
+    name:String , level:String , 
+    term:String , hall:String ,
+    id:Number , dues:Number 
+}
+
+Course:{
+    title:String , creditHour:Number , 
+    level:String , term:String ,department:String 
+}
+
+Resut{
+    studentId:String,
+    L1T1:{
+        gpa:Number , cgpa:Number , courses:[Course] , grade:[Number]
+    }
+    ..................................
+    L5T2:{
+        gpa:Number , cgpa:Number , courses:[Course] , grade:[Number]
+    }
+}
