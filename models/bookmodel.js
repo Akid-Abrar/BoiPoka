@@ -6,7 +6,7 @@ const bookSchema = mongoose.Schema({
     author : Number,
     publisher : Number,
     avg_rating: Number,
-    release_year: Date,
+    release_year: Number,
     genre : [String],
     description: String,
     review: String

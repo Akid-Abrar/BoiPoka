@@ -27,9 +27,9 @@ router.post('/', async (req, res) => {
     const Book = new Finder({
         _id: req.body._id,
         name: req.body.name,
-        author: req.body.authorid,
+        author: req.body.author,
         publisher: req.body.publisher,
-        avg_rating: req.body.rating,
+        avg_rating: req.body.avg_rating,
         release_year: req.body.release_year,
         genre: req.body.genre,
         description: req.body.description,
@@ -67,9 +67,9 @@ router.patch('/:id', async (req, res) => {
                 $set: {
 
                     name: req.body.name,
-                    author: req.body.authorid,
+                    author: req.body.author,
                     publisher: req.body.publisher,
-                    avg_rating: req.body.rating,
+                    avg_rating: req.body.avg_rating,
                     release_year: req.body.release_year,
                     genre: req.body.genre,
                     description: req.body.description,
