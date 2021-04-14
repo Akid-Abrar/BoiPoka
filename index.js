@@ -5,22 +5,16 @@ const bodyParser=require('body-parser');
 const app=express();
 
 app.use(bodyParser.json());
+//app.use(cors());
+//app.use(express.json());
 
 //Import Routes
 
-const studentRoute=require('./routes/students');
-app.use('/students',studentRoute);
+const PublisherRouter = require('./routes/publishers');
+app.use('/publishers', PublisherRouter);
+const ReaderRouter=require('./routes/readers');
+app.use('/readers',ReaderRouter);
 
-const teacherRoute=require('./routes/teachers');
-app.use('/teachers',teacherRoute);
-
-const resultRoute=require('./routes/results');
-app.use('/results',resultRoute);
-
-
-//can use different routes for /user /admin etc
-
-//Routes
 
 app.get('/', (req,res) =>{
     res.send('Welcome To Homepage !!!')
@@ -28,9 +22,12 @@ app.get('/', (req,res) =>{
 
 //DB connection
 
-mongoose.connect('mongodb+srv://Akid:Akid@biis.lvoz1.mongodb.net/BIIS-Model?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
+mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net/BoiPoka?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
     console.log('Database connected');
 })
 
 //Listen
-app.listen(3000);
+app.listen(3000,()=>{
+console.log('server is running on port!!')
+});
+//app.listen(3000);
