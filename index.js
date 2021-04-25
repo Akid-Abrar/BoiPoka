@@ -11,6 +11,12 @@ app.use(bodyParser.json());
 const postRoute=require('./routes/posts');
 app.use('/posts',postRoute);
 
+const authorRoute=require('./routes/authors');
+app.use('/authors',authorRoute);
+
+const bookRoute=require('./routes/books');
+app.use('/books',bookRoute);
+
 
 //can use different routes for /user /admin etc
 
