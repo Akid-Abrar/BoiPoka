@@ -10,6 +10,19 @@ app.use(bodyParser.json());
 
 //Import Routes
 
+const postRoute=require('./routes/posts');
+app.use('/posts',postRoute);
+
+const authorRoute=require('./routes/authors');
+app.use('/authors',authorRoute);
+
+const bookRoute=require('./routes/books');
+app.use('/books',bookRoute);
+
+
+//can use different routes for /user /admin etc
+
+//Routes
 const PublisherRouter = require('./routes/publishers');
 app.use('/publishers', PublisherRouter);
 const ReaderRouter=require('./routes/readers');
@@ -17,7 +30,7 @@ app.use('/readers',ReaderRouter);
 
 
 app.get('/', (req,res) =>{
-    res.send('Welcome To Homepage !!!')
+    res.send('Welcome To boipoka Homepage !!!')
 })
 
 //DB connection
