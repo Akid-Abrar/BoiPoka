@@ -13,7 +13,8 @@ const readerSchema = new Schema({
   books_read:[Number],
   wishlist:[Number],
   reviews:{type:String,required:true},
-  posts:{type:String,required:true},
+  posts:[Number],
+  author_id:{type:Number ,required:true},
 
 }, {
   timestamps: true,

@@ -19,6 +19,7 @@ router.route('/add').post((req, res) => {
   const wishlist=req.body.wishlist;
   const reviews=req.body.reviews;
   const posts=req.body.posts;
+  const author_id=req.body.author_id;
   
 
   const newReader = new Reader({
@@ -33,6 +34,7 @@ router.route('/add').post((req, res) => {
     wishlist,
     reviews,
     posts,
+    author_id
   });
 
   newReader.save()
@@ -66,6 +68,7 @@ router.route('/update/:id').put((req, res) => {
     reader.wishlist=req.body.wishlist;
     reader.reviews=req.body.reviews;
     reader.posts=req.body.posts;
+    reader.author_id=req.body.author_id;
 
       reader.save()
         .then(() => res.json('reader updated!'))
