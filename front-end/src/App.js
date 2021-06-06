@@ -62,7 +62,7 @@ class App extends Component {
     const registered={
       first_name:this.state.fullname,
       last_name:this.state.username,
-      //email:this.state.email,
+      email:this.state.email,
       password:this.state.password,
       
     }
