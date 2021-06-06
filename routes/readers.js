@@ -1,16 +1,20 @@
 const router = require('express').Router();
 let Reader = require('../models/reader.model');
 
-router.route('/').get((req, res) => {
+
+router.route('/').get(async(req, res) => {
+  const red=await Reader.find({first_name:"Akid"},{wishlist:1});
+  console.log(red);
   Reader.find()
     .then(reader => res.json(reader))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
 router.route('/add').post((req, res) => {
-  const _id = req.body._id;
+  //const _id = req.body._id;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
+  const email=req.body.email;
   const password=req.body.password;
   const is_author=req.body.is_author;
   const friends=req.body.friends;
@@ -23,9 +27,10 @@ router.route('/add').post((req, res) => {
   
 
   const newReader = new Reader({
-    _id,
+    //_id,
     first_name,
     last_name,
+    email,
     password,
     is_author,
     friends,
@@ -42,7 +47,26 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// router.route('/signup').post((req,res)=>{
+//   const first_name = req.body.first_name;
+//   const last_name = req.body.last_name;
+//   const password=req.body.password;
+
+//   const signedreader= new Reader ({
+//     first_name ,
+//     last_name ,
+//     password
+//   });
+//   signedreader.save()
+//   .then(()=> {res.json('reader adddeddd')
+// })
+// .catch(error =>{
+//   res.json(error)
+// })
+// });
+
 router.route('/:id').get((req, res) => {
+  
   Reader.findById(req.params.id)
     .then(reader => res.json(reader))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -57,9 +81,10 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').put((req, res) => {
   Reader.findById(req.params.id)
     .then(reader => {
-     reader._id = req.body._id;
+     //reader._id = req.body._id;
     reader.first_name=req.body.first_name;
     reader.last_name=req.body.last_name;
+    reader.email=req.body.email;
     reader.password=req.body.password;
     reader.is_author=req.body.is_author;
     reader.friends=req.body.friends;

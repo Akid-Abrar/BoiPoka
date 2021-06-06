@@ -1,9 +1,11 @@
 const express= require('express');
 const mongoose=require('mongoose');
 const bodyParser=require('body-parser');
+const Finder=require('./models/bookmodel');
+var cors = require('cors')
 
 const app=express();
-
+app.use(cors());
 app.use(bodyParser.json());
 //app.use(cors());
 //app.use(express.json());
@@ -30,8 +32,11 @@ app.use('/readers',ReaderRouter);
 
 
 app.get('/', (req,res) =>{
+    
     res.send('Welcome To boipoka Homepage !!!')
 })
+
+
 
 //DB connection
 

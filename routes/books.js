@@ -1,5 +1,6 @@
 const express = require('express');
 const Finder = require('../models/bookmodel')
+const read = require('../models/reader.model')
 
 const router = express.Router();
 
@@ -7,6 +8,11 @@ router.get('/', async (req, res) => {
     try {
         const loggedBooks = await Finder.find();
         res.json(loggedBooks)
+        
+const book=await Finder.find({_id:{$in:await read.find({first_name:"Akid"},{_id:0}).toArray()[0].wishlist}},
+{name:1 , author:1})
+console.log(book)
+       
     } catch (err) {
         res.json({ message: err });
     }
