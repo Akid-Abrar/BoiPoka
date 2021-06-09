@@ -7,21 +7,21 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      fullname: '',
-      username: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
       
     }
 
-    this.changeFullname=this.changeFullname.bind(this)
-    this.changeUsername=this.changeUsername.bind(this)
+    this.changeFirstName=this.changeFirstName.bind(this)
+    this.changeLastName=this.changeLastName.bind(this)
     this.changemail=this.changemail.bind(this)
     this.changepassword=this.changepassword.bind(this)
     this.onSubmit=this.onSubmit.bind(this)
   }
 
-  changeFullname(event)
+  changeFirstName(event)
   {
     this.setState(
       {
@@ -30,7 +30,7 @@ class App extends Component {
     )
   }
   
-  changeUsername(event)
+  changeLastName(event)
   {
     this.setState(
       {
@@ -60,19 +60,18 @@ class App extends Component {
   {
     event.preventDefault()
     const registered={
-      first_name:this.state.fullname,
-      last_name:this.state.username,
+      first_name:this.state.first_name,
+      last_name:this.state.last_name,
       email:this.state.email,
       password:this.state.password,
       
     }
-    axios.post('http://localhost:3000/readers/add',registered).then(response =>
+    axios.post('http://localhost:4000/readers/add',registered).then(response =>
       console.log(response.data)
     )
-
     this.state = {
-      fullname: '',
-      username: '',
+      first_name: '',
+      last_name: '',
       email: '',
       password: ''
     }
@@ -88,35 +87,56 @@ class App extends Component {
         <div className='container'>
           <div className='form-div'>
             <form onSubmit={this.onSubmit}>
-              <input type='text'
-                placeholder='Full name'
-                onChange={this.changeFullname}
-                value={this.state.fullname}
-                className='form-control form-group'
-              />
-              <input type='text'
-              placeholder='User name'
-              onChange={this.changeUsername}
-              value={this.state.username}
-              className='form-control form-group'
-            />
-
-            <input type='text'
-                placeholder='E-mail'
-                onChange={this.changemail}
-                value={this.state.email}
-                className='form-control form-group'
-              />
-
-              <input type='password'
-                placeholder='password'
-                onChange={this.changepassword}
-                value={this.state.password}
-                className='form-control form-group'
-              />
-
-              <input type='submit' className='btn btn-danger btn-block' value='Submit'/>
-
+              <div className="FirstName">
+                <label for="inputFirstName" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-2">
+                  <input type='text'
+                    placeholder='First Name'
+                    onChange={this.changeFirstName}
+                    value={this.state.first_name}
+                    className='form-control form-group'
+                  />
+                </div>
+              </div>
+              <div className="LastName">
+                <label for="inputLastName" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-2">
+                  <input type='text'
+                    placeholder='User name'
+                    onChange={this.changeLastName}
+                    value={this.state.last_name}
+                    className='form-control form-group'
+                  />
+                </div>
+             </div>
+             <div className="Email">
+                <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-2">
+                  <input type='text'
+                    placeholder='E-mail'
+                    onChange={this.changemail}
+                    value={this.state.email}
+                    className='form-control form-group'
+                  />
+                </div>
+             </div>
+             <div className="Password">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-2">
+                  <input type='password'
+                    placeholder='password'
+                    onChange={this.changepassword}
+                    value={this.state.password}
+                    className='form-control form-group'
+                  />
+               </div>
+             </div>
+             <br></br>
+             <div className="SubmitBtn">
+                <div class="col-sm-2">
+                  <input type='submit' className='btn btn-danger btn-block' value='Submit'/>
+                </div>
+             </div>
             </form>
           </div>
         </div>
