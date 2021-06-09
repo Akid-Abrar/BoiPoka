@@ -26,7 +26,7 @@ router.get('/:Id' , async (req,res) =>{
 router.post('/' , async (req,res) =>{
     const NewPost = new Finder({
 
-        _id:req.body._id,
+        // _id:req.body._id,
         type:req.body.type,
         like:req.body.like,
         bookid:req.body.bookid,

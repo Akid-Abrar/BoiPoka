@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const Author = new Finder({
-        _id: req.body._id,
+        // _id: req.body._id,
         is_claimed: req.body.is_claimed,
         biography: req.body.biography,
         books: req.body.books,
@@ -74,6 +74,8 @@ router.patch('/:id', async (req, res) => {
         res.json({ message: err });
     }
 })
+
+
 
 
 

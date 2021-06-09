@@ -8,13 +8,13 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const _id = req.body._id;
+  // const _id = req.body._id;
   const name = req.body.name;
   const books = req.body.books;
   
 
   const newPublisher = new Publisher({
-    _id,
+    // _id,
     name,
     books,
   });
