@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
+import Home from '../Home'
 import axios from 'axios';
 
 const SignUpPage = () => (
@@ -71,9 +72,6 @@ class SignUpFormBase extends Component {
 
       })
       .then(() => {
-        return this.props.firebase.doSendEmailVerification();
-      })
-      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -85,6 +83,7 @@ class SignUpFormBase extends Component {
         this.setState({ error });
       });
 
+      
     event.preventDefault();
   };
 

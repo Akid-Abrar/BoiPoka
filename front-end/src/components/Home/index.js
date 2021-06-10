@@ -8,14 +8,15 @@ const HomePage = () => (
   <div>
     <h1>Home Page</h1>
     <p>The Home Page is accessible by every signed in user.</p>
-
-    <Messages />
   </div>
+  
 );
+
+//<Messages />
 
 const condition = authUser => !!authUser;
 
 export default compose(
-  withEmailVerification,
+  //withEmailVerification,
   withAuthorization(condition),
 )(HomePage);
