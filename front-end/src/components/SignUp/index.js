@@ -5,7 +5,6 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import Home from '../Home'
 import axios from 'axios';
 
 const SignUpPage = () => (
@@ -21,7 +20,7 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  isAdmin: false,
+  isAuthor: false,
   error: null,
 };
 
@@ -54,11 +53,10 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        axios.post('http://localhost:3000/readers/add',{
+        axios.post('http://localhost:4000/readers/add',{
           first_name:firstname,
           last_name:lastname,
           email:this.state.email,
-          password:this.state.passwordOne,
           
         }).then(response =>
         console.log(response.data)
@@ -72,6 +70,9 @@ class SignUpFormBase extends Component {
 
       })
       .then(() => {
+        return this.props.firebase.doSendEmailVerification();
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -83,7 +84,6 @@ class SignUpFormBase extends Component {
         this.setState({ error });
       });
 
-      
     event.preventDefault();
   };
 
@@ -102,7 +102,7 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      isAdmin,
+      isAuthor,
       error,
     } = this.state;
 
@@ -151,11 +151,11 @@ class SignUpFormBase extends Component {
           placeholder="Confirm Password"
         />
         <label>
-          Admin:
+          Author:
           <input
-            name="isAdmin"
+            name="isAuthor"
             type="checkbox"
-            checked={isAdmin}
+            checked={isAuthor}
             onChange={this.onChangeCheckbox}
           />
         </label>
