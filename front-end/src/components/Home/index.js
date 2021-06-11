@@ -12,7 +12,7 @@ const HomePage = () => (
   
 );
 
-//<Messages />
+{/* <Messages /> */}
 
 const condition = authUser => !!authUser;
 

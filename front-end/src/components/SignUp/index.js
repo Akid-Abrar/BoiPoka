@@ -20,7 +20,7 @@ const INITIAL_STATE = {
   email: '',
   passwordOne: '',
   passwordTwo: '',
-  isAuthor: false,
+  isAdmin: false,
   error: null,
 };
 
@@ -102,7 +102,7 @@ class SignUpFormBase extends Component {
       email,
       passwordOne,
       passwordTwo,
-      isAuthor,
+      isAdmin,
       error,
     } = this.state;
 
@@ -151,11 +151,11 @@ class SignUpFormBase extends Component {
           placeholder="Confirm Password"
         />
         <label>
-          Author:
+          Admin:
           <input
-            name="isAuthor"
+            name="isAdmin"
             type="checkbox"
-            checked={isAuthor}
+            checked={isAdmin}
             onChange={this.onChangeCheckbox}
           />
         </label>
