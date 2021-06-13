@@ -15,7 +15,7 @@ router.route('/add').post((req, res) => {
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
   const email=req.body.email;
-  const password=req.body.password;
+  // const password=req.body.password;
   const is_author=req.body.is_author;
   const friends=req.body.friends;
   const following=req.body.following;
@@ -31,7 +31,7 @@ router.route('/add').post((req, res) => {
     first_name,
     last_name,
     email,
-    password,
+    // password,
     is_author,
     friends,
     following,
@@ -85,7 +85,7 @@ router.route('/update/:id').put((req, res) => {
     reader.first_name=req.body.first_name;
     reader.last_name=req.body.last_name;
     reader.email=req.body.email;
-    reader.password=req.body.password;
+    // reader.password=req.body.password;
     reader.is_author=req.body.is_author;
     reader.friends=req.body.friends;
     reader.following=req.body.following;

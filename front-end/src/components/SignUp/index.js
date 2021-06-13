@@ -53,11 +53,10 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        axios.post('http://localhost:3000/readers/add',{
+        axios.post('http://localhost:4000/readers/add',{
           first_name:firstname,
           last_name:lastname,
           email:this.state.email,
-          password:this.state.passwordOne,
           
         }).then(response =>
         console.log(response.data)
@@ -71,6 +70,9 @@ class SignUpFormBase extends Component {
 
       })
       .then(() => {
+        return this.props.firebase.doSendEmailVerification();
+      })
+      .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
@@ -82,7 +84,6 @@ class SignUpFormBase extends Component {
         this.setState({ error });
       });
 
-      
     event.preventDefault();
   };
 

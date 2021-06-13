@@ -45,7 +45,7 @@ mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net
 })
 
 //Listen
-app.listen(3000,()=>{
+app.listen(4000,()=>{
 console.log('server is running on port!!')
 });
 //app.listen(3000);
