@@ -13,7 +13,7 @@ class Landing extends Component
 
     componentDidMount()
     {
-        fetch('http://localhost:3000/readers/60c2081de75d4811348ac3ee')
+        fetch('http://localhost:3000/readers/60c1e2b8e75d4811348ac3e6')
           .then(res => res.json())
           .then(json =>{
               this.setState({
@@ -22,6 +22,8 @@ class Landing extends Component
         });
     }
 
+
+
     render(){
         var {items}= this.state;
         var f_name=items.first_name;
@@ -29,7 +31,7 @@ class Landing extends Component
         var name=f_name+" "+l_name;
         return(
           <div>
-              <h1>{name}</h1>
+              <h1>Landing</h1>
           </div>
 
         );

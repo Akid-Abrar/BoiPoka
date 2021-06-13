@@ -5,7 +5,6 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import Home from '../Home'
 import axios from 'axios';
 
 const SignUpPage = () => (

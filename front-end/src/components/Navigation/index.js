@@ -27,6 +27,7 @@ const NavigationAuth = ({ authUser }) => (
 <Nav.Link href={ROUTES.LANDING}>Landing</Nav.Link>
  <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
  <Nav.Link href={ROUTES.ACCOUNT}>Account </Nav.Link>
+ <Nav.Link href={ROUTES.READER}>My Profile</Nav.Link>
  {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
  <SignOutButton />
 </Nav>
@@ -46,6 +47,7 @@ const NavigationNonAuth = () => (
      <Nav className="mr-auto">
       <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
       <Nav.Link href={ROUTES.SIGN_IN}>Sign In</Nav.Link>
+      <Nav.Link href={ROUTES.READER}>My Profile</Nav.Link>
      </Nav>
      <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
