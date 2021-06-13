@@ -28,6 +28,7 @@ const NavigationAuth = ({ authUser }) => (
 <Nav.Link href={ROUTES.LANDING}>Landing</Nav.Link>
  <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
  <Nav.Link href={ROUTES.ACCOUNT}>Account </Nav.Link>
+ <Nav.Link href={ROUTES.READER}>Profile </Nav.Link>
  {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
  <SignOutButton />
 </Nav>

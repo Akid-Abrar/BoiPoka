@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 
 const bookSchema = mongoose.Schema({
-    // _id : Number,
+     _id : Number,
     name : {type:String,required:true},
     author : {type:String,required:true},
     publisher : {type:String,required:true},
