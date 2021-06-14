@@ -1,25 +1,39 @@
-const express= require('express');
-const mongoose=require('mongoose');
-const bodyParser=require('body-parser');
-const Finder=require('./models/bookmodel');
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const Finder = require('./models/bookmodel');
 var cors = require('cors')
 
-const app=express();
+const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+//app.use(function (req, res, next) {
+//    res.header("Access-Control-Allow-Origin", "*");
+//    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-//Type, Accept");
+//    next();
+//});
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header("Access-Control-Allow-Headers", "x-access-token, Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //app.use(cors());
 //app.use(express.json());
 
 //Import Routes
 
-const postRoute=require('./routes/posts');
-app.use('/posts',postRoute);
 
-const authorRoute=require('./routes/authors');
-app.use('/authors',authorRoute);
+const postRoute = require('./routes/posts');
+app.use('/posts', postRoute);
 
-const bookRoute=require('./routes/books');
-app.use('/books',bookRoute);
+const authorRoute = require('./routes/authors');
+app.use('/authors', authorRoute);
+
+const bookRoute = require('./routes/books');
+app.use('/books', bookRoute);
 
 
 //can use different routes for /user /admin etc
@@ -27,12 +41,12 @@ app.use('/books',bookRoute);
 //Routes
 const PublisherRouter = require('./routes/publishers');
 app.use('/publishers', PublisherRouter);
-const ReaderRouter=require('./routes/readers');
-app.use('/readers',ReaderRouter);
+const ReaderRouter = require('./routes/readers');
+app.use('/readers', ReaderRouter);
 
 
-app.get('/', (req,res) =>{
-    
+app.get('/', (req, res) => {
+
     res.send('Welcome To boipoka Homepage !!!')
 })
 
@@ -40,12 +54,12 @@ app.get('/', (req,res) =>{
 
 //DB connection
 
-mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net/BoiPoka?retryWrites=true&w=majority' , { useNewUrlParser: true } , ()=>{
+mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net/BoiPoka?retryWrites=true&w=majority', { useNewUrlParser: true }, () => {
     console.log('Database connected');
 })
 
 //Listen
-app.listen(4000,()=>{
-console.log('server is running on port!!')
+app.listen(4000, () => {
+    console.log('server is running on port!!')
 });
 //app.listen(3000);

@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const publisherSchema = new Schema({
   // _id: { type:Number, required: true },
   name: { type: String, required: true },
-  books: [Number],
+  books: [String],
 }, {
   timestamps: true,
 });

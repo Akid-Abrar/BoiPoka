@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
     "firebase": "^8.6.5",
     "node-pre-gyp": "^0.17.0",
     "react": "^16.6.3",
