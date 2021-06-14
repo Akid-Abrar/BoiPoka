@@ -6,6 +6,7 @@ import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
+import SearchArea from '../Search/Searcharea';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -31,10 +32,8 @@ const NavigationAuth = ({ authUser }) => (
  {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
  <SignOutButton />
 </Nav>
-<Form inline>
- <FormControl type="text" placeholder="Search" className="mr-sm-2" />
- <Button variant="outline-info">Search</Button>
-</Form>
+
+
 </Navbar>
     
     </div>
@@ -48,10 +47,9 @@ const NavigationNonAuth = () => (
       <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
       <Nav.Link href={ROUTES.SIGN_IN}>Sign In</Nav.Link>
      </Nav>
-     <Form inline>
-      <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
-     </Form>
+   
+   
+   
     </Navbar>  
   
 );

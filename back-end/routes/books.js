@@ -9,12 +9,31 @@ router.get('/', async (req, res) => {
         const loggedBooks = await Finder.find();
         res.json(loggedBooks)
         
-const book=await Finder.find({_id:{$in:await read.find({first_name:"Akid"},{_id:0}).toArray()[0].wishlist}},
-{name:1 , author:1})
-console.log(book)
+
        
     } catch (err) {
         res.json({ message: err });
+    }
+})
+
+//find with book name
+router.post('/bookname',async (req,res) => {
+    var Bookname=req.body.name;
+    try{
+        let book=await Finder.findOne({name:new RegExp('^'+Bookname+'$', "i")}).then(b =>{
+         if(b) {
+           console.log(b);
+           res.json(b);
+         }
+         else {
+             res.json ('book not found');
+         }
+        })
+        
+
+    }catch(err)
+    {
+        res.json({message:err});
     }
 })
 
