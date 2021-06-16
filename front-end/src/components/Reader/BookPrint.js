@@ -30,8 +30,6 @@ class BookPrint extends Component
           axios.get(link)
             .then((res) => {
               this.setState({books : res.data})
-              console.log("got")
-              console.log(res.data)
             }
             )
             .catch(() => {
@@ -43,7 +41,7 @@ class BookPrint extends Component
     render()
     {
         return(
-            <div>
+            <div class="container ">
                 <Card style={{ width: '18rem' }} bg={'light'}>
                     <Card.Body>
                         <Card.Text>

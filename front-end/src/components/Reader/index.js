@@ -58,8 +58,8 @@ class Reader extends Component
     displayReader(readers) {
 
       return readers.map((reader, index) => (
-        <div key={index} className="reader__display">
-          <Card style={{ width: '18rem' }} bg={'light'}>
+        <div key={index} className="reader__display" class="row row-content align-items-center">
+          <Card style={{ width: '35rem' }} bg={'light'} >
             <Card.Body>
               <Card.Text>
                 <h3>{reader.first_name} {reader.last_name}</h3>
