@@ -24,11 +24,14 @@ class DiscussionPost extends React.Component{
         this.state.reader = reader;
         console.log(res)
       })
+
+    
   }
 
   render() {
     return (
       <div>
+        <h3>{this.state.reader.first_name} {this.state.reader.last_name}</h3>
         {this.state.reader.email}
       </div>
     )
