@@ -1,0 +1,3 @@
+Added Genre field in Readers
+
+Upadated Account,PasswordChange,PasswordForget

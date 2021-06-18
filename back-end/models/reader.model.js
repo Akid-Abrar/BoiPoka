@@ -16,6 +16,7 @@ const readerSchema = new Schema({
   reviews:{type:String},
   posts:[Number],
   author_id:{type:Number },
+  genre:[String],
 
 }, {
   timestamps: true,
