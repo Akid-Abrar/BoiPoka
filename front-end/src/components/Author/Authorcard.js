@@ -5,7 +5,8 @@ const Authorcard = (props) => {
         
         <div className="card">
         <div className="card-body">
-        <h2 className="card-title">By:{props.firstname}  {props.lastname}</h2>
+        <h2>About Author</h2>
+        <h3 className="card-title">{props.firstname}  {props.lastname}</h3>
         
     
         </div>

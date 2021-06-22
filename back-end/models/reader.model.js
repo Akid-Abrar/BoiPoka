@@ -12,10 +12,10 @@ const readerSchema = new Schema({
   friends:[Number],
   following:[Number],
   books_read:[Number],
-  wishlist:[Number],
+  wishlist:[String],
   reviews:{type:String},
   posts:[Number],
-  author_id:{type:Number },
+  author_id:{type:String },
 
 }, {
   timestamps: true,

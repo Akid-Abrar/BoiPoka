@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import img from './pic.jpg';
+
 import { ListGroup, Card } from 'react-bootstrap';
+
+var p= process.cwd() + 'back-end/upload/food.jpg';
+console.log(p);
 
 const Bookcard = (props) => {
     return (
-
-
 
         <div>
             <img src={img} alt="picture" />
