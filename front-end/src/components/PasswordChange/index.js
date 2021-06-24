@@ -44,7 +44,7 @@ class PasswordChangeForm extends Component {
       passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <div class="container">
+      <div class="container" align="center">
         <h3>Password Change </h3>
       <Form onSubmit={this.onSubmit}>
         <Form.Group controlId="passwordOne">

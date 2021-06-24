@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import {Component} from 'react'
+import { compose } from 'recompose';
 import {
   AuthUserContext,
   withAuthorization,
@@ -9,14 +10,15 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Navbar,Nav,Form,FormControl,Button,Card} from 'react-bootstrap'
+import {Container,Row,Col,Table,Button,Card,Image,Array} from 'react-bootstrap'
 import BookPrint from './BookPrint'
+import FriendPrint from './FriendPrint'
+import '../styles.css'
 
 const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <h1>Account: {authUser.email}</h1>
         <Reader authUser={authUser}/>
       </div>
     )}
@@ -31,8 +33,8 @@ class Reader extends Component
         this.state = {
           readers: [],
           books: [],
+          friends: [],
         }
-
     }
     
 
@@ -56,24 +58,74 @@ class Reader extends Component
     }
 
     displayReader(readers) {
-
+      var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
       return readers.map((reader, index) => (
         <div key={index} className="reader__display" class="row row-content align-items-center">
-          <Card style={{ width: '35rem' , height : '10rem'}} bg={'light'} >
-            <Card.Body>
-              <Card.Text>
-                <h3>{reader.first_name} {reader.last_name}</h3>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <div>
-            <label>Books Read</label>
-            {this.displayBook(reader.books_read)}
-          </div>
-          <div>
-            <label>WishList</label>
-            {this.displayBook(reader.wishlist)}
-          </div>
+          <Container>
+            <Row>
+              <Col sm={6}>
+                <Card style={{ width: '25rem' , height : '9rem' , backgroundColor:"#d1ecf0d8" ,  border:"0px"}}  >
+                  <Card.Body>
+                    <Row>
+                      <Col sm={5}>
+                        <Image
+                          height={100}
+                          width={100}
+                          roundedCircle
+                          src={imgsrc}
+                        />
+                      </Col>
+                      <Col sm={7}><h2><br></br>{reader.first_name} {reader.last_name}</h2></Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+                <br></br>
+                <font style = {{color:"black"}} size="5"><b>Friends</b></font>
+                <br></br>
+                <br></br>
+                <Row>
+                  <br></br>
+                  {this.displayFriend(reader.friends)}
+                  <br></br>
+                </Row>
+                  <br></br>
+              </Col>
+              <Col sm={3}>
+                  <Table border="7" bordercolor="#925024" >
+                    <thead className="tableheader-style">
+                      <tr align="center">
+                        <th align="center"><font style = {{color:"#ebdb82d8"}} size="5">Books Read</font></th>
+                      </tr>
+                    </thead>
+                    <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
+                      <br></br>
+                      <tr>
+                          {this.displayBook(reader.books_read)}
+                           
+                      </tr>
+                      
+                    </tbody>
+                  </Table>
+             
+              </Col>
+              <Col sm={3}>
+              <Table border="7" bordercolor="#925024">
+                <thead bgcolor="#925024" align="center">
+                  <tr align="center">
+                    <th><font style = {{color:"#ebdb82d8"}} size="5">Wish List</font></th>
+                  </tr>
+                </thead>
+                <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
+                  <br></br>
+                  {this.displayBook(reader.wishlist)}
+                </tbody>
+              </Table>          
+              </Col>
+              
+            </Row>
+            
+          </Container>
+
           
         </div>
       ));
@@ -82,17 +134,30 @@ class Reader extends Component
     displayBook(bookIds) {
 
       return bookIds.map((bookId, index) => (
-        <div key={index} className="book__display">
+
+          <div key={index} className="book__display">
             <div><BookPrint bookid={bookId}/></div>
-        </div>
+            <br></br>
+          </div>
       ));
     };
+
+    displayFriend(friendIds) {
+
+      return friendIds.map((friendId, index) => (
+        <Col key={index} className="friend__display" sm={3}>
+            <FriendPrint friendid={friendId}/>
+        </Col>
+      ));
+    };
+    
+    
 
     render(){
 
         return(
-          <div>
-              <div className="display">
+          <div style = {{backgroundColor:"#d1ecf0d8"}}>
+              <div className="display" >
                 {this.displayReader(this.state.readers)}
               </div>
           </div>
@@ -100,4 +165,11 @@ class Reader extends Component
         );
     }
 }
-export default Info;
+
+const condition = authUser => !!authUser;
+//see overlays
+
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(Info);

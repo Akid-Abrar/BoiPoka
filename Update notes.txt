@@ -1,0 +1,5 @@
+Added Genre field in Readers
+
+Upadated Account,PasswordChange,PasswordForget
+
+Profile theke signout korle error dey

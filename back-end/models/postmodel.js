@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const postSchema=mongoose.Schema({
     // _id:Number,
     type:Number,//type=1 for discussion,2 for review,3 for comment
-    like:Number,
+    like:[Number],
     bookid:Number,//0 for comment and discussion
     creatorid:Number,
     content:String,
