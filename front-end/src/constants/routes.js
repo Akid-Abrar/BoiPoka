@@ -9,8 +9,4 @@ export const REVIEW = '/post/:id';
 export const COMMENT = '/comment/:id';
 export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
-<<<<<<< HEAD
 export const READER = '/reader';
-=======
-
->>>>>>> master

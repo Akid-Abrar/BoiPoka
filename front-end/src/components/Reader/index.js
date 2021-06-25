@@ -100,4 +100,8 @@ class Reader extends Component
         );
     }
 }
-export default Info;
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(Info);
+
