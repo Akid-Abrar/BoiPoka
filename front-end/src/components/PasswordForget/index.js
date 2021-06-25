@@ -50,7 +50,7 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <div class="container" align="center">
+      <div className="container" align="center">
         <h3> Forgot Password ? </h3>
       <Form onSubmit={this.onSubmit}>
       <Form.Group controlId="passwordOne">

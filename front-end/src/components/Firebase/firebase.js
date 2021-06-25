@@ -1,7 +1,8 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
-import 'firebase/storage';
+import 'firebase/storage'
+
 
 
 
@@ -14,7 +15,7 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
-const storage = ''
+// const storage = {}
 
 class Firebase {
   constructor() {
@@ -30,6 +31,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.storage = app.storage();
 
 
   }
@@ -91,12 +93,18 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+  // storage = storage.ref(`/images/${image.name}`);
 
   // *** Message API ***
 
   message = uid => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
+
+  // storage = this.storage.ref();
 }
+
+
+// export {storage}
 
 export {Firebase as default}  

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
+import Upload from './image'
 
 import {
   AuthUserContext,
@@ -23,7 +24,7 @@ const AccountPage = () => (
         <h1 align="center">Account: {authUser.email}</h1>
         <ImageUpload />
         <br/><br />
-        <div class="container" align="center">
+        <div className="container" align="center">
           <Button variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
         </div>
         <br/><br/>
@@ -45,9 +46,13 @@ class ImageUpload extends Component {
     }
   render(){
     return(
+      <AuthUserContext.Consumer>
+      {authUser => (
       <div>
-        <h1>Image Upload</h1>
+        <Upload id = {authUser.email}/>
       </div>
+      )}
+      </AuthUserContext.Consumer>
     )
   }
 }

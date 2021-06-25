@@ -58,7 +58,7 @@ class Reader extends Component
     }
 
     displayReader(readers) {
-      var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+      // var imgsrc=
       return readers.map((reader, index) => (
         <div key={index} className="reader__display" class="row row-content align-items-center">
           <Container>
@@ -72,7 +72,7 @@ class Reader extends Component
                           height={100}
                           width={100}
                           roundedCircle
-                          src={imgsrc}
+                          src={reader.image}
                         />
                       </Col>
                       <Col sm={7}><h2><br></br>{reader.first_name} {reader.last_name}</h2></Col>

@@ -24,6 +24,7 @@ router.route('/add').post((req, res) => {
   const reviews=req.body.reviews;
   const posts=req.body.posts;
   const author_id=req.body.author_id;
+  const image=req.body.image;
   
 
   const newReader = new Reader({
@@ -39,7 +40,8 @@ router.route('/add').post((req, res) => {
     wishlist,
     reviews,
     posts,
-    author_id
+    author_id,
+    image
   });
 
   newReader.save()
@@ -102,6 +104,7 @@ router.route('/update/:id').put((req, res) => {
     reader.reviews=req.body.reviews;
     reader.posts=req.body.posts;
     reader.author_id=req.body.author_id;
+    reader.image=req.body.image;
 
       reader.save()
         .then(() => res.json('reader updated!'))
@@ -109,5 +112,24 @@ router.route('/update/:id').put((req, res) => {
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+router.patch('/:id', async (req, res) => {
+  try {
+      const reader = await Reader.update(
+          { _id: req.params.id },
+          {
+              $set: {
+
+                  image: req.body.image,
+
+              }
+          }
+      );
+      res.json(reader)
+  } catch (err) {
+      res.json({ message: err });
+  }
+})
 
 module.exports = router;

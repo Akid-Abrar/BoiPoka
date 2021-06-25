@@ -1,10 +1,10 @@
 const mongoose=require('mongoose');
 
 const bookSchema = mongoose.Schema({
-    _id : String,
+    // _id : String,
     name : {type:String,required:true},
-    author : {type:String,required:true},
-    publisher : {type:String,required:false},
+    author : {type:mongoose.Schema.Types.ObjectId,required:true},
+    publisher : {type:mongoose.Schema.Types.ObjectId,required:false},
     avg_rating: Number,
     release_year: Number,
     genre : [String],

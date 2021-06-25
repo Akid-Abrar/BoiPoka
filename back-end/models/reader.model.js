@@ -15,8 +15,9 @@ const readerSchema = new Schema({
   wishlist:[Schema.Types.ObjectId],
   reviews:{type:String},
   posts:[Number],
-  author_id:{type:Number },
+  author_id:{type:mongoose.Schema.Types.ObjectId },
   genre:[String],
+  image:{type:String},
 
 }, {
   timestamps: true,
