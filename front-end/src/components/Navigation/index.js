@@ -23,18 +23,19 @@ const NavigationAuth = ({ authUser }) => (
 
 <div>
 <Navbar bg="navbar-dark" variant="dark">
-<Navbar.Brand href="#home">BoiPoka</Navbar.Brand>
-<Nav className="mr-auto">
-<Nav.Link href={ROUTES.LANDING}>Landing</Nav.Link>
- <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
- <Nav.Link href={ROUTES.ACCOUNT}>Account </Nav.Link>
- {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
- <SignOutButton />
-</Nav>
-<Form inline>
- <FormControl type="text" placeholder="Search" className="mr-sm-2" />
- <Button variant="outline-info">Search</Button>
-</Form>
+  <Navbar.Brand href="#home">BoiPoka</Navbar.Brand>
+  <Nav className="mr-auto">
+    <Nav.Link href={ROUTES.LANDING}>Landing</Nav.Link>
+    <Nav.Link href={ROUTES.HOME}>Home</Nav.Link>
+    <Nav.Link href={ROUTES.ACCOUNT}>Account </Nav.Link>
+    <Nav.Link href={ROUTES.READER}>Profile </Nav.Link>
+    {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
+    <SignOutButton />
+  </Nav>
+  <Form inline>
+    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+  </Form>
 </Navbar>
     
     </div>

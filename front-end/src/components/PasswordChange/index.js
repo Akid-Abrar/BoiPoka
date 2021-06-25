@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles.css'
+import {Form,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
 
 import { withFirebase } from '../Firebase';
 
@@ -41,7 +44,10 @@ class PasswordChangeForm extends Component {
       passwordOne !== passwordTwo || passwordOne === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <div class="container" align="center">
+        <h3>Password Change </h3>
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="passwordOne">
         <input
           name="passwordOne"
           value={passwordOne}
@@ -49,6 +55,8 @@ class PasswordChangeForm extends Component {
           type="password"
           placeholder="New Password"
         />
+        </Form.Group>
+        <Form.Group controlId="passwordTwo">
         <input
           name="passwordTwo"
           value={passwordTwo}
@@ -56,12 +64,15 @@ class PasswordChangeForm extends Component {
           type="password"
           placeholder="Confirm New Password"
         />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
-        </button>
+        </Form.Group>
+        <Button variant="primary" disabled={isInvalid} type="submit">
+          Change My Password
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
+      <br/>
+      </div>
     );
   }
 }

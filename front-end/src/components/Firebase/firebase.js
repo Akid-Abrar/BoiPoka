@@ -1,6 +1,9 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
+
+
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -11,9 +14,12 @@ const config = {
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
+const storage = ''
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
+    //storage = app.storage();
 
     /* Helper */
 
@@ -25,11 +31,7 @@ class Firebase {
     this.auth = app.auth();
     this.db = app.database();
 
-    /* Social Sign In Method Provider */
 
-    this.googleProvider = new app.auth.GoogleAuthProvider();
-    this.facebookProvider = new app.auth.FacebookAuthProvider();
-    this.twitterProvider = new app.auth.TwitterAuthProvider();
   }
 
   // *** Auth API ***
@@ -40,14 +42,6 @@ class Firebase {
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
 
-  doSignInWithGoogle = () =>
-    this.auth.signInWithPopup(this.googleProvider);
-
-  doSignInWithFacebook = () =>
-    this.auth.signInWithPopup(this.facebookProvider);
-
-  doSignInWithTwitter = () =>
-    this.auth.signInWithPopup(this.twitterProvider);
 
   doSignOut = () => this.auth.signOut();
 
@@ -105,4 +99,4 @@ class Firebase {
   messages = () => this.db.ref('messages');
 }
 
-export default Firebase;
+export {Firebase as default}  
