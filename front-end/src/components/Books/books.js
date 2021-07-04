@@ -4,6 +4,8 @@ import Booklist from './Booklist';
 import Authors from '../Author/Authors';
 import Addwish from '../wishlist/addwish';
 import Followauthor from '../Follow_author/FollowAuthor';
+import { compose } from 'recompose';
+import { withAuthorization, withEmailVerification } from '../Session';
 import axios from 'axios';
 import {
     AuthUserContext
@@ -177,5 +179,8 @@ class Books extends Component {
         );
     }
 }
-
-export default Info;
+const condition = authUser => !!authUser;
+export default compose(
+    withEmailVerification,
+    withAuthorization(condition),
+  )(Info);

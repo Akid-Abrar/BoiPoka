@@ -217,6 +217,10 @@ router.route('/update/:id').patch(async (req, res) => {
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
 try {
+  Reader.find({_id: req.params.id},'wishlist -_id',function(err, someValue){
+    if(err) return next(err);
+    console.log(someValue);
+  });
   Reader.findOneAndUpdate(
     { _id: req.params.id }, 
     { $push: {wishlist: req.body.wishlist  } },

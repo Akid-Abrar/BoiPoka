@@ -11,7 +11,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 //import Books from '../Books/books';
-import Info from '../Books/books';
+
 
 
 import * as ROUTES from '../../constants/routes';
@@ -24,7 +24,7 @@ const App = () => (
   <Router>
     <div>
       <Navigation />
-      <Info />
+     
       <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import "firebase/storage";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -10,11 +11,14 @@ const config = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
+// const storage={
+
+// };
 
 class Firebase {
   constructor() {
-    app.initializeApp(config);
-
+      app.initializeApp(config);
+    //   storage = app.storage();
     /* Helper */
 
     this.serverValue = app.database.ServerValue;
@@ -103,6 +107,10 @@ class Firebase {
   message = uid => this.db.ref(`messages/${uid}`);
 
   messages = () => this.db.ref('messages');
+  
 }
+// app.initializeApp(config);
+//       storage = app.storage();
+//export const storageRef = app.storage();
+export {  Firebase as default };
 
-export default Firebase;

@@ -1,31 +1,14 @@
 const express = require('express');
 const Finder = require('../models/bookmodel')
 const read = require('../models/reader.model')
-const multer=require('multer')
+//const multer=require('multer')
 const router = express.Router();
 
-const storage=multer.diskStorage({
-    destination:function(req,file,cb){
-cb(null,'upload/');
-    },
-    filename: function(req,file,cb){
-cb(null, file.originalname);
-    }
-});
 
-const fileFilter=(req,file,cb) => {
-//reject a file
-if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
-    cb(null,true);
 
-}else {
-    cb(null,false);
-}
-};
 
-const upload=multer({storage:storage,
-fileFilter:fileFilter
-});
+
+
 
 router.get('/', async (req, res) => {
     try {
@@ -71,7 +54,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/',upload.single('bookimage'), async (req, res) => {
+router.post('/', async (req, res) => {
     console.log(req.file);
     const Book = new Finder({
         // _id: req.body._id,
