@@ -39,7 +39,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').put((req, res) => {
   Publisher.findById(req.params.id)
     .then(publisher => {
-      publisher._id = req.body._id;
+      // publisher._id = req.body._id;
       publisher.name=req.body.name;
       publisher.books=req.body.books;
 

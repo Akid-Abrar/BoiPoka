@@ -3,16 +3,21 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
+    "@firebase/storage": "^0.5.5",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
     "firebase": "^8.6.5",
     "node-pre-gyp": "^0.17.0",
-    "react": "^16.6.3",
+    "react": "^16.14.0",
     "react-bootstrap": "^1.6.1",
-    "react-dom": "^16.6.3",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "recompose": "^0.30.0"
+    "reactstrap": "^8.9.0",
+    "recompose": "^0.30.0",
+    "react-hook-usefetch": "^1.0.4",
+    "use-http": "^1.0.21"
   },
   "scripts": {
     "start": "react-scripts start",
