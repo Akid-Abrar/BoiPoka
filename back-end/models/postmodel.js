@@ -1,13 +1,13 @@
 const mongoose=require('mongoose');
 
 const postSchema=mongoose.Schema({
-    // _id:Number,
+    // _id:String,
     type:Number,//type=1 for discussion,2 for review,3 for comment
     like:[Number],
     bookid:Number,//0 for comment and discussion
     creatorid:Number,
     content:String,
-    commentsIds:[Number],//empty string for comment,because cant comment on a comment
+    commentsIds:[String],//empty string for comment,because cant comment on a comment
     approved:Boolean
 },
 {

@@ -7,6 +7,8 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
+import DiscussionPost from '../Post/DiscussionPost';
+
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
@@ -17,6 +19,7 @@ import Genre from '../Genre'
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 //demo demo demo@gmail.com demo123 demo123
+
 
 
 
@@ -35,6 +38,8 @@ const App = () => (
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
+      
+      <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
       <FooterClass />
     </div>
   </Router>

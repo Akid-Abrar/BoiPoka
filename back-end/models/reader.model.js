@@ -17,6 +17,7 @@ const readerSchema = new Schema({
   posts:[Number],
   author_id:{type:Schema.Types.ObjectId },
   genre:[String],
+  image:{type:String},
 
 }, {
   timestamps: true,

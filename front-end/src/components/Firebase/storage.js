@@ -1,5 +1,5 @@
 import Firebase from './firebase';
 
-export default Firebase;
+// export default Firebase;
 
-export Firebase.storage();
+// export Firebase.storage();
