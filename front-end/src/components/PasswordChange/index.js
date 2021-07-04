@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
+import {Form,Button} from 'react-bootstrap'
 
 import { withFirebase } from '../Firebase';
 

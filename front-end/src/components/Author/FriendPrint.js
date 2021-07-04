@@ -26,10 +26,10 @@ class FriendPrint extends Component
     GetFriend (friendid)
     {
           var link = 'http://localhost:4000/readers/'+friendid
+          console.log(link)
           axios.get(link)
             .then((res) => {
               this.setState({friends : res.data})
-              
             }
             )
             .catch(() => {

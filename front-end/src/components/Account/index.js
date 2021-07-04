@@ -6,12 +6,11 @@ import {
   withAuthorization,
   withEmailVerification,
 } from '../Session';
-import { withFirebase } from '../Firebase';
 import { PasswordForgetForm } from '../PasswordForget';
 import PasswordChangeForm from '../PasswordChange';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Jumbotron,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import * as ROUTES from '../../constants/routes';
 
 

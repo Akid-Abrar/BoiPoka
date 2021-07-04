@@ -8,3 +8,4 @@ export const ADMIN = '/admin';
 export const ADMIN_DETAILS = '/admin/:id';
 export const READER = '/reader';
 export const GENRE = '/genre';
+export const AUTHOR = '/author';

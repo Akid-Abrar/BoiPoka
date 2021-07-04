@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const bookSchema = mongoose.Schema({
     // _id : Number,
     name : {type:String,required:true},
-    author : {type:String,required:true},
+    author : {type:mongoose.Schema.Types.ObjectId ,required:true},
     publisher : {type:String,required:true},
     avg_rating: Number,
     release_year: Number,

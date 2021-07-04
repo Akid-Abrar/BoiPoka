@@ -15,7 +15,7 @@ const readerSchema = new Schema({
   wishlist:[Schema.Types.ObjectId],
   reviews:{type:String},
   posts:[Number],
-  author_id:{type:Number },
+  author_id:{type:Schema.Types.ObjectId },
   genre:[String],
 
 }, {

@@ -19,48 +19,82 @@ const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <Reader authUser={authUser}/>
+        <Author authUser={authUser}/>
       </div>
     )}
   </AuthUserContext.Consumer>
 );
 
-class Reader extends Component
+class Author extends Component
 {
     constructor(props)
     {
         super(props)
         this.state = {
-          readers: [],
-          books: [],
-          friends: [],
+          
+          authorName: [],
+          authors:'',
         }
+        //const [authorName, setauthorName] = useState( 0 );
+        //const [author, setauthor] = useState( 0 );
     }
     
 
     componentDidMount()
     {
-        this.GetReader(this.props.authUser.email)
+        const id = "60ccc545ce420727b14a6b20";
+        this.GetAuthorName(id)
+        
     }
 
-    GetReader (email)
+    GetAuthorName (id)
     {
-        var link = 'http://localhost:4000/readers/email/'+email
-        console.log(link)
-        axios.get(link)
-          .then((res) => {
-            this.setState({readers : res.data})
-          }
-          )
-          .catch(() => {
-            alert("Data Unavailabe")
-          })
+        var link = 'http://localhost:4000/readers/findAuthorName/'+id
+        var link1 = 'http://localhost:4000/authors/'+id
+
+        const requestOne = axios.get(link)
+        const requestTwo = axios.get(link1)
+
+        axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
+
+          const responseOne = responses[0]
+        
+          const responseTwo = responses[1]
+
+          console.log("responseTwo")
+          console.log(responseTwo.data)
+
+
+          this.setState({authorName : responseOne.data[0]})
+          this.setState({authors : responseTwo.data})
+          console.log(this.state.authors)
+        })).catch(errors => {
+        
+          // react on errors.
+          alert("Data Unavailabe "+errors)
+        
+        })
+    
+          
+
     }
 
-    displayReader(readers) {
+    displayReader() {
+      var callFollower;
+      if(this.state.authors.followers !== undefined)
+      {
+        callFollower = this.displayFriend(this.state.authors.followers);
+      }
+
+      var callBooks;
+      if(this.state.authors.books !== undefined)
+      {
+        callBooks = this.displayBook(this.state.authors.books);
+      }
       var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
-      return readers.map((reader, index) => (
-        <div key={index} className="reader__display" class="row row-content align-items-center">
+      return  (
+        <div  className="author__display" class="row row-content align-items-center">
+          
           <Container>
             <Row>
               <Col sm={6}>
@@ -75,52 +109,40 @@ class Reader extends Component
                           src={imgsrc}
                         />
                       </Col>
-                      <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2></Col>
+                      <Col sm={7}><h2>
+                        {this.state.authorName.first_name} {this.state.authorName.last_name}
+                        </h2></Col>
                     </Row>
                   </Card.Body>
                 </Card>
                 <br></br>
-                <font style = {{color:"black"}} size="5"><b>Friends</b></font>
+                <font style = {{color:"black"}} size="5"><b>Followers</b></font>
                 <br></br>
                 <br></br>
                 <Row>
-                  <br></br>
-                  {console.log(reader.friends)}
-                  {this.displayFriend(reader.friends)}
+                  {console.log("followers",this.state.authors.followers)} 
+                  {callFollower}
                   <br></br>
                 </Row>
                   <br></br>
               </Col>
-              <Col sm={3}>
-                  <Table width="700px"border="7" bordercolor="#925024" >
+              <Col sm={6}>
+                  <Table width="700px" border="7" bordercolor="#925024" >
                     <thead className="tableheader-style">
                       <tr align="center">
-                        <th align="center"><font style = {{color:"#ebdb82d8"}} size="5">Books Read</font></th>
+                        <th align="center"><font style = {{color:"#ebdb82d8"}} size="5">Books By </font></th>
                       </tr>
                     </thead>
                     <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
                       <br></br>
                       <tr>
-                          {this.displayBook(reader.books_read)}
-                           
+                        {console.log("books",this.state.authors.books)} 
+                        {callBooks}     
                       </tr>
                       
                     </tbody>
                   </Table>
              
-              </Col>
-              <Col sm={3}>
-              <Table border="7" bordercolor="#925024">
-                <thead bgcolor="#925024" align="center">
-                  <tr align="center">
-                    <th><font style = {{color:"#ebdb82d8"}} size="5">Wish List</font></th>
-                  </tr>
-                </thead>
-                <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
-                  <br></br>
-                  {this.displayBook(reader.wishlist)}
-                </tbody>
-              </Table>          
               </Col>
               
             </Row>
@@ -129,25 +151,26 @@ class Reader extends Component
 
           
         </div>
-      ));
+      );
     };
 
     displayBook(bookIds) {
 
       return bookIds.map((bookId, index) => (
 
-          <div key={index} className="book__display">
+          <div key={index} className="book__display_1">
             <div><BookPrint bookid={bookId}/></div>
             <br></br>
           </div>
       ));
     };
 
-    displayFriend(friendIds) {
+    displayFriend(followerIds) {
+      console.log("from displayfriend",followerIds)
 
-      return friendIds.map((friendId, index) => (
-        <Col key={index} className="friend__display" sm={3}>
-            <FriendPrint friendid={friendId}/>
+      return followerIds.map((followerId, index) => (
+        <Col key={index} className="friend__display_1" sm={3}>
+            <FriendPrint friendid={followerId}/>
         </Col>
       ));
     };
@@ -158,8 +181,8 @@ class Reader extends Component
 
         return(
           <div style = {{backgroundColor:"#d1ecf0d8"}}>
-              <div className="display" >
-                {this.displayReader(this.state.readers)}
+              <div className="display_1" >
+              {this.displayReader()}
               </div>
           </div>
 
@@ -168,7 +191,6 @@ class Reader extends Component
 }
 
 const condition = authUser => !!authUser;
-//see overlays
 
 export default compose(
   withEmailVerification,

@@ -80,6 +80,13 @@ router.route('/email/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+router.route('/findAuthorName/:authorId').get((req, res) => {
+  
+  Reader.find({author_id : req.params.authorId})
+    .then(reader => res.json(reader))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 router.route('/:id').delete((req, res) => {
  Reader.findByIdAndDelete(req.params.id)
     .then(() => res.json('reader deleted.'))

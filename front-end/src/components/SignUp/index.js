@@ -8,7 +8,7 @@ import * as ROLES from '../../constants/roles';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
+import {Form,Button} from 'react-bootstrap'
 
 const SignUpPage = () => (
   <div>
@@ -188,9 +188,14 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-  <p align="center">
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
+  <div>
+    <p align="center">
+      Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    </p>
+    <p align="center">
+      If you want to create an author account,please contact us at <font color="red">support.boipoka@gmail.com</font>
+    </p>
+  </div>
 );
 
 const SignUpForm = compose(

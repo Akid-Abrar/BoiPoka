@@ -8,7 +8,7 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
+import {Form,Button} from 'react-bootstrap'
 
 const SignInPage = () => (
   <div>
@@ -24,15 +24,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
-const ERROR_CODE_ACCOUNT_EXISTS =
-  'auth/account-exists-with-different-credential';
 
-const ERROR_MSG_ACCOUNT_EXISTS = `
-  An account with an E-Mail address to
-  this social account already exists. Try to login from
-  this account instead and associate your social accounts on
-  your personal account page.
-`;
 
 class SignInFormBase extends Component {
   constructor(props) {

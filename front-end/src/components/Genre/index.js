@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { compose } from 'recompose';
 import {
     AuthUserContext,
     withAuthorization,
     withEmailVerification,
   } from '../Session';
-import * as ROUTES from '../../constants/routes';
-import * as ROLES from '../../constants/roles';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Row,Col,Form,FormControl,Button,Card,ListGroup} from 'react-bootstrap'
+import {Row,Col,Form,Card,ListGroup} from 'react-bootstrap'
 
 
 const ShowChooseGenre = () => (
@@ -88,4 +87,11 @@ class Genre extends Component {
 
 }
 
-export default ShowChooseGenre
+const condition = authUser => !!authUser;
+
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(ShowChooseGenre);
+
+ 

@@ -11,6 +11,7 @@ import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import ReaderPage from '../Reader';
+import AuthorPage from '../Author'
 import Genre from '../Genre'
 
 import * as ROUTES from '../../constants/routes';
@@ -27,12 +28,10 @@ const App = () => (
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route
-        path={ROUTES.PASSWORD_FORGET}
-        component={PasswordForgetPage}
-      />
+      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage}/>
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.READER} component={ReaderPage} />
+      <Route path={ROUTES.AUTHOR} component={AuthorPage} />
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />

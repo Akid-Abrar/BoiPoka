@@ -5,7 +5,7 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button,Card,Row,Col,Container,Alert} from 'react-bootstrap'
+import {Form,Button} from 'react-bootstrap'
 
 const PasswordForgetPage = () => (
   <div>
