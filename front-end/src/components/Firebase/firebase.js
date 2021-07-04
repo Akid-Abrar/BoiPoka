@@ -14,6 +14,9 @@ const config = {
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
+// const storage={
+
+// };
 
 // const storage = {}
 
@@ -103,8 +106,9 @@ class Firebase {
 
   // storage = this.storage.ref();
 }
+// app.initializeApp(config);
+//       storage = app.storage();
+//export const storageRef = app.storage();
+export {  Firebase as default };
 
 
-// export {storage}
-
-export {Firebase as default}  

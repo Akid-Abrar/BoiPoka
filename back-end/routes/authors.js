@@ -74,8 +74,30 @@ router.patch('/:id', async (req, res) => {
         res.json({ message: err });
     }
 })
+//add into followers array
 
-
+router.patch('/updateauthor/:id', async (req, res) => {
+    try {
+     Finder.findOneAndUpdate(
+        { _id: req.params.id }, 
+        { $push: {followers: req.body.followers } },
+        function (error, success) {
+          if (error) {
+              console.log(error);
+              res.json('error')
+          } else {
+              console.log(success);
+              res.json("successfully added followers")
+          }
+      });
+    
+      
+    }catch(err)
+    {
+      console.log(err);
+      res.json(err);
+    }
+    })
 
 
 

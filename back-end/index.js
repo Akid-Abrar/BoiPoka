@@ -12,6 +12,7 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use('/upload',express.static('upload'));
 //app.use(cors());
 //app.use(express.json());
 
@@ -54,4 +55,4 @@ mongoose.connect('mongodb+srv://boipoka:boipoka@boipokacluster.iedgm.mongodb.net
 app.listen(4000, () => {
     console.log('server is running on port!!')
 });
-//app.listen(3000);
+//app.listen(4000);

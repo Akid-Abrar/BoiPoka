@@ -15,6 +15,9 @@ import AdminPage from '../Admin';
 import ReaderPage from '../Reader';
 import AuthorPage from '../Author'
 import Genre from '../Genre'
+//import Books from '../Books/books';
+
+
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -27,6 +30,7 @@ const App = () => (
   <Router>
     <div>
       <Navigation />
+     
       <hr />
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
