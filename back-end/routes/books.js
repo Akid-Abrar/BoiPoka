@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     console.log(req.file);
     const Book = new Finder({
-        _id: req.body._id,
+        // _id: req.body._id,
         name: req.body.name,
         author: req.body.author,
         publisher: req.body.publisher,

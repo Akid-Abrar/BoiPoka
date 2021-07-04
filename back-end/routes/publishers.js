@@ -8,13 +8,13 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const _id = req.body._id;
+  // const _id = req.body._id;
   const name = req.body.name;
   const books = req.body.books;
   
 
   const newPublisher = new Publisher({
-    _id,
+    // _id,
     name,
     books,
   });
@@ -39,7 +39,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').put((req, res) => {
   Publisher.findById(req.params.id)
     .then(publisher => {
-      publisher._id = req.body._id;
+      // publisher._id = req.body._id;
       publisher.name=req.body.name;
       publisher.books=req.body.books;
 
