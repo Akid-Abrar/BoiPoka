@@ -23,6 +23,17 @@ router.get('/:Id' , async (req,res) =>{
     }
 })
 
+router.get('/creatorid/:Id' , async (req,res) =>{
+  
+    try{
+        const posts=await Finder.find({creatorid: req.params.Id});
+        res.json(posts)
+    }catch(err)
+    {
+        res.json({message : err});
+    }
+  });
+
 router.post('/' , async (req,res) =>{
     const NewPost = new Finder({
 
@@ -33,7 +44,7 @@ router.post('/' , async (req,res) =>{
         creatorid:req.body.creatorid,
         content:req.body.content,
         date:req.body.date,
-        commentsIds:req.body.commentsIds,
+        comments:req.body.comments,
         approved:req.body.approved
     });
 
@@ -60,10 +71,11 @@ router.delete('/:Id' , async (req,res) =>{
 
 router.patch('/:postId' , async (req,res) =>{
     try{
-        const updatedPost=await Finder.updateOne(
+        const updatedPost=await Finder.update(
             {_id : req.params.postId} ,
             {$set: {
-                content : req.body.content
+                content : req.body.content,
+                comments : req.body.comments,
                 }
             }
         );

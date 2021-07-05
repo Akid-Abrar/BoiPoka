@@ -16,15 +16,16 @@ router.route('/add').post((req, res) => {
   const last_name = req.body.last_name;
   const email = req.body.email;
   // const password=req.body.password;
-  const is_author = req.body.is_author;
-  const friends = req.body.friends;
-  const following = req.body.following;
-  const books_read = req.body.books_read;
-  const wishlist = req.body.wishlist;
-  const reviews = req.body.reviews;
-  const posts = req.body.posts;
-  const author_id = req.body.author_id;
-
+  const is_author=req.body.is_author;
+  const friends=req.body.friends;
+  const following=req.body.following;
+  const books_read=req.body.books_read;
+  const wishlist=req.body.wishlist;
+  const reviews=req.body.reviews;
+  const posts=req.body.posts;
+  const author_id=req.body.author_id;
+  const image=req.body.image;
+  
 
   const newReader = new Reader({
     //_id,
@@ -39,7 +40,8 @@ router.route('/add').post((req, res) => {
     wishlist,
     reviews,
     posts,
-    author_id
+    author_id,
+    image
   });
 
   newReader.save()
@@ -63,6 +65,20 @@ router.route('/:id').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+router.route('/email/:id').get((req, res) => {
+  
+  Reader.find({email : req.params.id})
+    .then(reader => res.json(reader))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/findAuthorName/:authorId').get((req, res) => {
+  
+  Reader.find({author_id : req.params.authorId})
+    .then(reader => res.json(reader))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
 //find author by author_id
 router.get('/author/:id', async (req, res) => {
   var author = req.params.id;
@@ -109,6 +125,50 @@ router.route('/:id').delete((req, res) => {
     .then(() => res.json('reader deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
+router.route('/update/:id').put((req, res) => {
+  Reader.findById(req.params.id)
+    .then(reader => {
+     //reader._id = req.body._id;
+    reader.first_name=req.body.first_name;
+    reader.last_name=req.body.last_name;
+    reader.email=req.body.email;
+    // reader.password=req.body.password;
+    reader.is_author=req.body.is_author;
+    reader.friends=req.body.friends;
+    reader.following=req.body.following;
+    reader.books_read=req.body.books_read;
+    reader.wishlist=req.body.wishlist;
+    reader.reviews=req.body.reviews;
+    reader.posts=req.body.posts;
+    reader.author_id=req.body.author_id;
+    reader.image=req.body.image;
+
+      reader.save()
+        .then(() => res.json('reader updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+router.patch('/:id', async (req, res) => {
+  try {
+      const reader = await Reader.update(
+          { _id: req.params.id },
+          {
+              $set: {
+
+                  image: req.body.image,
+
+              }
+          }
+      );
+      res.json(reader)
+  } catch (err) {
+      res.json({ message: err });
+  }
+})
 
 // router.route('/update/:id').patch(async(req, res) => {
 //   Reader.findById(req.params.id)

@@ -1,0 +1,15 @@
+.user{
+    padding: 2px;
+    font-weight:bold;
+}
+
+.profile{
+    border-radius: 50%;
+    height: 30px;
+    width: 40px;
+    margin: 5px;
+}
+
+.comment{
+    margin-left: 10px;
+}

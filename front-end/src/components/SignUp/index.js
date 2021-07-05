@@ -6,10 +6,12 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles.css'
+import {Form,Button} from 'react-bootstrap'
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
     <SignUpForm />
   </div>
 );
@@ -114,7 +116,10 @@ class SignUpFormBase extends Component {
       lastname === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <div class="container">
+        <h2>Sign Up</h2>
+      <Form onSubmit={this.onSubmit}>
+      <Form.Group controlId="first_name">
         <input
           name="firstname"
           value={firstname}
@@ -122,6 +127,8 @@ class SignUpFormBase extends Component {
           type="text"
           placeholder="First Name"
         />
+        </Form.Group>
+        <Form.Group controlId="last_name">
         <input
           name="lastname"
           value={lastname}
@@ -129,6 +136,8 @@ class SignUpFormBase extends Component {
           type="text"
           placeholder="Last Name"
         />
+        </Form.Group>
+        <Form.Group controlId="email">
         <input
           name="email"
           value={email}
@@ -136,6 +145,8 @@ class SignUpFormBase extends Component {
           type="text"
           placeholder="Email Address"
         />
+        </Form.Group>
+        <Form.Group controlId="password">
         <input
           name="passwordOne"
           value={passwordOne}
@@ -143,6 +154,8 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Password"
         />
+        </Form.Group>
+        <Form.Group controlId="confirm-password">
         <input
           name="passwordTwo"
           value={passwordTwo}
@@ -150,6 +163,8 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
+        </Form.Group>
+        <br/>
         <label>
           Admin:
           <input
@@ -159,20 +174,28 @@ class SignUpFormBase extends Component {
             onChange={this.onChangeCheckbox}
           />
         </label>
-        <button disabled={isInvalid} type="submit">
+        <br/><br/>
+        <Button disabled={isInvalid} type="submit">
           Sign Up
-        </button>
+        </Button>
 
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
+      <br/>
+      </div>
     );
   }
 }
 
 const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </p>
+  <div>
+    <p align="center">
+      Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
+    </p>
+    <p align="center">
+      If you want to create an author account,please contact us at <font color="red">support.boipoka@gmail.com</font>
+    </p>
+  </div>
 );
 
 const SignUpForm = compose(

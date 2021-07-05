@@ -16,6 +16,8 @@ const readerSchema = new Schema({
   reviews:{type:String},
   posts:[Number],
   author_id:{type:mongoose.Schema.ObjectId },
+  genre:[String],
+  image:{type:String},
 
 }, {
   timestamps: true,

@@ -1,15 +1,15 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Card} from 'react-bootstrap'
 
 const Landing = () => (
   
-  <div>
+  <div style = {{backgroundColor:"#d1ecf0d8"}}>
     <div>
-    
-       <h1>Landing</h1>
-       <h1>Welcome </h1>
-       <h1>Welcome To BoiPoka</h1>
-       <h1>Vallage Na Mara Jabo</h1>
-       <h1>Etto Pera</h1>
+      <Card style={{ width: '80rem' , height : '30rem' , backgroundColor:"#d1ecf0d8" ,  border:"0px"}}>
+          <h1 align="center"><font style = {{color:"black"}} >Welcome To Boipoka</font></h1>
+          
+      </Card>
     </div>
     
   </div>

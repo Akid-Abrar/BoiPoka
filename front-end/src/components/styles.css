@@ -39,6 +39,14 @@
     background-color: #925024;
 }
 
+.tableheader-style{
+    background-color: #925024;
+}
+
+.border-style{
+    border : 20px;
+    border-color : #d1ecf0d8;
+}
 .list{
     display: grid;
     margin:20px 0 50px 0;
