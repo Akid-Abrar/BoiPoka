@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap'
 import Post from './post'
-import profile from './profile.png'
+// import profile from './profile.png'
 
 const Info = () => (
   <AuthUserContext.Consumer>
@@ -82,7 +82,7 @@ class DiscussionPost extends Component {
     if (this.state.posts.length !== 0) {
       return (
         <div>
-          <h5 className="user"><img className="profile" src={profile} />{this.state.reader.first_name} {this.state.reader.last_name}</h5>
+          <h5 className="user"><img className="profile" src={this.state.reader.image} />{this.state.reader.first_name} {this.state.reader.last_name}</h5>
 
           {this.displayPost(this.state.posts)}
         </div>

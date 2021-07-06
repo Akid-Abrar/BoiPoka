@@ -5,11 +5,23 @@
 
 .profile{
     border-radius: 50%;
-    height: 30px;
+    height: 40px;
     width: 40px;
     margin: 5px;
 }
 
 .comment{
     margin-left: 10px;
+    padding: 10px;
+    color: #925024;
+}
+
+.comment-dark{
+    background-color: #925024;
+    color:floralwhite;
+}
+
+.post{
+    border : 20px;
+    border-color : #d1ecf0d8;
 }

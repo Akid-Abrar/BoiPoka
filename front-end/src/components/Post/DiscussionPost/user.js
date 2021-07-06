@@ -12,6 +12,7 @@ class User extends Component {
         this.state = {
             first_name: '',
             last_name: '',
+            image:'',
         }
 
     }
@@ -26,6 +27,8 @@ class User extends Component {
         // if (link !== undefined) {
         axios.get(link)
             .then((res) => {
+                // console.log("data",res.data);
+                this.setState({ image: res.data.image })
                 this.setState({ first_name: res.data.first_name })
                 this.setState({ last_name: res.data.last_name })
             }
@@ -38,7 +41,7 @@ class User extends Component {
 
     render() {
         return (
-            <>{this.state.first_name} {this.state.last_name}</>
+            <><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</>
         );
 
     }
