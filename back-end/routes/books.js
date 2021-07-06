@@ -55,13 +55,14 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    console.log(req.file);
+   // console.log(req.file);
     const Book = new Finder({
         // _id: req.body._id,
         name: req.body.name,
         author: req.body.author,
         publisher: req.body.publisher,
-        bookimage:req.file.path,
+       // bookimage:req.file.path,
+        bookimage:req.body.bookimage,
         avg_rating: req.body.avg_rating,
         release_year: req.body.release_year,
         genre: req.body.genre,
