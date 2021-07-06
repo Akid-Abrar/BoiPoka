@@ -104,6 +104,7 @@ router.patch('/:id', async (req, res) => {
                     author: req.body.author,
                     publisher: req.body.publisher,
                    // bookimage:req.file.path,
+                    bookimage:req.body.bookimage,
                     avg_rating: req.body.avg_rating,
                     release_year: req.body.release_year,
                     genre: req.body.genre,
@@ -118,6 +119,25 @@ router.patch('/:id', async (req, res) => {
         res.json({ message: err });
     }
 })
+
+//update image
+router.patch('/image/:id', async (req, res) => {
+    try {
+        const book = await Finder.updateOne(
+            { _id: req.params.id },
+            {
+                $set: {
+  
+                    bookimage: req.body.bookimage,
+  
+                }
+            }
+        );
+        res.json(book)
+    } catch (err) {
+        res.json({ message: err });
+    }
+  })
 
 
 

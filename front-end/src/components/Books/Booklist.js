@@ -13,6 +13,7 @@ const Booklist = (props) => {
                  genre={book["genre"]}
                  des={book["description"]}
                  nam={book["name"]}
+                 bookimage={book["bookimage"]}
                  />
                 })
             }

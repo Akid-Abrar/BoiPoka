@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import {
+  AuthUserContext,
+  withAuthorization,
+  withEmailVerification,
+} from '../Session';
+import { compose } from 'recompose';
+import Upload from './image'
+
+
 
 class Bookadd extends Component {
     constructor(props) {
@@ -73,6 +82,11 @@ class Bookadd extends Component {
         });
     }
 
+    imageadd(_id)
+    {
+
+    }
+
     //for update book
     updateBook() {
         let { name, genre
@@ -140,9 +154,14 @@ class Bookadd extends Component {
                 <td>{book.name}</td>
                 <td>{book.author}</td>
                 <td>{book.genre}</td>
+                <td>{book._id}</td>
                 <td>
                   <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book._id, book.name,book.genre,book.release_year,book.publisher,book.description,book.author,book.bookimage)}>Edit</Button>
                   <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
+                 {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
+                 
+                 <Upload id={book._id}/>
+
                 </td>
               </tr>
             )
@@ -308,6 +327,7 @@ class Bookadd extends Component {
                   <th>Name</th>
                   <th>Author_id</th>
                   <th>Genre</th>
+                  <th>idd</th>
                 </tr>
               </thead>
     
@@ -322,4 +342,30 @@ class Bookadd extends Component {
         
     }
 }
-export default Bookadd;
+
+class ImageUpload extends Component {
+  constructor(props)
+    {
+        super(props)
+        this.state = {
+          bookimage : ''
+        }
+    }
+  render(){
+    return(
+      
+      <div>
+        <Upload />
+      </div>
+    
+    )
+  }
+}
+
+
+const condition = authUser => !!authUser;
+
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(Bookadd);
