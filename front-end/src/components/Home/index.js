@@ -7,12 +7,13 @@ import Messages from '../Messages';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'react-bootstrap'
 import DiscussionPost from '../Post/DiscussionPost'
+import FriendSuggestion from '../FriendSuggestion'
 const HomePage = () => (
   <div>
-  <Info />
+  {/* <Info /> */}
 {/*<Image /> */} 
   <Row style={{padding: 20}}>
-    <Col className="col">friend suggestion</Col>
+    <Col className="col"><FriendSuggestion/></Col>
     <Col className="col-6"><DiscussionPost /></Col>
     <Col className="col">Recommendation</Col>
   </Row>

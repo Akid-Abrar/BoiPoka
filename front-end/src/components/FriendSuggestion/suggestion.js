@@ -3,16 +3,16 @@ import React from 'react';
 import { Component } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import '../../styles.css'
+import './style.css'
 import { Button, Card, Col, Container } from 'react-bootstrap'
 
-class User extends Component {
+class Suggestion extends Component {
     constructor(props) {
         super(props)
         this.state = {
             first_name: '',
             last_name: '',
-            image:'',
+            image: '',
         }
 
     }
@@ -41,10 +41,13 @@ class User extends Component {
 
     render() {
         return (
-            <div><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
+            <Card>
+                <div><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
+                <Button className="comment-dark">Add Friend</Button>
+            </Card>
         );
 
     }
 }
 
-export default User
+export default Suggestion

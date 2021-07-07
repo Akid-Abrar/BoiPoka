@@ -14,7 +14,11 @@ class Post extends Component {
         super(props)
         this.state = {
             post: '',
+            comment: '',
         }
+
+        this.handleComment = this.handleComment.bind(this);
+        this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
 
     }
 
@@ -25,7 +29,7 @@ class Post extends Component {
 
     GetPost(postid) {
         var link = 'http://localhost:4000/posts/' + postid
-        console.log(link)
+        // console.log(link)
         // if (link !== undefined) {
         axios.get(link)
             .then((res) => {
@@ -55,28 +59,57 @@ class Post extends Component {
         }
     };
 
+    handleComment(event) {
+        this.setState({ comment: event.target.value })
+    }
+
+    handleCommentSubmit(event) {
+        const comments={
+            commentatorid: this.props.currentuserid,
+            comment: this.state.comment,
+        }
+        const post= {comments}
+        // console.log(comments);
+        axios.patch('http://localhost:4000/posts/addcomment/' + this.props.postid, post).then((response) => {
+            // console.log("wishlist");
+            // console.log("patch", response);
+
+        }).catch((err) => {
+            alert("not valid data")
+        })
+        window.location.reload(false);
+        event.preventDefault();
+
+    }
+
+
     PrintPosts(post) {
         return (
-            <div>
+            <Card>
+                <User id={post.creatorid} />
                 <Card>
-                    <h5 className="post">{post.content}</h5>
+                    <div className="post" style={{ backgroundColor: "#d1ecf0d8", border: "7px", bordercolor: "#925024" }}>
+                        <h5>{post.content}</h5>
+                    </div>
+
                 </Card>
                 <div>
                     <i className="far fa-heart mr-4"></i><i className="far fa-comment"></i>
                 </div>
                 { this.PrintComments(post.comments)}
 
-                <Form className="m-2">
+                <Form className="m-2" onSubmit={this.handleCommentSubmit}>
                     <input
-                        name="comment"
+                        value={this.state.comment}
+                        onChange={this.handleComment}
                         type="text"
                         placeholder="Add a comment"
                         className="mr-2"
                     />
-                    <button type="submit" className="btn btn-light m-2">Post</button>
+                    <input type="submit" value="Post" />
                 </Form>
                 {/* {console.log("hello", post)} */}
-            </div >
+            </Card >
 
         );
 

@@ -7,43 +7,42 @@ import {
   AuthUserContext,
   withAuthorization,
   withEmailVerification,
-} from '../../Session';
+} from '../Session';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap'
-import Post from './post'
-import AddPost from './addPost'
+import Suggestion from './suggestion'
 // import profile from './profile.png'
 
 const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <DiscussionPost authUser={authUser} />
+      <FriendSuggestion authUser={authUser} />
     )}
   </AuthUserContext.Consumer>
 );
 
-class DiscussionPost extends Component {
+class FriendSuggestion extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      reader: '',
       id: '',
-      result: [],
-      posts: [],
+      reader: '',
+      result:[],
+      suggestion:[],
     }
 
   }
 
 
   componentDidMount() {
-    this.GetPost(this.props.authUser.email)
+    this.GetUser(this.props.authUser.email)
 
   }
 
 
-  GetPost(email) {
+  GetUser(email) {
 
     var link = 'http://localhost:4000/readers/email/' + email
     // console.log(link)
@@ -53,23 +52,21 @@ class DiscussionPost extends Component {
         this.setState({ reader: res.data[0] })
         this.setState({ id: res.data[0]._id })
 
-        link = 'http://localhost:4000/posts/'
+        link = 'http://localhost:4000/readers/'
         // console.log(link)
 
         axios.get(link).then((res) => {
           this.setState({ result: res.data })
           // console.log('result', this.state.result);
           this.state.result.map((r, index) => {
-            if (r.creatorid == this.state.id || (r.creatorid in this.state.reader.friends) || (r.creatorid in this.state.reader.following)) {
-              this.state.posts.push(r)
+            if(!(r._id in this.state.reader.friends) && r._id !== this.state.id){
+              this.state.suggestion.push(r)
             }
-            // console.log('hello');
+            
 
           });
-          this.state.posts.sort(function (x, y) {
-            return x.timestamp < y.timestamp ? -1 : 1;
-          })
-          // console.log('post', this.state.posts);
+          
+        //   console.log('suggestion', this.state.suggestion);
 
         }
         )
@@ -86,26 +83,12 @@ class DiscussionPost extends Component {
 
   }
 
-  displayPosts(reader, posts) {
-    // console.log(this.state.posts)
+  
 
-    if (this.state.posts.length !== 0) {
-      return (
-        <div>
-          {this.displayPost(this.state.posts)}
-        </div>
-      );
-    } else {
-      return (
-        <div>No posts to show</div>
-      )
-    }
-  };
+  displayUser(posts) {
 
-  displayPost(posts) {
-
-    return posts.map((post, index) => (
-      <div key={index} ><Post postid={post._id} currentuserid={this.state.id} /></div>
+    return this.state.suggestion.map((s, index) => (
+      <div key={index} ><Suggestion id={s._id} /></div>
 
     ));
   };
@@ -117,11 +100,11 @@ class DiscussionPost extends Component {
     return (
 
       <div>
-        <div>
-          <AddPost id={this.state.id} />
+        <div className="m-4">
+          <h4>People you may know</h4>
         </div>
         <div className="mt-3">
-          {this.displayPosts(this.state.posts)}
+          {this.displayUser(this.state.suggestion)}
         </div>
 
       </div>
