@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { AuthUserContext } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -30,6 +30,7 @@ const NavigationAuth = ({ authUser }) => (
     {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
     <Nav.Link href={ROUTES.AUTHOR}>Sample Author</Nav.Link>
     <Nav.Link href={ROUTES.BOOK}>Book Search</Nav.Link>
+    
     <SignOutButton />
   </Nav>
   {/*<Form inline>
@@ -37,6 +38,7 @@ const NavigationAuth = ({ authUser }) => (
       <Button variant="outline-info">Search</Button>
   </Form>
   <Form inline> */}
+  
     
 </Navbar>
 );

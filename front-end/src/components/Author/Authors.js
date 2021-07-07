@@ -9,10 +9,13 @@ const Authors = (props) => {
             key={i}
             firstname={a["first_name"]}
             lastname={a["last_name"]}
+            handle={props.handlefollow}
             
             />
         })
+        
     }
+   
             
         </div>
     )

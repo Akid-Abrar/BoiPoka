@@ -14,6 +14,7 @@ const Booklist = (props) => {
                  des={book["description"]}
                  nam={book["name"]}
                  bookimage={book["bookimage"]}
+                 wish={props.handlewish}
                  />
                 })
             }
