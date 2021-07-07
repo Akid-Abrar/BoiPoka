@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import {
+  AuthUserContext,
+  withAuthorization,
+  withEmailVerification,
+} from '../Session';
+import { compose } from 'recompose';
+import Upload from './image'
+
+
 
 class Bookadd extends Component {
     constructor(props) {
@@ -10,6 +19,7 @@ class Bookadd extends Component {
             newBookData: {
                 name: '',
                 genre: [],
+                publisher :'',
                 release_year: '',
                 description: '',
                 author: '',
@@ -18,13 +28,15 @@ class Bookadd extends Component {
 
             },
             editBookData: {
-                id: '',
+                _id:'',
                 name: '',
                 genre: [],
                 release_year: '',
+                publisher :'',
                 description: '',
                 author: '',
-                bookimage: ''
+                bookimage: '',
+                
 
             },
             newBookModal: false,
@@ -33,7 +45,7 @@ class Bookadd extends Component {
 
     }
     componentWillMount() {
-
+      this._refreshBooks();
     }
 
     toggleNewBookModal() {
@@ -50,6 +62,7 @@ class Bookadd extends Component {
     //for adding book
     addBook() {
         axios.post('http://localhost:4000/books', this.state.newBookData).then((response) => {
+          //console.log(response.data);
             let { books } = this.state;
 
             books.push(response.data);
@@ -59,6 +72,7 @@ class Bookadd extends Component {
                     name: '',
                     genre: [],
                     release_year: '',
+                    publisher:'',
                     description: '',
                     author: '',
                     bookimage: ''
@@ -68,52 +82,66 @@ class Bookadd extends Component {
         });
     }
 
+    imageadd(_id)
+    {
+
+    }
+
     //for update book
     updateBook() {
         let { name, genre
             , release_year,
+            publisher,
             description,
             author,
             bookimage
         } = this.state.editBookData;
 
-        axios.patch('http://localhost:4000/books/' + this.state.editBookData.id, {
+        axios.patch('http://localhost:4000/books/' + this.state.editBookData._id, {
             name, genre
             , release_year,
+            publisher,
             description,
             author,
-            bookimage,
+            bookimage
         }).then((response) => {
+          console.log(response.data);
             this._refreshBooks();
 
             this.setState({
-                editBookModal: false, editBookData: { id: '',
+                editBookModal: false, editBookData: { 
+                _id:'',
                 name: '',
                 genre: [],
                 release_year: '',
+                publisher:'',
                 description: '',
                 author: '',
-                bookimage: '' }
+                bookimage: '',
+                 }
             })
         });
     }
 
-    editBook(id, name,genre,release_year,description,author,bookimage) {
+    editBook( _id,name,genre,release_year,publisher,description,author,bookimage) {
         this.setState({
-          editBookData: { id, name,genre,release_year,description,author,bookimage}, editBookModal: ! this.state.editBookModal
+          editBookData: { _id, name,genre,release_year,publisher,description,author,bookimage}, editBookModal: ! this.state.editBookModal
         });
       }
 
 
-      deleteBook(id) {
-        axios.delete('http://localhost:4000/books/' + id).then((response) => {
+      deleteBook(_id) {
+        axios.delete('http://localhost:4000/books/' + _id).then((response) => {
+          console.log(response.data);
           this._refreshBooks();
         });
       }
       _refreshBooks() {
         axios.get('http://localhost:4000/books').then((response) => {
+         // console.log(response.data);
           this.setState({
             books: response.data
+           
           })
         });
       }
@@ -122,15 +150,18 @@ class Bookadd extends Component {
     render() {
         let books = this.state.books.map((book) => {
             return (
-              <tr key={book.id}>
+              <tr >
                 <td>{book.name}</td>
                 <td>{book.author}</td>
-                <td>{book.description}</td>
-                <td>{book.release_year}</td>
                 <td>{book.genre}</td>
+                
                 <td>
-                  <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book.id, book.name,book.genre,book.release_year,book.description,book.author,book.bookimage)}>Edit</Button>
-                  <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book.id)}>Delete</Button>
+                  <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book._id, book.name,book.genre,book.release_year,book.publisher,book.description,book.author,book.bookimage)}>Edit</Button>
+                  <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
+                 {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
+                 
+                 <Upload id={book._id}/>
+
                 </td>
               </tr>
             )
@@ -142,21 +173,65 @@ class Bookadd extends Component {
             <ModalHeader toggle={this.toggleNewBookModal.bind(this)}>Add a new book</ModalHeader>
             <ModalBody>
               <FormGroup>
-                <Label for="title">Title</Label>
-                <Input id="title" value={this.state.newBookData.title} onChange={(e) => {
+                <Label for="name">Name</Label>
+                <Input id="name" value={this.state.newBookData.name} onChange={(e) => {
                   let { newBookData } = this.state;
     
-                  newBookData.title = e.target.value;
+                  newBookData.name = e.target.value;
     
                   this.setState({ newBookData });
                 }} />
               </FormGroup>
               <FormGroup>
-                <Label for="rating">Rating</Label>
-                <Input id="rating" value={this.state.newBookData.rating} onChange={(e) => {
+                <Label for="author">Author</Label>
+                <Input id="author" value={this.state.newBookData.author} onChange={(e) => {
                   let { newBookData } = this.state;
     
-                  newBookData.rating = e.target.value;
+                  newBookData.author = e.target.value;
+    
+                  this.setState({ newBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+              <Label for="pub">Publisher</Label>
+              <Input id="pub" value={this.state.newBookData.publisher} onChange={(e) => {
+                let { newBookData } = this.state;
+  
+                newBookData.publisher = e.target.value;
+  
+                this.setState({ newBookData });
+              }} />
+            </FormGroup>
+
+              <FormGroup>
+                <Label for="realease">Release_year</Label>
+                <Input id="release" value={this.state.newBookData.release_year} onChange={(e) => {
+                  let { newBookData } = this.state;
+    
+                  newBookData.release_year = e.target.value;
+    
+                  this.setState({ newBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="genre">Genre</Label>
+                <Input id="genre" value={this.state.newBookData.genre} onChange={(e) => {
+                  let { newBookData } = this.state;
+    
+                  newBookData.genre = e.target.value;
+    
+                  this.setState({ newBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="description">Description</Label>
+                <Input id="descrip" value={this.state.newBookData.description} onChange={(e) => {
+                  let { newBookData } = this.state;
+    
+                  newBookData.description = e.target.value;
     
                   this.setState({ newBookData });
                 }} />
@@ -173,21 +248,65 @@ class Bookadd extends Component {
             <ModalHeader toggle={this.toggleEditBookModal.bind(this)}>Edit a new book</ModalHeader>
             <ModalBody>
               <FormGroup>
-                <Label for="title">Title</Label>
-                <Input id="title" value={this.state.editBookData.title} onChange={(e) => {
+                <Label for="name">Name</Label>
+                <Input id="name" value={this.state.editBookData.name} onChange={(e) => {
                   let { editBookData } = this.state;
     
-                  editBookData.title = e.target.value;
+                  editBookData.name = e.target.value;
     
                   this.setState({ editBookData });
                 }} />
               </FormGroup>
               <FormGroup>
-                <Label for="rating">Rating</Label>
-                <Input id="rating" value={this.state.editBookData.rating} onChange={(e) => {
+                <Label for="author">Author</Label>
+                <Input id="author" value={this.state.editBookData.author} onChange={(e) => {
                   let { editBookData } = this.state;
     
-                  editBookData.rating = e.target.value;
+                  editBookData.author = e.target.value;
+    
+                  this.setState({ editBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="publisher">Publisher</Label>
+                <Input id="publisher" value={this.state.editBookData.publisher} onChange={(e) => {
+                  let { editBookData } = this.state;
+    
+                  editBookData.publisher = e.target.value;
+    
+                  this.setState({ editBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="genre">Genre</Label>
+                <Input id="genre" value={this.state.editBookData.genre} onChange={(e) => {
+                  let { editBookData } = this.state;
+    
+                  editBookData.genre = e.target.value;
+    
+                  this.setState({ editBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="relyr">Release year</Label>
+                <Input id="relyrr" value={this.state.editBookData.release_year} onChange={(e) => {
+                  let { editBookData } = this.state;
+    
+                  editBookData.release_year = e.target.value;
+    
+                  this.setState({ editBookData });
+                }} />
+              </FormGroup>
+
+              <FormGroup>
+                <Label for="desc">Description</Label>
+                <Input id="desc" value={this.state.editBookData.description} onChange={(e) => {
+                  let { editBookData } = this.state;
+    
+                  editBookData.description = e.target.value;
     
                   this.setState({ editBookData });
                 }} />
@@ -204,10 +323,11 @@ class Bookadd extends Component {
             <Table>
               <thead>
                 <tr>
-                  <th>#</th>
+                  
                   <th>Name</th>
-                  <th>Release year</th>
-                  <th>Author</th>
+                  <th>Author_id</th>
+                  <th>Genre</th>
+                  
                 </tr>
               </thead>
     
@@ -222,4 +342,30 @@ class Bookadd extends Component {
         
     }
 }
-export default Bookadd;
+
+class ImageUpload extends Component {
+  constructor(props)
+    {
+        super(props)
+        this.state = {
+          bookimage : ''
+        }
+    }
+  render(){
+    return(
+      
+      <div>
+        <Upload />
+      </div>
+    
+    )
+  }
+}
+
+
+const condition = authUser => !!authUser;
+
+export default compose(
+  withEmailVerification,
+  withAuthorization(condition),
+)(Bookadd);

@@ -10,7 +10,7 @@ import DiscussionPost from '../Post/DiscussionPost'
 import FriendSuggestion from '../FriendSuggestion'
 const HomePage = () => (
   <div>
-  {/* <Info /> */}
+  
 {/*<Image /> */} 
   <Row style={{padding: 20}}>
     <Col className="col"><FriendSuggestion/></Col>
