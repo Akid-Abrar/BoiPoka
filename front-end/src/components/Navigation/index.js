@@ -31,10 +31,7 @@ const NavigationAuth = ({ authUser }) => (
     <Nav.Link href={ROUTES.AUTHOR}>Sample Author</Nav.Link>
     <SignOutButton />
   </Nav>
-  <Form inline>
-    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-      <Button variant="outline-info">Search</Button>
-  </Form>
+     <SearchArea />
 </Navbar>
 );
 

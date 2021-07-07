@@ -149,26 +149,17 @@ class Books extends Component {
         return (
             <div>
 
-                <SearchArea searchbook={this.searchbook} handlesearch={this.handlesearch} />
+                <SearchArea searchbook={this.searchbook} handlesearch={this.handlesearch} align="center"/>
                 <CardDeck>
                     <Card>
                         <Card.Body>
-
-
-
                             <Booklist books={this.state.books} />
-
                             <Addwish handlewish={this.handlewish} />
-
-
                         </Card.Body>
                     </Card>
                     <Card>
                         <Card.Body>
-
-
                             <Authors auth={this.state.Author} />
-
                             <Followauthor handlefollow={this.handlefollow} />
                         </Card.Body>
                        

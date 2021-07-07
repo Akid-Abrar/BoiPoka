@@ -130,7 +130,9 @@ class Author extends Component
                   <Table width="700px" border="7" bordercolor="#925024" >
                     <thead className="tableheader-style">
                       <tr align="center">
-                        <th align="center"><font style = {{color:"#ebdb82d8"}} size="5">Books By </font></th>
+                        <th align="center">
+                          <font style = {{color:"#ebdb82d8"}} size="5">Books By {this.state.authorName.first_name} {this.state.authorName.last_name}</font>
+                        </th>
                       </tr>
                     </thead>
                     <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>

@@ -46,7 +46,7 @@ class FriendPrint extends Component
             <div>
             <OverlayTrigger
                 placement="bottom"
-                overlay={<Tooltip id="button-tooltip-2">{this.state.friends.first_name}</Tooltip>}
+                overlay={<Tooltip id="button-tooltip-2">{this.state.friends.first_name} {this.state.friends.last_name}</Tooltip>}
                 >
                 {({ ref, ...triggerHandler }) => (
                     <Button
