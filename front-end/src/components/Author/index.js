@@ -83,7 +83,7 @@ class Author extends Component
       var callFollower;
       if(this.state.authors.followers !== undefined)
       {
-        callFollower = this.displayFriend(this.state.authors.followers);
+        callFollower = this.displayFollower(this.state.authors.followers);
       }
 
       var callBooks;
@@ -106,7 +106,7 @@ class Author extends Component
                           height={100}
                           width={100}
                           roundedCircle
-                          src={imgsrc}
+                          src={this.state.authors.image}
                         />
                       </Col>
                       <Col sm={7}><h2>
@@ -167,7 +167,7 @@ class Author extends Component
       ));
     };
 
-    displayFriend(followerIds) {
+    displayFollower(followerIds) {
       console.log("from displayfriend",followerIds)
 
       return followerIds.map((followerId, index) => (

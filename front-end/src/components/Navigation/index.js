@@ -29,9 +29,15 @@ const NavigationAuth = ({ authUser }) => (
     <Nav.Link href={ROUTES.READER}>Profile </Nav.Link>
     {!!authUser.roles[ROLES.ADMIN] && (<Nav.Link href={ROUTES.ADMIN}>Admin</Nav.Link> )}
     <Nav.Link href={ROUTES.AUTHOR}>Sample Author</Nav.Link>
+    <Nav.Link href={ROUTES.BOOK}>Book Search</Nav.Link>
     <SignOutButton />
   </Nav>
-     <SearchArea />
+  {/*<Form inline>
+    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+      <Button variant="outline-info">Search</Button>
+  </Form>
+  <Form inline> */}
+    
 </Navbar>
 );
 

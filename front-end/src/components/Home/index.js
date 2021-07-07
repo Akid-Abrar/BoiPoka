@@ -9,7 +9,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import DiscussionPost from '../Post/DiscussionPost'
 const HomePage = () => (
   <div>
-  <Info />
+  
 {/*<Image /> */} 
   <Row style={{padding: 20}}>
     <Col className="col">friend suggestion</Col>

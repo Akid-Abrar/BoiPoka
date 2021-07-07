@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import img from './pic.jpg';
+import {Image} from 'react-bootstrap'
 
 import { ListGroup, Card } from 'react-bootstrap';
 
@@ -10,7 +10,12 @@ const Bookcard = (props) => {
     return (
 
         <div>
-            <img src={img} alt="picture" />
+        <Image
+        height={100}
+        width={100}
+        rounded
+        src={props.bookimage}
+      />
             <div>
                 <h5>Avg_rating:{props.avg_rating}</h5>
                 <p>Genre:</p>

@@ -60,7 +60,7 @@ class FriendPrint extends Component
                             height={40}
                             width={40}
                             roundedCircle
-                            src={imgsrc}
+                            src={this.state.friends.Image}
                         />
                     </Button>
                 )}
