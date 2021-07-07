@@ -1,40 +1,57 @@
 import React, { Component } from 'react'
-import img from './pic.jpg';
+import {Image} from 'react-bootstrap'
 
-import { ListGroup, Card } from 'react-bootstrap';
+import { ListGroup, Card,Form,Button,OverlayTrigger,Popover,Row,Col } from 'react-bootstrap';
+import Addwish from '../wishlist/addwish';
 
-var p= process.cwd() + 'back-end/upload/food.jpg';
-console.log(p);
+
 
 const Bookcard = (props) => {
     return (
 
         <div>
-            <img src={img} alt="picture" />
-            <div>
+        <Row style={{padding: 20}}>
+        <Col className="col-6">
+        <Image
+        height={100}
+        width={100}
+        rounded
+        src={props.bookimage}
+      />
+            
+            
+                    
+
                 <h5>Avg_rating:{props.avg_rating}</h5>
+                
+                <Addwish handlewish={props.wish} />
+                </Col>
+                <Col className="col-6">
                 <p>Genre:</p>
                 <ul>
-                    <ListGroup variant="flush">
+                    <ListGroup variant="flush" >
                         {props.genre.map((value, index) => {
 
-                            return <ListGroup.Item key={index}>{value}</ListGroup.Item>
+                            return <ListGroup.Item style = {{backgroundColor:"#ebdb82d8"}} key={index}>{value}</ListGroup.Item>
                         })}
                     </ListGroup>
 
                 </ul>
                 <Card bg={'light'} text={'dark'}  style={{ width: '28rem' }} className="mb-2">
-                    <Card.Header>{props.nam}</Card.Header>
+                    <Card.Header style = {{backgroundColor:"#925024"}}>{props.nam}</Card.Header>
                     <Card.Body>
-                        <Card.Title> Description </Card.Title>
-                        <Card.Text>
+                        <Card.Title > Description </Card.Title>
+                        <Card.Text style = {{backgroundColor:"#ebdb82d8"}}>
                             {props.des}
                         </Card.Text>
                     </Card.Body>
                 </Card>
-
-
-            </div>
+                </Col>
+                
+                
+             
+           
+            </Row>
         </div>
     )
 

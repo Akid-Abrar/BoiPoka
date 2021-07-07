@@ -16,6 +16,7 @@ import ReaderPage from '../Reader';
 import AuthorPage from '../Author'
 import Genre from '../Genre'
 //import Books from '../Books/books';
+import Info from '../Books/books';
 
 
 
@@ -42,7 +43,7 @@ const App = () => (
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
-      
+      <Route path={ROUTES.BOOK} component={Info} />
       <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
       <FooterClass />
     </div>

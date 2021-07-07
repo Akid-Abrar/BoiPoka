@@ -14,7 +14,7 @@ const Addwish =(props) =>
         <div >
     <Form inline onSubmit={props.handlewish} action="">
     <OverlayTrigger rootClose placement="right" trigger="click" placement="right" overlay={popover}>
-    <Button label="Add to wishlist" variant="outline-info" type="submit">Add to wishlist</Button>
+    <Button label="Add to wishlist" style = {{backgroundColor:"#925024"}} type="submit">Add to wishlist</Button>
     </OverlayTrigger>
     </Form>
     </div>

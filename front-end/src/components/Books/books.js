@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import SearchArea from '../Search/Searcharea';
 import Booklist from './Booklist';
 import Authors from '../Author/Authors';
-import Addwish from '../wishlist/addwish';
-import Followauthor from '../Follow_author/FollowAuthor';
+import Auth from '../Author/Auth';
 import { compose } from 'recompose';
 import { withAuthorization, withEmailVerification } from '../Session';
 import axios from 'axios';
@@ -11,13 +10,13 @@ import {
     AuthUserContext
 
 } from '../Session';
-import { CardDeck, Card } from 'react-bootstrap';
+import { CardDeck, Card ,Row,Col} from 'react-bootstrap';
 
 
 const Info = () => (
     <AuthUserContext.Consumer>
         {authUser => (
-            <div>
+            <div >
                 <Books authUser={authUser} />
             </div>
         )}
@@ -35,6 +34,7 @@ class Books extends Component {
             Author: [],
             searchfield: '',
             user: [],
+            newAuthor:[]
         }
 
     }
@@ -73,13 +73,25 @@ class Books extends Component {
             axios.get("http://localhost:4000/readers/auth/" +author).then((response) => {
 
                 this.setState({ Author: [response.data] });
-                console.log('author');
+               // console.log('author');
+                //console.log(response.data);
+
+            }).catch(() => {
+                alert("Data Unavailabe")
+
+            })
+    
+            axios.get("http://localhost:4000/authors/" +author).then((response) => {
+
+                this.setState({ newAuthor: [response.data] });
+                console.log(' new author');
                 console.log(response.data);
 
             }).catch(() => {
                 alert("Data Unavailabe")
 
             })
+
 
 
 
@@ -148,31 +160,38 @@ class Books extends Component {
     render() {
         return (
             <div>
-
+            
                 <SearchArea searchbook={this.searchbook} handlesearch={this.handlesearch} />
+                
                 <CardDeck>
+                <Row style={{padding: 20}}>
+                    
+
+                       
+                       <Col className="col">
+                         
+                       <Card >
+                        <Card.Body > 
+
+                            <Booklist handlewish={this.handlewish}  books={this.state.books} />
+                            </Card.Body> 
+                            </Card> 
+                           
+                       </Col>
+
+                       <Col className="col-4">
                     <Card>
-                        <Card.Body>
+                        <Card.Body >
 
 
-
-                            <Booklist books={this.state.books} />
-
-                            <Addwish handlewish={this.handlewish} />
-
-
-                        </Card.Body>
-                    </Card>
-                    <Card>
-                        <Card.Body>
-
-
-                            <Authors auth={this.state.Author} />
-
-                            <Followauthor handlefollow={this.handlefollow} />
+                            <Authors handlefollow={this.handlefollow} auth={this.state.Author}  />
+                            <Auth newauth={this.state.newAuthor} />
+                           
                         </Card.Body>
                        
                     </Card>
+                    </Col> 
+                    </Row>
                 </CardDeck>
             </div>
 
