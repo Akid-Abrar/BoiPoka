@@ -152,17 +152,22 @@ class Bookadd extends Component {
             return (
               <tr >
                 <td>{book.name}</td>
-                <td>{book.author}</td>
+                {/*<td>book.author</td>*/}
                 <td>{book.genre}</td>
                 
                 <td>
                   <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book._id, book.name,book.genre,book.release_year,book.publisher,book.description,book.author,book.bookimage)}>Edit</Button>
+                </td>
+                <td>
                   <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
                  {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
-                 
-                 <Upload id={book._id}/>
-
                 </td>
+                <td>
+                  <Upload id={book._id}/>
+                </td>
+                 
+
+                
               </tr>
             )
           });
@@ -325,7 +330,7 @@ class Bookadd extends Component {
                 <tr>
                   
                   <th>Name</th>
-                  <th>Author_id</th>
+                  {/*<th>Author_id</th>*/}
                   <th>Genre</th>
                   
                 </tr>

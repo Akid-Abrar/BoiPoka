@@ -50,16 +50,18 @@ class FriendSuggestion extends Component {
     axios.get(link)
       .then((res) => {
         this.setState({ reader: res.data[0] })
-        this.setState({ id: res.data[0]._id })
+        this.setState({ id: this.state.reader._id })
 
         link = 'http://localhost:4000/readers/'
-        // console.log(link)
+        console.log('reader',this.state.reader.friends)
+        // console.log('id', this.state.id)
 
         axios.get(link).then((res) => {
           this.setState({ result: res.data })
-          // console.log('result', this.state.result);
+        //   console.log('result', this.state.result);
           this.state.result.map((r, index) => {
-            if(!(r._id in this.state.reader.friends) && r._id !== this.state.id){
+            console.log('rid',r._id);
+            if((this.state.reader.friends.includes(r._id) === false) && r._id !== this.state.id){
               this.state.suggestion.push(r)
             }
             

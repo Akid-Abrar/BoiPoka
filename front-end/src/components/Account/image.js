@@ -5,6 +5,7 @@ import '@firebase/firestore';
 import '@firebase/auth';
 import '@firebase/storage'
 import axios from 'axios';
+import {Container,Row,Col,Button,Card,Image} from 'react-bootstrap'
 
 
 
@@ -50,20 +51,20 @@ function Upload(props) {
 					 })
 				})
 			});
-
-			
-
-			
-
-
-
 	}
 
 	return (
 		<div>
 			<center>
-				<input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
-				<button onClick={upload}>Upload</button>
+				<Card style={{ width: '15rem' , height : '9rem' , backgroundColor:"#d1ecf0d8" ,  border:"0px"}}>
+				<Card.Header><h4>Upload Image</h4></Card.Header>
+				<Card.Header>
+					<input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
+				</Card.Header>
+				<Card.Body>
+					<Button variant="secondary" onClick={upload} >Upload</Button>
+				</Card.Body>
+				</Card>
 			</center>
 		</div>
 	);

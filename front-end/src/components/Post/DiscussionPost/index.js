@@ -60,7 +60,7 @@ class DiscussionPost extends Component {
           this.setState({ result: res.data })
           // console.log('result', this.state.result);
           this.state.result.map((r, index) => {
-            if (r.creatorid == this.state.id || (r.creatorid in this.state.reader.friends) || (r.creatorid in this.state.reader.following)) {
+            if (r.creatorid == this.state.id || (this.state.reader.friends.includes(r.creatorid)) || (this.state.reader.following.includes(r.creatorid))) {
               this.state.posts.push(r)
             }
             // console.log('hello');

@@ -13,19 +13,35 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
 import {Button} from 'react-bootstrap'
 import * as ROUTES from '../../constants/routes';
-
-
+import {Container,Row,Col,Table,Card,Image} from 'react-bootstrap'
+import info from '../Reader'
 
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <div>
-        <h1 align="center">Account: {authUser.email}</h1>
-        <ImageUpload />
+      <div style = {{backgroundColor:"#d1ecf0d8"}}>
+        <Container>
+        <Row>
+          <Col sm={3}></Col>
+          <Col><h1 align="center">Account: {authUser.email}</h1></Col>
+        </Row>
+        <Row><Col></Col></Row>
+        <Row >
+          <Col sm={3}>
+          <ImageUpload />
+          </Col>
+          <Col sm={7}>
+            
+          </Col>
+        </Row>
         <br/><br />
-        <div className="container" align="center">
+        <br></br>
+        <Row >
+          <Col sm={3} align="center">
           <Button variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
-        </div>
+          </Col>
+        </Row>
+        </Container>
         <br/><br/>
         <PasswordForgetForm />
         <PasswordChangeForm />

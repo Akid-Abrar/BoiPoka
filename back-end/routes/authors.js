@@ -26,7 +26,9 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const Author = new Finder({
         // _id: req.body._id,
-        is_claimed: req.body.is_claimed,
+        first_name:req.body.first_name,
+        last_name:req.body.last_name,
+        image:req.body.image,
         biography: req.body.biography,
         books: req.body.books,
         followers: req.body.followers
@@ -62,7 +64,6 @@ router.patch('/:id', async (req, res) => {
             {
                 $set: {
 
-                    is_claimed: req.body.is_claimed,
                     biography: req.body.biography,
                     books: req.body.books,
                     followers: req.body.followers
@@ -99,7 +100,46 @@ router.patch('/updateauthor/:id', async (req, res) => {
     }
     })
 
+    router.patch('/updatebio/:id', async (req, res) => {
+        try {
+         Finder.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { biography: req.body.biography  },
+            function (error, success) {
+              if (error) {
+                  console.log(error);
+                  res.json('error')
+              } else {
+                  console.log(success);
+                  res.json("successfully update bio")
+              }
+          });
+        
+          
+        }catch(err)
+        {
+          console.log(err);
+          res.json(err);
+        }
+        })
 
-
+//update image
+router.patch('/image/:id', async (req, res) => {
+    try {
+        const book = await Finder.updateOne(
+            { _id: req.params.id },
+            {
+                $set: {
+  
+                    image: req.body.image,
+  
+                }
+            }
+        );
+        res.json(book)
+    } catch (err) {
+        res.json({ message: err });
+    }
+  })
 
 module.exports = router;

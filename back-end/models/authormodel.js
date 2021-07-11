@@ -2,8 +2,10 @@ const mongoose=require('mongoose');
 
 const authorSchema = mongoose.Schema({
     // _id : String,
-    is_claimed: {type:Boolean,required:true},
-    biography: {type:String,required:true},
+    first_name:{type:String},
+    last_name:{type:String},
+    image:{type:String},
+    biography: {type:String},
     books : [mongoose.Schema.Types.ObjectId],
     followers: [mongoose.Schema.Types.ObjectId]
 })

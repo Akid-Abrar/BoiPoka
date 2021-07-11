@@ -15,7 +15,7 @@ function Upload(props) {
 	const upload = () => {
 		if (image == null)
 			return;
-		var uploadTask=storage.ref().child(`/Book/images/${props.id}.${image.name}`).put(image);
+		var uploadTask=storage.ref().child(`/Author/images/${props.id}.${image.name}`).put(image);
 
 		uploadTask.on('state_changed',
 			(snapshot) => {
@@ -26,17 +26,17 @@ function Upload(props) {
 			},
 			() => {
 				// complete function ....
-				storage.ref().child(`/Book/images/${props.id}.${image.name}`).getDownloadURL().then(url => {
+				storage.ref().child(`/Author/images/${props.id}.${image.name}`).getDownloadURL().then(url => {
 					 console.log(url);
 					imageurl=url;
 					// this.setState({ url });
-					const book={
-						bookimage:imageurl
+					const author={
+						image:imageurl
 					};
-					console.log("book",book);
+					console.log("author",author);
 		
 					
-						axios.patch('http://localhost:4000/books/image/' + props.id, book).then((response) => {
+						axios.patch('http://localhost:4000/authors/image/' + props.id, author).then((response) => {
 						// console.log("wishlist");
 						 console.log("patch",response);
 			 

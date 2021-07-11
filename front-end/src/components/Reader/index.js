@@ -34,6 +34,7 @@ class Reader extends Component
           readers: [],
           books: [],
           friends: [],
+          genras:[],
         }
     }
     
@@ -88,6 +89,25 @@ class Reader extends Component
                   {console.log(reader.friends)}
                   {this.displayFriend(reader.friends)}
                   <br></br>
+                </Row>
+                <Row>
+                <Card style={{ width: '10rem'  , backgroundColor:"#d1ecf0d8" ,  border:"0px"}} >
+                  <Card.Header>
+                    Favourite Genras
+                  </Card.Header>
+                  
+                  {
+                      reader.genre.map((Genre, index) => (
+                        <Card.Body key={index} className="genre__display" >
+                          <h4>{Genre}</h4>
+                        </Card.Body >
+                    ))
+                    }
+                  </Card>
+                </Row>
+                  
+                <Row>
+                    
                 </Row>
                   <br></br>
               </Col>
