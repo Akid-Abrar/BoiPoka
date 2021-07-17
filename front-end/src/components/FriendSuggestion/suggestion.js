@@ -43,7 +43,7 @@ class Suggestion extends Component {
         return (
             <Card>
                 <div><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
-                <Button className="comment-dark">Add Friend</Button>
+                <Button className="button-dark">Add Friend</Button>
             </Card>
         );
 

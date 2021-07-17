@@ -17,8 +17,8 @@ const FooterClass = () => (
                         </ul>
                     </div>
                 </div> 
-                <div class="row justify-content-center">             
-                    <div class="col-auto">
+                <div className="row justify-content-center">             
+                    <div className="col-auto">
                         <p><font color="white" size="4">© Copyright BoiPoka Team</font></p>
                     </div>
                 </div>

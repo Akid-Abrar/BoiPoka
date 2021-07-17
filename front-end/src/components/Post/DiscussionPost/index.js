@@ -105,7 +105,7 @@ class DiscussionPost extends Component {
   displayPost(posts) {
 
     return posts.map((post, index) => (
-      <div key={index} ><Post postid={post._id} currentuserid={this.state.id} /></div>
+      <div className="mt-5" key={index} ><Post postid={post._id} currentuserid={this.state.id} /></div>
 
     ));
   };

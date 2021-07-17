@@ -26,3 +26,7 @@
     border-width: 2px solid;
     border-color : #d1ecf0d8;
 }
+
+.textarea{
+    resize:none;
+}

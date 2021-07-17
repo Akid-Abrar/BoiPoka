@@ -41,8 +41,9 @@ class AddPost extends Component {
         }).catch((err) => {
             alert("not valid data")
         })
-        window.location.reload(false);
-        event.preventDefault();
+        // window.location.reload(false);
+        // event.preventDefault();
+        // this.componentDidMount();
 
     }
 
@@ -57,7 +58,7 @@ class AddPost extends Component {
                         value={this.state.post}
                         onChange={this.handlePost}
                         type="text"
-                        className="m-1"
+                        className="textarea m-1"
                     />
                     <input type="submit" value="Post" />
                 </Form>
