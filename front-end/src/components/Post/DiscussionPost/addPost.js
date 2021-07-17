@@ -41,8 +41,8 @@ class AddPost extends Component {
         }).catch((err) => {
             alert("not valid data")
         })
-        // window.location.reload(false);
-        // event.preventDefault();
+        window.location.reload(false);
+        event.preventDefault();
         // this.componentDidMount();
 
     }
