@@ -95,7 +95,7 @@ return(
     <div className=".py-10" >
     
     
-    <Link to={'./info/'+searchtext}>cccc </Link>
+    <Link to={'./info/'+searchtext}>Search  </Link>
     
     </div>
     </div>
