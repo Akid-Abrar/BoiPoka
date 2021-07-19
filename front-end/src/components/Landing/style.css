@@ -1,0 +1,9 @@
+.welcome{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background-color: #9e5a2d;
+    margin-top: 35px;
+    margin-right: 35px;
+}

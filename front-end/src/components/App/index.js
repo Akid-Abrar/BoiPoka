@@ -17,6 +17,7 @@ import AuthorPage from '../Author'
 import Genre from '../Genre'
 //import Books from '../Books/books';
 import Info from '../Books/books';
+import ProfileView from '../ProfileView'
 
 
 
@@ -32,7 +33,7 @@ const App = () => (
     <div>
       <Navigation />
      
-      <hr />
+      {/* <hr /> */}
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -45,6 +46,7 @@ const App = () => (
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.BOOK} component={Info} />
       <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
+      <Route path={ROUTES.PROFILE} component={ProfileView} />
       <FooterClass />
     </div>
   </Router>

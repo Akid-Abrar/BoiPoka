@@ -19,7 +19,7 @@ import info from '../Reader'
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <div style = {{backgroundColor:"#d1ecf0d8"}}>
+      <div style = {{backgroundColor:"#d1ecf0d8", marginBottom: "27px"}}>
         <Container>
         <Row>
           <Col sm={3}></Col>

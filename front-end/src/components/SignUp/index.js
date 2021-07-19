@@ -116,7 +116,7 @@ class SignUpFormBase extends Component {
       lastname === '';
 
     return (
-      <div class="container">
+      <div class="container mt-2" align='center'>
         <h2>Sign Up</h2>
       <Form onSubmit={this.onSubmit}>
       <Form.Group controlId="first_name">

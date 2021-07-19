@@ -53,14 +53,14 @@ class FriendSuggestion extends Component {
         this.setState({ id: this.state.reader._id })
 
         link = 'http://localhost:4000/readers/'
-        console.log('reader',this.state.reader.friends)
+        // console.log('reader',this.state.reader.friends)
         // console.log('id', this.state.id)
 
         axios.get(link).then((res) => {
           this.setState({ result: res.data })
         //   console.log('result', this.state.result);
           this.state.result.map((r, index) => {
-            console.log('rid',r._id);
+            // console.log('rid',r._id);
             if((this.state.reader.friends.includes(r._id) === false) && r._id !== this.state.id){
               this.state.suggestion.push(r)
             }
@@ -90,7 +90,7 @@ class FriendSuggestion extends Component {
   displayUser(posts) {
 
     return this.state.suggestion.map((s, index) => (
-      <div key={index} ><Suggestion id={s._id} /></div>
+      <div key={index} ><Suggestion id={s._id} user={this.state.id}/></div>
 
     ));
   };

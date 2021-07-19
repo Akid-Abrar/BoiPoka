@@ -13,7 +13,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap'
 import Post from './post'
-import AddPost from './addPost'
+// import AddPost from './addPost'
 // import profile from './profile.png'
 
 const Info = () => (
@@ -32,13 +32,19 @@ class DiscussionPost extends Component {
       id: '',
       result: [],
       posts: [],
+      post: '',
     }
+
+    this.handlePost = this.handlePost.bind(this);
+    this.handlePostSubmit = this.handlePostSubmit.bind(this);
+    this.GetPost(this.props.authUser.email)
+
 
   }
 
 
   componentDidMount() {
-    this.GetPost(this.props.authUser.email)
+
 
   }
 
@@ -86,7 +92,7 @@ class DiscussionPost extends Component {
 
   }
 
-  displayPosts(reader, posts) {
+  displayPosts() {
     // console.log(this.state.posts)
 
     if (this.state.posts.length !== 0) {
@@ -111,17 +117,60 @@ class DiscussionPost extends Component {
   };
 
 
+  handlePost(event) {
+    this.setState({ post: event.target.value })
+  }
+
+  handlePostSubmit(event) {
+    const post = {
+      creatorid: this.state.id,
+      content: this.state.post,
+    }
+    // console.log("post",post);
+
+    axios.post('http://localhost:4000/posts/', post).then((response) => {
+      // console.log("wishlist");
+      // console.log("post", response);
+
+    }).catch((err) => {
+      alert("not valid data")
+    })
+
+    event.preventDefault();
+    this.state.post = '';
+    window.location.reload(false);
+
+  }
+
+  // componentWillUnmount() {
+  //   this.setState = (state, callback) => {
+  //     return;
+  //   };
+  // }
+
+
 
   render() {
+
 
     return (
 
       <div>
         <div>
-          <AddPost id={this.state.id} />
-        </div>
+          <h6>Start a discussion</h6>
+          <Form className="m-1" onSubmit={this.handlePostSubmit}>
+            <textarea
+              rows="3" cols="60"
+              value={this.state.post}
+              onChange={this.handlePost}
+              type="text"
+              className="textarea m-1"
+            />
+            <input type="submit" value="Post" />
+          </Form>
+        </div >
         <div className="mt-3">
-          {this.displayPosts(this.state.posts)}
+          {this.displayPosts()}
         </div>
 
       </div>
@@ -129,6 +178,9 @@ class DiscussionPost extends Component {
     );
   }
 }
+
+
+
 const condition = authUser => !!authUser;
 export default compose(
   withEmailVerification,

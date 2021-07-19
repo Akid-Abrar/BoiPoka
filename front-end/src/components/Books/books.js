@@ -159,7 +159,7 @@ class Books extends Component {
 
     render() {
         return (
-            <div>
+            <div style = {{marginBottom: "27px"}}>
             
                 <SearchArea searchbook={this.searchbook} handlesearch={this.handlesearch} />
                 

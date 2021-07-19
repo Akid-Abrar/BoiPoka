@@ -93,7 +93,7 @@ class Author extends Component
       }
       var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
       return  (
-        <div  className="author__display" class="row row-content align-items-center">
+        <div  className="author__display" class="row row-content align-items-center" style = {{marginBottom: "27px"}}>
           
           <Container>
             <Row>

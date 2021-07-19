@@ -11,7 +11,7 @@ import * as ROUTES from '../../constants/routes';
 import {Row,Col} from 'react-bootstrap'
 
 const AdminPage = () => (
-  <div>
+  <div style = {{marginBottom: "27px"}}>
     <h1>Admin</h1>
     <Row>
       <Col sm={9}><Bookadd /></Col>

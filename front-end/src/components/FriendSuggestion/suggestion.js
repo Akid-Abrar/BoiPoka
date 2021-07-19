@@ -4,21 +4,35 @@ import { Component } from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
-import { Button, Card, Col, Container } from 'react-bootstrap'
+import { Card, Button } from 'react-bootstrap'
+// import ProfileView from '../ProfileView'
+// import { PROFILE } from '../../constants/routes';
+import { Link } from 'react-router-dom';
+
+// import { useEffect, useRef } from "react";
+
+
 
 class Suggestion extends Component {
+    // _isMounted = false;
     constructor(props) {
         super(props)
         this.state = {
             first_name: '',
             last_name: '',
             image: '',
+            token: 'Add Friend'
         }
+
+
+        this.handleAddFriend = this.handleAddFriend.bind(this);
+        this.GetCommenter(this.props.id)
+
 
     }
 
     componentDidMount() {
-        this.GetCommenter(this.props.id)
+        // this._isMounted = true;
     }
 
     GetCommenter(id) {
@@ -37,13 +51,48 @@ class Suggestion extends Component {
                 var msg = "User Unavailabe for id " + id
                 alert(msg)
             })
-    };
+    }
+
+    handleAddFriend = (event) => {
+
+        // this.state.token = "Added"
+        const friend = {
+            friends: this.props.id
+        }
+
+        // console.log(this.props.user)
+        // console.log(friend)
+
+        axios.patch('http://localhost:4000/readers/addfriend/' + this.props.user, friend).then((response) => {
+            // console.log(this.props.user)
+            // console.log(response)
+
+        }).catch((err) => {
+            alert("not valid data")
+        })
+        // console.log("after patch")
+        event.preventDefault();
+        this.setState({ token: "Added" })
+
+    }
+
+    // componentWillUnmount() {
+    //     this.setState = (state, callback) => {
+    //         return;
+    //     };
+    // }
+
 
     render() {
+
         return (
-            <Card>
-                <div><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
-                <Button className="button-dark">Add Friend</Button>
+            <Card className="friend">
+                <div className="friend">
+                    <a href={`/profile/${this.props.id}/${this.props.user}`}>
+                        <div><img className="profile m-2" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
+                    </a>
+                    <input type="submit" value={this.state.token} onClick={this.handleAddFriend} />
+                </div>
             </Card>
         );
 

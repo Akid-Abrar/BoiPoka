@@ -31,7 +31,7 @@ class Reader extends Component
     {
         super(props)
         this.state = {
-          readers: [],
+          reader: '',
           books: [],
           friends: [],
           genras:[],
@@ -50,7 +50,7 @@ class Reader extends Component
         console.log(link)
         axios.get(link)
           .then((res) => {
-            this.setState({readers : res.data})
+            this.setState({reader : res.data[0]})
           }
           )
           .catch(() => {
@@ -58,10 +58,10 @@ class Reader extends Component
           })
     }
 
-    displayReader(readers) {
+    displayReader(reader) {
       // var imgsrc=
-      return readers.map((reader, index) => (
-        <div key={index} className="reader__display" class="row row-content align-items-center">
+      return (
+        <div className="reader__display row row-content align-items-center" style = {{marginBottom: "27px"}}>
           <Container>
             <Row>
               <Col sm={6}>
@@ -86,7 +86,7 @@ class Reader extends Component
                 <br></br>
                 <Row>
                   <br></br>
-                  {console.log(reader.friends)}
+                  {/* {console.log(reader.friends)} */}
                   {this.displayFriend(reader.friends)}
                   <br></br>
                 </Row>
@@ -97,11 +97,16 @@ class Reader extends Component
                   </Card.Header>
                   
                   {
-                      reader.genre.map((Genre, index) => (
+                      reader.genre != undefined ? (reader.genre.length != 0 ? reader.genre.map((Genre, index) => (
                         <Card.Body key={index} className="genre__display" >
                           <h4>{Genre}</h4>
                         </Card.Body >
-                    ))
+                      )) : (<Card.Body className="genre__display" >
+                        <h4>No Genre</h4>
+                      </Card.Body >)) : (<Card.Body className="genre__display" >
+                        <h4>No Genre</h4>
+                      </Card.Body >)
+                    
                     }
                   </Card>
                 </Row>
@@ -149,27 +154,43 @@ class Reader extends Component
 
           
         </div>
-      ));
+      )
     };
 
     displayBook(bookIds) {
 
-      return bookIds.map((bookId, index) => (
+      return (bookIds != undefined ? (bookIds.length != 0 ? bookIds.map((bookId, index) => (
 
-          <div key={index} className="book__display">
-            <div><BookPrint bookid={bookId}/></div>
-            <br></br>
-          </div>
-      ));
+        <div key={index} className="book__display">
+          <div><BookPrint bookid={bookId} /></div>
+          <br></br>
+        </div>
+      )) : (<div className="book__display">
+        <div>No Books</div>
+        <br></br>
+      </div>)) : (<div className="book__display">
+        <div>No Books</div>
+        <br></br>
+      </div>))
     };
 
     displayFriend(friendIds) {
 
-      return friendIds.map((friendId, index) => (
-        <Col key={index} className="friend__display" sm={3}>
-            <FriendPrint friendid={friendId}/>
-        </Col>
-      ));
+      if (friendIds != undefined) {
+        return friendIds.length != 0 ? (friendIds.map((friendId, index) => (
+          <Col key={index} className="friend__display" sm={3}>
+            <FriendPrint friendid={friendId} userid={this.state.reader._id} />
+          </Col>
+        ))) : (<Col className="friend__display" sm={3}>
+          <Container style={{ paddingBottom: "20px" }}>No Friends</Container>
+        </Col>)
+      } else {
+        return (
+          <Col className="friend__display" sm={3}>
+            <Container>No Friends</Container>
+          </Col>
+        )
+      }
     };
     
     
@@ -179,7 +200,7 @@ class Reader extends Component
         return(
           <div style = {{backgroundColor:"#d1ecf0d8"}}>
               <div className="display" >
-                {this.displayReader(this.state.readers)}
+                {this.displayReader(this.state.reader)}
               </div>
           </div>
 

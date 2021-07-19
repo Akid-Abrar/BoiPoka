@@ -16,16 +16,16 @@ router.route('/add').post((req, res) => {
   const last_name = req.body.last_name;
   const email = req.body.email;
   // const password=req.body.password;
-  const is_author=req.body.is_author;
-  const friends=req.body.friends;
-  const following=req.body.following;
-  const books_read=req.body.books_read;
-  const wishlist=req.body.wishlist;
-  const reviews=req.body.reviews;
-  const posts=req.body.posts;
-  const author_id=req.body.author_id;
-  const image=req.body.image;
-  
+  const is_author = req.body.is_author;
+  const friends = req.body.friends;
+  const following = req.body.following;
+  const books_read = req.body.books_read;
+  const wishlist = req.body.wishlist;
+  const reviews = req.body.reviews;
+  const posts = req.body.posts;
+  const author_id = req.body.author_id;
+  const image = req.body.image;
+
 
   const newReader = new Reader({
     //_id,
@@ -67,16 +67,16 @@ router.route('/:id').get((req, res) => {
 });
 
 
-router.route('/email/:id').get((req, res) => {
-  
-  Reader.find({email : req.params.id})
-    .then(reader => res.json(reader))
-    .catch(err => res.status(400).json('Error: ' + err));
-});
+// router.route('/email/:id').get((req, res) => {
+
+//   Reader.find({email : req.params.id})
+//     .then(reader => res.json(reader))
+//     .catch(err => res.status(400).json('Error: ' + err));
+// });
 
 router.route('/findAuthorName/:authorId').get((req, res) => {
-  
-  Reader.find({author_id : req.params.authorId})
+
+  Reader.find({ author_id: req.params.authorId })
     .then(reader => res.json(reader))
     .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -104,7 +104,7 @@ router.get('/author/:id', async (req, res) => {
 router.get('/auth/:id', async (req, res) => {
   var author = req.params.id;
   try {
-     Reader.findOne({ author_id: req.params.id }).then(b => {
+    Reader.findOne({ author_id: req.params.id }).then(b => {
       if (b) {
         console.log(b);
         res.json(b);
@@ -130,20 +130,20 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').put((req, res) => {
   Reader.findById(req.params.id)
     .then(reader => {
-     //reader._id = req.body._id;
-    reader.first_name=req.body.first_name;
-    reader.last_name=req.body.last_name;
-    reader.email=req.body.email;
-    // reader.password=req.body.password;
-    reader.is_author=req.body.is_author;
-    reader.friends=req.body.friends;
-    reader.following=req.body.following;
-    reader.books_read=req.body.books_read;
-    reader.wishlist=req.body.wishlist;
-    reader.reviews=req.body.reviews;
-    reader.posts=req.body.posts;
-    reader.author_id=req.body.author_id;
-    reader.image=req.body.image;
+      //reader._id = req.body._id;
+      reader.first_name = req.body.first_name;
+      reader.last_name = req.body.last_name;
+      reader.email = req.body.email;
+      // reader.password=req.body.password;
+      reader.is_author = req.body.is_author;
+      reader.friends = req.body.friends;
+      reader.following = req.body.following;
+      reader.books_read = req.body.books_read;
+      reader.wishlist = req.body.wishlist;
+      reader.reviews = req.body.reviews;
+      reader.posts = req.body.posts;
+      reader.author_id = req.body.author_id;
+      reader.image = req.body.image;
 
       reader.save()
         .then(() => res.json('reader updated!'))
@@ -155,20 +155,20 @@ router.route('/update/:id').put((req, res) => {
 
 router.patch('/:id', async (req, res) => {
   try {
-      const reader = await Reader.update(
-          { _id: req.params.id },
-          {
-              $set: {
+    const reader = await Reader.update(
+      { _id: req.params.id },
+      {
+        $set: {
 
-                  image: req.body.image,
+          image: req.body.image,
 
 
-              }
-          }
-      );
-      res.json(reader)
+        }
+      }
+    );
+    res.json(reader)
   } catch (err) {
-      res.json({ message: err });
+    res.json({ message: err });
   }
 })
 
@@ -243,34 +243,34 @@ router.route('/update/:id').patch(async (req, res) => {
       if (posts == null || posts == '') {
         posts = docs.posts;
       }
-      if (author_id== null || author_id == '') {
+      if (author_id == null || author_id == '') {
         author_id = docs.author_id;
       }
 
       let options;
-     
+
       options = {
         first_name: first_name,
-        last_name : last_name,
+        last_name: last_name,
         email: email,
-         is_author:is_author,
-         friends:friends,
-         following:following,
-         books_read :books_read ,
-         wishlist:wishlist,
-         reviews:reviews,
-         posts:posts,
-         author_id :author_id 
+        is_author: is_author,
+        friends: friends,
+        following: following,
+        books_read: books_read,
+        wishlist: wishlist,
+        reviews: reviews,
+        posts: posts,
+        author_id: author_id
       }
-      Reader.updateOne({_id: req.params.id},{$set:options}, 
-        function (err,data) {
+      Reader.updateOne({ _id: req.params.id }, { $set: options },
+        function (err, data) {
           if (err) {
-            res.json({ msg: 'product not found'+err })
+            res.json({ msg: 'product not found' + err })
           } else {
-            res.json({ msg: 'product updated successfully'+data} )
+            res.json({ msg: 'product updated successfully' + data })
           }
         })
-     
+
     }
 
   })
@@ -278,58 +278,100 @@ router.route('/update/:id').patch(async (req, res) => {
 
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
-try {
-  Reader.find({_id: req.params.id},'wishlist -_id',function(err, someValue){
-    if(err) return next(err);
-    console.log(someValue);
-  });
-  Reader.findOneAndUpdate(
-    { _id: req.params.id }, 
-    { $push: {wishlist: req.body.wishlist  } },
-    function (error, success) {
-      if (error) {
+  try {
+    Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
+      if (err) return next(err);
+      console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { wishlist: req.body.wishlist } },
+      function (error, success) {
+        if (error) {
           console.log(error);
           res.json('error')
-      } else {
+        } else {
           console.log(success);
           res.json("success")
-      }
-  });
+        }
+      });
 
-  
-}catch(err)
-{
-  console.log(err);
-  res.json(err);
-}
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
 })
 
 router.patch('/updategenre/:id', async (req, res) => {
   try {
-    Reader.find({_id: req.params.id},'genre -_id',function(err, someValue){
-      if(err) return next(err);
+    Reader.find({ _id: req.params.id }, 'genre -_id', function (err, someValue) {
+      if (err) return next(err);
       console.log(someValue);
     });
     Reader.findOneAndUpdate(
-      { _id: req.params.id }, 
-      { $push: {genre: req.body.genre  } },
+      { _id: req.params.id },
+      { $push: { genre: req.body.genre } },
       function (error, success) {
         if (error) {
-            console.log(error);
-            res.json('error')
+          console.log(error);
+          res.json('error')
         } else {
-            console.log(success);
-            res.json("success")
+          console.log(success);
+          res.json("success")
         }
-    });
-  
-    
-  }catch(err)
-  {
+      });
+
+
+  } catch (err) {
     console.log(err);
     res.json(err);
   }
-  })
+})
+
+router.patch('/addfriend/:id', async (req, res) => {
+  try {
+    Reader.find({ _id: req.params.id }, 'friends -_id', function (err, someValue) {
+      if (err) return next(err);
+      // console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { friends: req.body.friends } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+          res.json('error')
+        } else {
+          console.log(success);
+          res.json("success")
+        }
+      });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
+
+
+router.patch('/updatefriend/:id', async (req, res) => {
+  try {
+      const updatedPost = await Reader.updateOne(
+          { _id: req.params.id },
+          {
+              $set: {
+                  friends: req.body.friends,
+              }
+          }
+      );
+      res.json(updatedPost)
+  } catch (err) {
+      res.json({ message: err });
+  }
+})
 
 
 module.exports = router;

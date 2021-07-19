@@ -6,7 +6,7 @@ import '../styles.css'
 import { Nav} from 'react-bootstrap'
 
 const SignOutButton = ({ firebase }) => (
-  <Nav.Link onClick={firebase.doSignOut}>Sign Out</Nav.Link>
+  <Nav.Link onClick={firebase.doSignOut}><i className="fas fa-sign-out-alt"></i>Sign Out</Nav.Link>
 );
 
 export default withFirebase(SignOutButton);

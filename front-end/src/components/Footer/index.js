@@ -4,27 +4,18 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import * as ROUTES from '../../constants/routes';
 // import {Footer} from 'react-bootstrap'
 
-const FooterClass = () => (   
-     
-        <footer className="footer">
-            <div className="container">
-                <div className="row justify-content-center" >             
-                    <div className="col-4 col-sm-2">
-                        <ul className="list-unstyled">
-                            <li><a href={ROUTES.HOME}>Home</a></li>
-                            <li><a href={ROUTES.READER}>Profile</a></li>
-                            <li><a href={ROUTES.ACCOUNT}>Account</a></li>
-                        </ul>
-                    </div>
-                </div> 
-                <div className="row justify-content-center">             
-                    <div className="col-auto">
-                        <p><font color="white" size="4">© Copyright BoiPoka Team</font></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-     
+const FooterClass = () => (
+
+    <footer className="footer fixed-bottom">
+
+        {/* <div align="center"> */}
+
+            <font color="white" size="4">© ᶜᵒᵖʸʳⁱᵍʰᵗ ᴮᵒⁱᴾᵒᵏᵃ ᵀᵉᵃᵐ</font>
+
+        {/* </div> */}
+
+    </footer>
+
 );
 
 export default FooterClass;
