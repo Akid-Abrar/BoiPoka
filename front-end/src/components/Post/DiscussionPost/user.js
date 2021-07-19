@@ -43,8 +43,9 @@ class User extends Component {
         return (
             <div>
                 <a href={`/profile/${this.props.id}/${this.props.userid}`}>
-                <img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}
+                <img className="profile" src={this.state.image} />
                 </a>
+                {this.state.first_name} {this.state.last_name}
             </div>
         );
 

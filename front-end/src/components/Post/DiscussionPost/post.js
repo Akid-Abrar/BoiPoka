@@ -49,7 +49,7 @@ class Post extends Component {
     PrintComments(comments) {
         if (comments.length !== 0) {
             return comments.map((comment, index) => (
-                <div key={index} className="comment-dark">
+                <div key={index} className="comment-dark p-2">
                     <User id={comment.commentatorid} userid={this.props.currentuserid}/>
                     <Card className="comment" key={index}>
                         {comment.comment}

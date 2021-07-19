@@ -8,7 +8,7 @@ import {
   withAuthorization,
   withEmailVerification,
 } from '../Session';
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
 import { Container, Row, Col, Table, Card, Image } from 'react-bootstrap'
@@ -53,7 +53,7 @@ class ProfileView extends Component {
     // const {id} = window.location.href
     // console.log(window.location.pathname.split('/')[2])
     var link = 'http://localhost:4000/readers/' + window.location.pathname.split('/')[2]
-    this.state.id = window.location.pathname.split('/')[3]
+    this.setState({id:window.location.pathname.split('/')[3]})
     // console.log(link)
 
 
@@ -88,7 +88,7 @@ class ProfileView extends Component {
 
   handleAddFriend = (event) => {
 
-    if (this.state.token == "Add Friend") {
+    if (this.state.token === "Add Friend") {
       this.state.userfriends.push(this.state.reader._id)
       const friend = {
         friends: this.state.userfriends
@@ -140,7 +140,7 @@ class ProfileView extends Component {
                       />
                     </Col>
                     <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2>
-                    {this.state.id != this.state.reader._id ? <input type="submit" value={this.state.token} onClick={this.handleAddFriend} /> : <></>}
+                    {this.state.id !== this.state.reader._id ? <input type="submit" value={this.state.token} onClick={this.handleAddFriend} /> : <></>}
                       
                     </Col>
                   </Row>
@@ -163,7 +163,7 @@ class ProfileView extends Component {
                   </Card.Header>
 
                   {
-                    reader.genre != undefined ? (reader.genre.length != 0 ? reader.genre.map((Genre, index) => (
+                    reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
                       <Card.Body key={index} className="genre__display" >
                         <h4>{Genre}</h4>
                       </Card.Body >
@@ -224,7 +224,7 @@ class ProfileView extends Component {
 
   displayBook(bookIds) {
 
-    return (bookIds != undefined ? (bookIds.length != 0 ? bookIds.map((bookId, index) => (
+    return (bookIds !== undefined ? (bookIds.length !== 0 ? bookIds.map((bookId, index) => (
 
       <div key={index} className="book__display">
         <div><BookPrint bookid={bookId} /></div>
@@ -241,8 +241,8 @@ class ProfileView extends Component {
 
   displayFriend(friendIds) {
 
-    if (friendIds != undefined) {
-      return friendIds.length != 0 ? (friendIds.map((friendId, index) => (
+    if (friendIds !== undefined) {
+      return friendIds.length !== 0 ? (friendIds.map((friendId, index) => (
         <Col key={index} className="friend__display" sm={3}>
           <FriendPrint friendid={friendId} userid={this.state.id} />
         </Col>

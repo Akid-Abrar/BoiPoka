@@ -97,7 +97,7 @@ class Reader extends Component
                   </Card.Header>
                   
                   {
-                      reader.genre != undefined ? (reader.genre.length != 0 ? reader.genre.map((Genre, index) => (
+                      reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
                         <Card.Body key={index} className="genre__display" >
                           <h4>{Genre}</h4>
                         </Card.Body >
@@ -159,7 +159,7 @@ class Reader extends Component
 
     displayBook(bookIds) {
 
-      return (bookIds != undefined ? (bookIds.length != 0 ? bookIds.map((bookId, index) => (
+      return (bookIds !== undefined ? (bookIds.length !== 0 ? bookIds.map((bookId, index) => (
 
         <div key={index} className="book__display">
           <div><BookPrint bookid={bookId} /></div>
@@ -176,8 +176,8 @@ class Reader extends Component
 
     displayFriend(friendIds) {
 
-      if (friendIds != undefined) {
-        return friendIds.length != 0 ? (friendIds.map((friendId, index) => (
+      if (friendIds !== undefined) {
+        return friendIds.length !== 0 ? (friendIds.map((friendId, index) => (
           <Col key={index} className="friend__display" sm={3}>
             <FriendPrint friendid={friendId} userid={this.state.reader._id} />
           </Col>
