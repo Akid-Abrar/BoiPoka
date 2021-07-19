@@ -25,8 +25,26 @@ router.get('/', async (req, res) => {
 //find with book name
 router.post('/bookname',async (req,res) => {
     var Bookname=req.body.name;
-    try{
-        let book=await Finder.findOne({name:new RegExp('^'+Bookname+'$', "i")}).then(b =>{
+    var regex=new RegExp(req.body.name,'i');
+    var result=Finder.find({name:regex});
+    result.exec(function(err,data){
+        var r=[];
+        if(!err)
+        {
+         if(data && data.length && data.length>0)
+         {
+             data.forEach(user =>{
+                 r.push(user);
+             })
+         }
+        }
+       // console.log(r);
+        res.json(r);
+
+    })
+  /*  try{
+        /*let book=await Finder.find({name:new Regex(Bookname)}).then(b =>{
+            console.log(book);
          if(b) {
            console.log(b);
            res.json(b);
@@ -34,13 +52,13 @@ router.post('/bookname',async (req,res) => {
          else {
              res.json ('book not found');
          }
-        })
+        })*/
         
 
-    }catch(err)
+  /*  }catch(err)
     {
         res.json({message:err});
-    }
+    }*/
 })
 
 //Find with special mongo document ID

@@ -15,7 +15,7 @@ import AdminPage from '../Admin';
 import ReaderPage from '../Reader';
 import AuthorPage from '../Author'
 import Genre from '../Genre'
-//import Books from '../Books/books';
+import SearchArea from '../Search/Searcharea';
 import Info from '../Books/books';
 
 
@@ -43,8 +43,9 @@ const App = () => (
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
-      <Route path={ROUTES.BOOK} component={Info} />
+      <Route path={ROUTES.BOOK} component={SearchArea} />
       <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
+      <Route path='/info/:value'  component={Info} />
       <FooterClass />
     </div>
   </Router>

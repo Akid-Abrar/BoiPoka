@@ -16,8 +16,16 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const loggedAuthors = await Finder.findById(req.params.id);
-        res.json(loggedAuthors)
+         Finder.findById(req.params.id).then(b => {
+            if (b) {
+               // console.log(b);
+                res.json(b);
+              }
+              else {
+                res.json('author not found');
+              }
+         })
+        
     } catch (err) {
         res.json({ message: err });
     }

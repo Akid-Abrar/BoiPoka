@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose } from 'recompose';
-import Info from '../Books/books';
+import SearchArea from '../Search/Searcharea';
 //import Image from '../Imageup/Image';
 import { withAuthorization, withEmailVerification } from '../Session';
 import Messages from '../Messages';

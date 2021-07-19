@@ -105,7 +105,7 @@ router.get('/auth/:id', async (req, res) => {
   try {
      Reader.findOne({ author_id: req.params.id }).then(b => {
       if (b) {
-        console.log(b);
+       // console.log(b);
         res.json(b);
       }
       else {

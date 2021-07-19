@@ -10,14 +10,15 @@ import {
     AuthUserContext
 
 } from '../Session';
-import { CardDeck, Card ,Row,Col} from 'react-bootstrap';
+import { CardDeck, Card ,Row,Col,Button} from 'react-bootstrap';
 
 
-const Info = () => (
+const Info = (props) => (
     <AuthUserContext.Consumer>
         {authUser => (
             <div >
-                <Books authUser={authUser} />
+               
+                <Books searchname={props.match.params.value} authUser={authUser} />
             </div>
         )}
     </AuthUserContext.Consumer>
@@ -31,17 +32,31 @@ class Books extends Component {
         super(props);
         this.state = {
             books: [],
+            allbook:[],
             Author: [],
-            searchfield: '',
+            searchfield: props.searchname,
             user: [],
-            newAuthor:[]
+            newAuthor: [],
         }
 
     }
 
     componentDidMount() {
-        //console.log(this.props.authUser.email);
-        this.GetReader(this.props.authUser.email)
+        
+        
+
+        let suggestion = [];
+        this.GetReader(this.props.authUser.email);
+        axios.get("http://localhost:4000/books").then((res)=>
+        {
+            res.data.map((b,i)=>{
+             suggestion.push(b["name"]);
+            })
+            this.setState({ allbook: suggestion });
+            //console.log(this.state.allbook);
+        }).catch(() => {
+            alert("Data Unavailabe")
+        })
 
     }
 
@@ -59,33 +74,43 @@ class Books extends Component {
                 alert("Data Unavailabe")
             })
     }
-
-    searchbook = (e) => {
-        let val;
-        e.preventDefault();
-        const search = { name: this.state.searchfield };
+     
+    searchbook = () => {
+       
+      // console.log(this.props.match.params.value);
+       
+        //const search = { name:this.props.match.params.value  };
+        //console.log(id);
+        const search = { name: this.props.searchname };
+        
         axios.post("http://localhost:4000/books/bookname", search).then((response) => {
-            console.log(this.state.user);
-            this.setState({ books: [response.data] });
+            //console.log(this.state.user);
+            this.setState({ books: response.data });
+            //console.log("book array");
+           // console.log(this.state.books);
 
-            const author =  response.data['author'] ;
+            const author =  response.data[0]['author'] ;
             
             axios.get("http://localhost:4000/readers/auth/" +author).then((response) => {
-
+                
+               // console.log(response.data);
                 this.setState({ Author: [response.data] });
                // console.log('author');
-                //console.log(response.data);
+                //console.log(this.state.Author);
 
             }).catch(() => {
                 alert("Data Unavailabe")
 
             })
     
-            axios.get("http://localhost:4000/authors/" +author).then((response) => {
-
-                this.setState({ newAuthor: [response.data] });
-                console.log(' new author');
-                console.log(response.data);
+            axios.get("http://localhost:4000/authors/" +author).then((res) => {
+               
+                this.setState({ newAuthor: [res.data] });
+                
+               // console.log('new author');
+                //console.log(this.state.newAuthor);
+                
+               
 
             }).catch(() => {
                 alert("Data Unavailabe")
@@ -109,7 +134,7 @@ class Books extends Component {
 
     handlesearch = (e) => {
         console.log(e.target.value);
-        this.setState({ searchfield: e.target.value });
+        
 
     }
 
@@ -158,11 +183,17 @@ class Books extends Component {
     }
 
     render() {
+        
+               
+           
         return (
-            <div>
+            <div className=".py-5">
             
-                <SearchArea searchbook={this.searchbook} handlesearch={this.handlesearch} />
-                
+             
+             {/* <Button variant="outline-info"  onClick={this.searchbook}>
+        Search </Button>*/}
+        {this.searchbook()}
+             {this.state.books.length >0 ?
                 <CardDeck>
                 <Row style={{padding: 20}}>
                     
@@ -183,16 +214,18 @@ class Books extends Component {
                     <Card>
                         <Card.Body >
 
-
-                            <Authors handlefollow={this.handlefollow} auth={this.state.Author}  />
-                            <Auth newauth={this.state.newAuthor} />
                            
+                            <Authors handlefollow={this.handlefollow} auth={this.state.Author}  />
+                            
+                             <Auth newauth={this.state.newAuthor} />
+        
                         </Card.Body>
                        
                     </Card>
                     </Col> 
                     </Row>
                 </CardDeck>
+                : null}
             </div>
 
         );

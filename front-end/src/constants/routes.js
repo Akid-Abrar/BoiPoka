@@ -13,3 +13,4 @@ export const READER = '/reader';
 export const GENRE = '/genre';
 export const AUTHOR = '/author';
 export const BOOK ='/book';
+export const INFO='/info';

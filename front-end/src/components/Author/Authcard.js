@@ -8,15 +8,18 @@ const Authcard = (props) => {
         <div className="card">
         <div className="card-body">
         <div className="card-title">
+        
         <Image
         height={100}
         width={100}
         roundedCircle
         src={props.image}
-      />
-      <div className="card-text" style = {{backgroundColor:"#ebdb82d8"}}>{props.follow.length} Followers  </div>
+        alt="image"
+       /> 
+    
+      <div className="card-text" style = {{backgroundColor:"#ebdb82d8"}}>{props.follow.length} Followers  </div> 
             </div>
-            
+        
         <div className="card-text" style = {{backgroundColor:"#ebdb82d8"}}>{props.bio}  </div>
         
         
