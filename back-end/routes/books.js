@@ -42,23 +42,7 @@ router.post('/bookname',async (req,res) => {
         res.json(r);
 
     })
-  /*  try{
-        /*let book=await Finder.find({name:new Regex(Bookname)}).then(b =>{
-            console.log(book);
-         if(b) {
-           console.log(b);
-           res.json(b);
-         }
-         else {
-             res.json ('book not found');
-         }
-        })*/
-        
-
-  /*  }catch(err)
-    {
-        res.json({message:err});
-    }*/
+  
 })
 
 //Find with special mongo document ID

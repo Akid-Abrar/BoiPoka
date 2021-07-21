@@ -31,6 +31,9 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+//find book with author name
+
+
 router.post('/', async (req, res) => {
     const Author = new Finder({
         // _id: req.body._id,
