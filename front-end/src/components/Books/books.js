@@ -91,13 +91,6 @@ class Books extends Component {
                 alert("Data Unavailabe")
 
             })
-
-
-
-
-
-
-
         }).catch(() => {
             alert("Data Unavailable")
 

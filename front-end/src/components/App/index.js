@@ -8,6 +8,10 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import DiscussionPost from '../Post/DiscussionPost';
+import Bookadd from '../Bookadmin/Boodadd';
+import Authoradd from '../AuthorAdmin/AuthorAdd';
+import Postadd from '../PostAdmin/postAdd';
+import Useradmin from '../Admin/user';
 
 import HomePage from '../Home';
 import AccountPage from '../Account';
@@ -45,6 +49,10 @@ const App = () => (
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.BOOK} component={Info} />
       <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
+      <Route path={ROUTES.BOOKADMIN} component={Bookadd} />
+      <Route path={ROUTES.AUTHORADMIN} component={Authoradd} />
+      <Route path={ROUTES.POSTADMIN} component={Postadd} />
+      <Route path={ROUTES.USERADMIN} component={Useradmin} />
       <FooterClass />
     </div>
   </Router>

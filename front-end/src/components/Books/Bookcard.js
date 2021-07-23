@@ -35,7 +35,6 @@ const Bookcard = (props) => {
                             return <ListGroup.Item style = {{backgroundColor:"#ebdb82d8"}} key={index}>{value}</ListGroup.Item>
                         })}
                     </ListGroup>
-
                 </ul>
                 <Card bg={'light'} text={'dark'}  style={{ width: '28rem' }} className="mb-2">
                     <Card.Header style = {{backgroundColor:"#925024"}}>{props.nam}</Card.Header>
@@ -47,10 +46,6 @@ const Bookcard = (props) => {
                     </Card.Body>
                 </Card>
                 </Col>
-                
-                
-             
-           
             </Row>
         </div>
     )

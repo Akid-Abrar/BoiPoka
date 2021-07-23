@@ -21,6 +21,15 @@ router.get('/:Id', async (req, res) => {
     }
 })
 
+router.get('comments/:Id', async (req, res) => {
+    try {
+        const posts = await Finder.find({ comments : req.params.Id });
+        res.json(posts)
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
 router.get('/creatorid/:Id', async (req, res) => {
 
     try {
@@ -63,7 +72,6 @@ router.delete('/:Id', async (req, res) => {
     }
 })
 
-
 router.patch('/:postId', async (req, res) => {
     try {
         const updatedPost = await Finder.updateOne(
@@ -103,5 +111,38 @@ router.patch('/addcomment/:id', async (req, res) => {
         res.json(err);
     }
 })
+
+router.delete("/post/:postId/comment/:commentId",
+async (req, res) => {
+      try {
+        let result = await Finder.updateOne(
+          { _id: req.params.postId },
+          {
+            $pull: { "comments": {_id:req.params.commentId} }
+          }
+        );
+  
+        res.send(result);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong");
+      }
+    }
+  );
+
+  router.get( "/comment/:commentId",async (req, res) => {
+      try {
+        let result = await Finder.find(
+          { "comments._id": req.params.commentId }
+          
+        );
+  
+        res.send(result);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send("Something went wrong");
+      }
+    }
+  );
 
 module.exports = router;

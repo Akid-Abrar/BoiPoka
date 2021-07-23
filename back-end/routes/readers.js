@@ -3,8 +3,6 @@ let Reader = require('../models/reader.model');
 
 
 router.route('/').get(async (req, res) => {
-  const red = await Reader.find({ first_name: "Akid" }, { wishlist: 1 });
-  console.log(red);
   Reader.find()
     .then(reader => res.json(reader))
     .catch(err => res.status(400).json('Error: ' + err));
