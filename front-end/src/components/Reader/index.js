@@ -100,7 +100,7 @@ class Reader extends Component
                   </Card.Header>
                   
                   {
-                      reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
+                      reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
                         <Card.Body key={index} className="genre__display" >
                           <h4>{Genre}</h4>
                         </Card.Body >
@@ -109,6 +109,14 @@ class Reader extends Component
                       </Card.Body >)) : (<Card.Body className="genre__display" >
                         <h4>No Genre</h4>
                       </Card.Body >)
+                    
+                    }
+                    {
+                      /*reader.genre.map((Genre, index) => (
+                        <Card.Body key={index} className="genre__display" >
+                          <h4>{Genre}</h4>
+                        </Card.Body >
+                      )) */
                     
                     }
                   </Card>
