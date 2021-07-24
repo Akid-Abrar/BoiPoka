@@ -15,10 +15,7 @@ class PostAdd extends Component {
         super(props);
         this.state = {
             posts: [],
-            newPostData: {
-                content:'',
-                comments:[]
-            },
+            comments:[],
             newPostModal: false,
         }
 
@@ -32,19 +29,31 @@ class PostAdd extends Component {
             newPostModal: !this.state.newPostModal
         });
     }
-      deletePost(_id) {
+      deletePost(_id) 
+      {
         axios.delete('http://localhost:4000/posts/' + _id).then((response) => {
+          console.log(response.data);
+          this._refresPosts();
+        });
+      }
+      deleteComment(_postid,_commentid)
+      {
+        ///post/:postId/comment/:commentId
+        var link = 'http://localhost:4000/posts/post/'+_postid+'/comment/'+_commentid;
+        console.log('link',link)
+        axios.delete(link).then((response) => {
           console.log(response.data);
           this._refresPosts();
         });
       }
       _refresPosts() {
         axios.get('http://localhost:4000/posts').then((response) => {
-         // console.log(response.data);
+          console.log('data',response.data);
           this.setState({
             posts: response.data
-           
+            
           })
+          //console.log((posts)
         });
       }
 
@@ -53,18 +62,34 @@ class PostAdd extends Component {
         let posts = this.state.posts.map((post) => {
             return (
               <tr >
-                <td>{post.content}</td>
                 <td>
-                  <Button color="danger" size="sm" onClick={this.deletePost.bind(this, post._id)}>Delete</Button>
+                  {post.content}
+                  {console.log('comments',post.comments)}
+                </td>
+                <td>
+                  <Button color="danger" size="sm" onClick={this.deletePost.bind(this, post._id)}>Delete Post</Button>
                  {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
                 </td>
+                <td>
+                 
+                  {post.comments.map((comment,index)=>(
+                      
+                      <div key={index} className="comm__display">
+                        
+                          {console.log('singlecomment',comment)}
+                          <td>{comment.comment}</td>
+                          <td><Button color="danger" size="sm" onClick={this.deleteComment.bind(this, post._id,comment._id)}>Delete Comment</Button></td>
+                      </div>
+                    ))}
+                   
+                </td>
+                
                  
 
                 
               </tr>
             )
           });
-          //baki
         return (
             <div className="App container">
     
@@ -72,7 +97,8 @@ class PostAdd extends Component {
             <Table >
               <thead>
                 <tr>
-                  <th>Content</th>
+                  <th>Posts</th>
+                  <th>Comments</th>
                 </tr>
               </thead>
     
