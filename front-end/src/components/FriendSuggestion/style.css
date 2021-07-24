@@ -8,7 +8,6 @@
     height: 40px;
     width: 40px;
     margin: 5px;
-    /* color: antiquewhite; */
 }
 
 .comment{
@@ -19,7 +18,7 @@
 
 .comment-dark{
     background-color: #925024;
-    color:white;
+    color:floralwhite;
 }
 
 .post{
@@ -28,10 +27,7 @@
     border-color : #d1ecf0d8;
 }
 
-.textarea{
-    resize:none;
+.friend{
+    padding: 5px;
+    margin: 5px;
 }
-
-a:link    {color:#000;} 
-a:visited {color:#000;} 
-a:active  {color:#000;}  

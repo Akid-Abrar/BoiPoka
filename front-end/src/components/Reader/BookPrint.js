@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
-import {Component} from 'react'
+import {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
@@ -60,9 +61,10 @@ class BookPrint extends Component
                             height={40}
                             width={30}
                             rounded
-                            src={imgsrc}
+                            src={this.state.books.bookimage}
                         />
-                        <span className="ml-1">{this.state.books.name}</span>
+                        <Link to={'./info/'+ this.state.books.name}> <span className="ml-1">{this.state.books.name}</span>
+                        </Link>
                     </Button>
                 )}
             </OverlayTrigger>

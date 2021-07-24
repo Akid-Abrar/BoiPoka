@@ -5,7 +5,7 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button} from 'react-bootstrap'
+import { Form, Button, Container } from 'react-bootstrap'
 
 const PasswordForgetPage = () => (
   <div>
@@ -50,26 +50,28 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
-      <div className="container" align="center">
-        <h3> Forgot Password ? </h3>
-      <Form onSubmit={this.onSubmit}>
-      <Form.Group controlId="passwordOne">
-        <input
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-      </Form.Group>
-        <Button variant="primary" disabled={isInvalid} type="submit">
-          Reset My Password
-        </Button>
+      <Container>
+        <div className="container mt-5" align="center" style={{ justifyContent: "center" }}>
+          <h3> Forgot Password ? </h3>
+          <Form onSubmit={this.onSubmit}>
+            <Form.Group controlId="passwordOne">
+              <input
+                name="email"
+                value={this.state.email}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Email Address"
+              />
+            </Form.Group>
+            <Button variant="primary" disabled={isInvalid} type="submit">
+              Reset My Password
+            </Button>
 
-        {error && <p>{error.message}</p>}
-      </Form>
-      <br/>
-      </div>
+            {error && <p>{error.message}</p>}
+          </Form>
+          <br />
+        </div>
+      </Container>
     );
   }
 }

@@ -187,7 +187,7 @@ class Books extends Component {
                
            
         return (
-            <div className=".py-5">
+            <div style = {{marginBottom: "27px"}}>
             
              
              {/* <Button variant="outline-info"  onClick={this.searchbook}>

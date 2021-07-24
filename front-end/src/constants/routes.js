@@ -14,3 +14,4 @@ export const GENRE = '/genre';
 export const AUTHOR = '/author';
 export const BOOK ='/book';
 export const INFO='/info';
+export const PROFILE = '/profile/:id/:user'

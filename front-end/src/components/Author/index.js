@@ -83,7 +83,7 @@ class Author extends Component
       var callFollower;
       if(this.state.authors.followers !== undefined)
       {
-        callFollower = this.displayFriend(this.state.authors.followers);
+        callFollower = this.displayFollower(this.state.authors.followers);
       }
 
       var callBooks;
@@ -93,7 +93,7 @@ class Author extends Component
       }
       var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
       return  (
-        <div  className="author__display" class="row row-content align-items-center">
+        <div  className="author__display" class="row row-content align-items-center" style = {{marginBottom: "27px"}}>
           
           <Container>
             <Row>
@@ -106,7 +106,7 @@ class Author extends Component
                           height={100}
                           width={100}
                           roundedCircle
-                          src={imgsrc}
+                          src={this.state.authors.image}
                         />
                       </Col>
                       <Col sm={7}><h2>
@@ -130,7 +130,9 @@ class Author extends Component
                   <Table width="700px" border="7" bordercolor="#925024" >
                     <thead className="tableheader-style">
                       <tr align="center">
-                        <th align="center"><font style = {{color:"#ebdb82d8"}} size="5">Books By </font></th>
+                        <th align="center">
+                          <font style = {{color:"#ebdb82d8"}} size="5">Books By {this.state.authorName.first_name} {this.state.authorName.last_name}</font>
+                        </th>
                       </tr>
                     </thead>
                     <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
@@ -165,7 +167,7 @@ class Author extends Component
       ));
     };
 
-    displayFriend(followerIds) {
+    displayFollower(followerIds) {
       console.log("from displayfriend",followerIds)
 
       return followerIds.map((followerId, index) => (
