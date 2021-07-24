@@ -144,5 +144,21 @@ async (req, res) => {
       }
     }
   );
+router.patch('/like/:postId', async (req, res) => {
+    try {
+        const updatedPost = await Finder.updateOne(
+            { _id: req.params.postId },
+            {
+                $set: {
+                    like: req.body.like,
+                }
+            }
+        );
+        res.json(updatedPost)
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
 
 module.exports = router;

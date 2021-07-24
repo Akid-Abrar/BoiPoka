@@ -19,8 +19,9 @@ import AdminPage from '../Admin';
 import ReaderPage from '../Reader';
 import AuthorPage from '../Author'
 import Genre from '../Genre'
-//import Books from '../Books/books';
+import SearchArea from '../Search/Searcharea';
 import Info from '../Books/books';
+import ProfileView from '../ProfileView'
 
 
 
@@ -36,7 +37,7 @@ const App = () => (
     <div>
       <Navigation />
      
-      <hr />
+      {/* <hr /> */}
       <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -47,12 +48,14 @@ const App = () => (
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
-      <Route path={ROUTES.BOOK} component={Info} />
+      <Route path={ROUTES.BOOK} component={SearchArea} />
       <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
       <Route path={ROUTES.BOOKADMIN} component={Bookadd} />
       <Route path={ROUTES.AUTHORADMIN} component={Authoradd} />
       <Route path={ROUTES.POSTADMIN} component={Postadd} />
       <Route path={ROUTES.USERADMIN} component={Useradmin} />
+      <Route path='/info/:value'  component={Info} />
+      <Route path={ROUTES.PROFILE} component={ProfileView} />
       <FooterClass />
     </div>
   </Router>

@@ -8,6 +8,7 @@
     height: 40px;
     width: 40px;
     margin: 5px;
+    /* color: antiquewhite; */
 }
 
 .comment{
@@ -18,7 +19,7 @@
 
 .comment-dark{
     background-color: #925024;
-    color:floralwhite;
+    color:white;
 }
 
 .post{
@@ -30,3 +31,7 @@
 .textarea{
     resize:none;
 }
+
+a:link    {color:#000;} 
+a:visited {color:#000;} 
+a:active  {color:#000;}  

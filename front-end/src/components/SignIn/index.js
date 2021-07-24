@@ -8,14 +8,22 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button} from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
+import logo from './logo.png';
 
 const SignInPage = () => (
-  <div>
-    <SignInForm />
-    <PasswordForgetLink />
-    <SignUpLink />
-  </div>
+  <Row>
+    <Col>
+      <img src={logo}/>
+    </Col>
+    <Col>
+      <div className="m-5">
+        <SignInForm />
+        <PasswordForgetLink />
+        <SignUpLink />
+      </div>
+    </Col>
+  </Row>
 );
 
 const INITIAL_STATE = {
@@ -59,35 +67,35 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <div class="container">
+      <div className="container" align="center">
         <h2>Sign In </h2>
-      <Form onSubmit={this.onSubmit}>
-      <Form.Group controlId="email">
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        </Form.Group>
-        <Form.Group controlId="password">
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        </Form.Group>
-        
-        <Button variant="primary" disabled={isInvalid} type="submit">
-          Sign In
+        <Form onSubmit={this.onSubmit}>
+          <Form.Group controlId="email">
+            <input
+              name="email"
+              value={email}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Email Address"
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <input
+              name="password"
+              value={password}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+
+          <Button variant="primary" disabled={isInvalid} type="submit">
+            Sign In
         </Button>
 
-        {error && <p>{error.message}</p>}
-      </Form>
-      <br />
+          {error && <p>{error.message}</p>}
+        </Form>
+        <br />
       </div>
     );
   }

@@ -1,0 +1,40 @@
+.searchcontainer {
+    border: 1px solid gray;
+    padding: 5px;
+    width: 50%;
+    border-radius: 10px;
+}
+
+.search {
+    line-height: 10px;
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.suggestions {
+    border: 1px solid #999;
+    border-top-width: 0;
+    list-style: none;
+    margin-top: 0;
+    max-height: 143px;
+    overflow-y: auto;
+    padding-left: 0;
+    width: calc(300px + 1rem);
+  }
+  
+  .suggestions li {
+    padding: 0.5rem;
+  }
+  .no-suggestions {
+    color: #999;
+    padding: 0.5rem;
+  }
+
+ul li {
+    cursor: pointer;
+}
+
+hr{
+    border-top: 1px solid rgba(216, 216, 216, 0.753);
+}

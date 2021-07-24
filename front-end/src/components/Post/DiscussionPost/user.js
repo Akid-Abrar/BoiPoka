@@ -12,7 +12,7 @@ class User extends Component {
         this.state = {
             first_name: '',
             last_name: '',
-            image:'',
+            image: '',
         }
 
     }
@@ -41,7 +41,12 @@ class User extends Component {
 
     render() {
         return (
-            <div><img className="profile" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
+            <div>
+                <a href={`/profile/${this.props.id}/${this.props.userid}`}>
+                <img className="profile" src={this.state.image} />
+                </a>
+                {this.state.first_name} {this.state.last_name}
+            </div>
         );
 
     }

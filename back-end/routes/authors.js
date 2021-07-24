@@ -16,12 +16,45 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const loggedAuthors = await Finder.findById(req.params.id);
-        res.json(loggedAuthors)
+         Finder.findById(req.params.id).then(b => {
+            if (b) {
+               // console.log(b);
+                res.json(b);
+              }
+              else {
+                res.json('author not found');
+              }
+         })
+        
     } catch (err) {
         res.json({ message: err });
     }
 })
+
+//find book with author name
+
+router.get('/authorname/:id',async (req,res) => {
+   
+    var regex=new RegExp(req.params.id,'i');
+    var result=Finder.find({first_name:regex});
+    result.exec(function(err,data){
+        var r=[];
+        if(!err)
+        {
+         if(data && data.length && data.length>0)
+         {
+             data.forEach(user =>{
+                 r.push(user);
+             })
+         }
+        }
+       // console.log(r);
+        res.json(r);
+
+    })
+  
+})
+
 
 router.post('/', async (req, res) => {
     const Author = new Finder({

@@ -21,15 +21,13 @@
     color:floralwhite;
 }
 
-.button-dark{
-    background-color: #925024;
-    color:floralwhite;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
 .post{
     padding: 10px;
     border-width: 2px solid;
     border-color : #d1ecf0d8;
+}
+
+.friend{
+    padding: 5px;
+    margin: 5px;
 }
