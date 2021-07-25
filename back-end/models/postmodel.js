@@ -15,6 +15,7 @@ const postSchema = mongoose.Schema({
     bookid: mongoose.Schema.Types.ObjectId,//0 for comment and discussion
     creatorid: mongoose.Schema.Types.ObjectId,
     content: String,
+    rating: Number,
     comments: [commentSchema],//empty string for comment,because cant comment on a comment
     approved: Boolean
 },

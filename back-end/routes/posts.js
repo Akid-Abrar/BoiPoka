@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
         bookid: req.body.bookid,
         creatorid: req.body.creatorid,
         content: req.body.content,
+        rating: req.body.rating,
         date: req.body.date,
         comments: req.body.comments,
         approved: req.body.approved

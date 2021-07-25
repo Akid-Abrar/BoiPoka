@@ -14,32 +14,31 @@ router.get('/', async (req, res) => {
     try {
         const loggedBooks = await Finder.find();
         res.json(loggedBooks)
-        
 
-       
+
+
     } catch (err) {
         res.json({ message: err });
     }
 })
 
 //find with book name
-router.post('/bookname',async (req,res) => {
-    var Bookname=req.body.name;
-    try{
-        let book=await Finder.findOne({name:new RegExp('^'+Bookname+'$', "i")}).then(b =>{
-         if(b) {
-           console.log(b);
-           res.json(b);
-         }
-         else {
-             res.json ('book not found');
-         }
+router.post('/bookname', async (req, res) => {
+    var Bookname = req.body.name;
+    try {
+        let book = await Finder.findOne({ name: new RegExp('^' + Bookname + '$', "i") }).then(b => {
+            if (b) {
+                console.log(b);
+                res.json(b);
+            }
+            else {
+                res.json('book not found');
+            }
         })
-        
 
-    }catch(err)
-    {
-        res.json({message:err});
+
+    } catch (err) {
+        res.json({ message: err });
     }
 })
 
@@ -55,19 +54,20 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-   // console.log(req.file);
+    // console.log(req.file);
     const Book = new Finder({
         // _id: req.body._id,
         name: req.body.name,
         author: req.body.author,
         publisher: req.body.publisher,
-       // bookimage:req.file.path,
-        bookimage:req.body.bookimage,
+        // bookimage:req.file.path,
+        bookimage: req.body.bookimage,
         avg_rating: req.body.avg_rating,
+        rating_giver: req.body.rating_giver,
         release_year: req.body.release_year,
         genre: req.body.genre,
         description: req.body.description,
-        review: req.body.review
+        reviews: req.body.reviews
     });
 
     try {
@@ -103,13 +103,14 @@ router.patch('/:id', async (req, res) => {
                     name: req.body.name,
                     author: req.body.author,
                     publisher: req.body.publisher,
-                   // bookimage:req.file.path,
-                    bookimage:req.body.bookimage,
+                    // bookimage:req.file.path,
+                    bookimage: req.body.bookimage,
                     avg_rating: req.body.avg_rating,
+                    rating_giver: req.body.rating_giver,
                     release_year: req.body.release_year,
                     genre: req.body.genre,
                     description: req.body.description,
-                    review: req.body.review
+                    reviews: req.body.reviews
 
                 }
             }
@@ -127,9 +128,9 @@ router.patch('/image/:id', async (req, res) => {
             { _id: req.params.id },
             {
                 $set: {
-  
+
                     bookimage: req.body.bookimage,
-  
+
                 }
             }
         );
@@ -137,7 +138,52 @@ router.patch('/image/:id', async (req, res) => {
     } catch (err) {
         res.json({ message: err });
     }
-  })
+})
+
+
+router.patch('/addreview/:id', async (req, res) => {
+    try {
+        Finder.find({ _id: req.params.id }, 'reviews -_id', function (err, someValue) {
+            if (err) return next(err);
+            console.log(someValue);
+        });
+        Finder.findOneAndUpdate(
+            { _id: req.params.id },
+            { $push: { reviews: req.body.reviews } },
+            function (error, success) {
+                if (error) {
+                    console.log(error);
+                    res.json('error')
+                } else {
+                    console.log(success);
+                    res.json("success")
+                }
+            });
+    } catch (err) {
+        console.log(err);
+        res.json(err);
+    }
+})
+
+
+router.patch('/rating/:id', async (req, res) => {
+    try {
+        const book = await Finder.updateOne(
+            { _id: req.params.id },
+            {
+                $set: {
+
+                    avg_rating: req.body.avg_rating,
+                    rating_giver: req.body.rating_giver
+
+                }
+            }
+        );
+        res.json(book)
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
 
 
 

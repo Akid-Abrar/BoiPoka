@@ -18,6 +18,7 @@ import Genre from '../Genre'
 //import Books from '../Books/books';
 import Info from '../Books/books';
 import ProfileView from '../ProfileView'
+import ReviewPost from '../Post/ReviewPost'
 
 
 
@@ -45,8 +46,8 @@ const App = () => (
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.BOOK} component={Info} />
-      <Route path={ROUTES.DISCUSSION} component={DiscussionPost} />
       <Route path={ROUTES.PROFILE} component={ProfileView} />
+      <Route path={ROUTES.REVIEW} component={ReviewPost} />
       <FooterClass />
     </div>
   </Router>

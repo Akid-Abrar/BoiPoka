@@ -163,7 +163,7 @@ class ProfileView extends Component {
                   </Card.Header>
 
                   {
-                    reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
+                    (reader.genre !== undefined && reader.genre !== null)? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
                       <Card.Body key={index} className="genre__display" >
                         <h4>{Genre}</h4>
                       </Card.Body >

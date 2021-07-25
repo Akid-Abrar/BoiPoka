@@ -93,11 +93,11 @@ class Reader extends Component
                 <Row>
                 <Card style={{ width: '10rem'  , backgroundColor:"#d1ecf0d8" ,  border:"0px"}} >
                   <Card.Header>
-                    Favourite Genras
+                    Favourite Genres
                   </Card.Header>
                   
                   {
-                      reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
+                      (reader.genre !== undefined && reader.genre !== null) ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
                         <Card.Body key={index} className="genre__display" >
                           <h4>{Genre}</h4>
                         </Card.Body >

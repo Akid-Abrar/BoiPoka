@@ -123,6 +123,7 @@ class DiscussionPost extends Component {
 
   handlePostSubmit(event) {
     const post = {
+      type: 1,
       creatorid: this.state.id,
       content: this.state.post,
     }
@@ -164,7 +165,7 @@ class DiscussionPost extends Component {
               value={this.state.post}
               onChange={this.handlePost}
               type="text"
-              className="textarea m-1"
+              className="textarea m-2 p-2"
             />
             <input type="submit" value="Post" />
           </Form>
