@@ -38,7 +38,7 @@ class Genre extends Component {
           }
           )
           .catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe for onChangeCheckbox in genre")
           })
     };
 

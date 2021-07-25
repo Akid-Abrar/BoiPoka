@@ -55,7 +55,7 @@ class Books extends Component {
             this.setState({ allbook: suggestion });
             //console.log(this.state.allbook);
         }).catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe in book's componentDidMount")
         })
 
     }
@@ -71,7 +71,7 @@ class Books extends Component {
             }
             )
             .catch(() => {
-                alert("Data Unavailabe")
+                alert("Data Unavailabe ib book's GetReader")
             })
     }
      
@@ -99,7 +99,7 @@ class Books extends Component {
                 //console.log(this.state.Author);
 
             }).catch(() => {
-                alert("Data Unavailabe")
+                alert("Data Unavailabe in book's searchbook(inner) in author from reader")
 
             })
     
@@ -113,18 +113,11 @@ class Books extends Component {
                
 
             }).catch(() => {
-                alert("Data Unavailabe")
+                alert("Data Unavailabe in book's searchbook(inner) author from author")
 
             })
-
-
-
-
-
-
-
         }).catch(() => {
-            alert("Data Unavailable")
+            alert("Data Unavailableb in book's searchbook(outer)")
 
         })
 
@@ -200,7 +193,7 @@ try{
              
              {/* <Button variant="outline-info"  onClick={this.searchbook}>
         Search </Button>*/}
-        {this.searchbook()}
+            {this.searchbook()}
              {this.state.books.length >0 ?
                 <CardDeck>
                 <Row style={{padding: 20}}>

@@ -53,18 +53,21 @@ class ProfileView extends Component {
     // const {id} = window.location.href
     // console.log(window.location.pathname.split('/')[2])
     var link = 'http://localhost:4000/readers/' + window.location.pathname.split('/')[2]
+    console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
     this.setState({id:window.location.pathname.split('/')[3]})
-    // console.log(link)
+     console.log('link',link)
+     console.log('this.state.id : ',this.state.id)
 
 
-    axios.get('http://localhost:4000/readers/' + this.state.id)
+    axios.get('http://localhost:4000/readers/' + window.location.pathname.split('/')[3])
       .then((res) => {
-        this.setState({ user: res.data })
+        console.log('1st query',res.data)
+        this.setState({ user: res.data})
         this.setState({ userfriends: this.state.user.friends })
         axios.get(link)
           .then((res) => {
 
-            this.setState({ reader: res.data })
+            this.setState({ reader: res.data})
 
             if (this.state.user.friends.includes(this.state.reader._id)) {
               this.setState({ token: "Remove Friend" })
@@ -75,12 +78,12 @@ class ProfileView extends Component {
           }
           )
           .catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe for reader")
           })
       }
       )
       .catch(() => {
-        alert("Data Unavailabe")
+        alert("Data Unavailabe reader1")
       })
 
 
@@ -163,7 +166,7 @@ class ProfileView extends Component {
                   </Card.Header>
 
                   {
-                    reader.genre !== undefined ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
+                    reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
                       <Card.Body key={index} className="genre__display" >
                         <h4>{Genre}</h4>
                       </Card.Body >
