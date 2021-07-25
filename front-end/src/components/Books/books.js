@@ -138,23 +138,31 @@ class Books extends Component {
 
     }
 
-    handlewish = (e) => {
+    handlewish = async(e) => {
         e.preventDefault();
+
         let book;
         let userid = this.state.user[0]['_id'];
-        //console.log(userid);
+        console.log('userid',userid);
         this.state.books.map((b, i) => {
-           // console.log(b['_id']);
+            
+           console.log('bookid',b['_id']);
             book = { wishlist: b['_id'] };
         })
-
-        axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {
-           // console.log("wishlist");
+console.log('hdbfu',book);
+console.log('w',book.wishlist);
+console.log('link','http://localhost:4000/readers/updatebook/' + userid);
+try{
+     const res=  await axios.patch('http://localhost:4000/readers/updatebook/' + userid, book);/*.then((response) => {*/
+            
             //console.log(response.data);
-
-        }).catch((err) => {
+            console.log("KI RE VAI");
+            console.log(res.data);
+        }catch(err)  {
             alert("not valid data")
-        })
+        };
+        console.log("mor hala");
+        
     }
 
     //handle following author
@@ -165,9 +173,9 @@ class Books extends Component {
         let follower;
         let writer;
         console.log(userid);
-        this.state.Author.map((b, i) => {
-            console.log( b['author_id']);
-            writer=b['author_id'];
+        this.state.newAuthor.map((b, i) => {
+            console.log( b['_id']);
+            writer=b['_id'];
             follower={followers:userid};
 
             axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
@@ -215,9 +223,9 @@ class Books extends Component {
                         <Card.Body >
 
                            
-                            <Authors handlefollow={this.handlefollow} auth={this.state.Author}  />
+                           {/*<Authors handlefollow={this.handlefollow} auth={this.state.Author}  />*/}
                             
-                             <Auth newauth={this.state.newAuthor} />
+                             <Auth handlefollow={this.handlefollow}  newauth={this.state.newAuthor} />
         
                         </Card.Body>
                        

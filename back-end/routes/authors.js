@@ -121,7 +121,7 @@ router.patch('/updateauthor/:id', async (req, res) => {
               res.json('error')
           } else {
               console.log(success);
-              res.json("successfully added followers")
+              res.json(success);
           }
       });
     
