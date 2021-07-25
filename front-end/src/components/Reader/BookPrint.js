@@ -63,8 +63,7 @@ class BookPrint extends Component
                             rounded
                             src={this.state.books.bookimage}
                         />
-                        <Link to={'./info/'+ this.state.books.name}> <span className="ml-1">{this.state.books.name}</span>
-                        </Link>
+                        <Link to={'./info/'+ this.state.books.name}> <span className="ml-1">{this.state.books.name}</span></Link>
                     </Button>
                 )}
             </OverlayTrigger>

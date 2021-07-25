@@ -21,9 +21,11 @@
     overflow-y: auto;
     padding-left: 0;
     width: calc(300px + 1rem);
+    color: #999;
   }
   
-  .suggestions li {
+  .suggestions_li {
+    color: #999;
     padding: 0.5rem;
   }
   .no-suggestions {
@@ -38,3 +40,4 @@ ul li {
 hr{
     border-top: 1px solid rgba(216, 216, 216, 0.753);
 }
+

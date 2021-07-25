@@ -11,7 +11,7 @@ const SearchArea =(props) =>
 {
   
     
-    const [searchtext, setSearchtext] = useState("");
+  const [searchtext, setSearchtext] = useState("");
   const [suggest, setSuggest] = useState([]);
   const [resfound, setResfound] = useState(true);
   const [sug,setSug]= useState([]);
@@ -30,10 +30,8 @@ const SearchArea =(props) =>
           //console.log(s);
           setSug(s);
       }).catch(() => {
-          alert("Data Unavailabe")
+          console.log("Data Unavailabe in handlesug in searcharea")
       })
-     
-  
   }
 
   const handleauthor =() => {
@@ -45,16 +43,11 @@ const SearchArea =(props) =>
         
             authors.push(b["first_name"]);
            
-
         })
-        
-        
-        
-        
        // console.log(authors);
         setAuth(authors);
     }).catch(() => {
-        alert("Data Unavailabe")
+        console.log("Data Unavailabe for handleAuthor in searcharea")
     })
   }
   const handleChange = (e) => {
@@ -123,6 +116,9 @@ const SearchArea =(props) =>
     setSuggest(suggestion);
    
     setSearchtext(searchval);
+
+    handlesug();
+    handleauthor();
   };
 
   const suggestedText = (value) => {
@@ -140,18 +136,20 @@ const SearchArea =(props) =>
         </div>
       );
     }
-if(suggest.length >0){
+  if(suggest.length >0){
     return (
+      <div className="suggestions" style={ {backgroundColor:"#F0ECEC"}}>
       <ul class="suggestions">
         {suggest.map((item, index) => {
           return (
             <div key={index}>
-              <li onClick={() => suggestedText(item)}>{item}</li>
+              <li onClick={() => suggestedText(item)}><font style = {{color:"black"}}>{item}</font></li>
               {index !== suggest.length - 1 && <hr />}
             </div>
           );
         })}
       </ul>
+      </div>
       
     );
 }
@@ -170,15 +168,13 @@ if(suggest.length >0){
 
 return(
     <div className="search-area">
-    {handlesug()}
-    {handleauthor()}
+    {/*handlesug()*/}
+    {/*handleauthor()*/}
     <Form inline  action="">
     <FormControl value={searchtext} onChange={handleChange}  type="text" placeholder="Search for books" className="mr-sm-2" />
-    </Form>
-    {getSuggestions()}
-    
     <Link to={'./info/'+searchtext}> <i className="fas fa-search"></i> </Link>
-    
+    </Form>
+    <div>{getSuggestions()}</div>
     
     </div>
 )

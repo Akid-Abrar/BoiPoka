@@ -52,11 +52,11 @@ class FriendSuggestion extends Component {
         this.setState({ reader: res.data[0] })
         this.setState({ id: this.state.reader._id })
 
-        link = 'http://localhost:4000/readers/'
+        var link1 = 'http://localhost:4000/readers/'
         // console.log('reader',this.state.reader.friends)
         // console.log('id', this.state.id)
 
-        axios.get(link).then((res) => {
+        axios.get(link1).then((res) => {
           this.setState({ result: res.data })
         //   console.log('result', this.state.result);
           this.state.result.map((r, index) => {
@@ -73,13 +73,13 @@ class FriendSuggestion extends Component {
         }
         )
           .catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe for link1 in friendsuggestion")
           })
 
       }
       )
       .catch(() => {
-        alert("Data Unavailabe")
+        alert("Data Unavailabe for link in friendsuggestion")
       })
 
 
