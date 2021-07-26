@@ -355,6 +355,32 @@ router.patch('/addfriend/:id', async (req, res) => {
   }
 })
 
+router.patch('/addauthor/:id', async (req, res) => {
+  try {
+    Reader.find({ _id: req.params.id }, 'following -_id', function (err, someValue) {
+      if (err) return next(err);
+      // console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { following: req.body.following } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+          res.json('error')
+        } else {
+          console.log(success);
+          res.json("success")
+        }
+      });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
 
 
 router.patch('/updatefriend/:id', async (req, res) => {

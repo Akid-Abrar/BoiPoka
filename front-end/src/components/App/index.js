@@ -24,6 +24,7 @@ import Info from '../Books/books';
 import ProfileView from '../ProfileView'
 import ReviewPost from '../Post/ReviewPost'
 
+import AprofileView from '../Authorview';
 
 
 import * as ROUTES from '../../constants/routes';
@@ -57,6 +58,7 @@ const App = () => (
       <Route path='/info/:value'  component={Info} />
       <Route path={ROUTES.PROFILE} component={ProfileView} />
       <Route path={ROUTES.REVIEW} component={ReviewPost} />
+      <Route path={ROUTES.APROFILE} component={AprofileView} />
       <FooterClass />
     </div>
   </Router>
