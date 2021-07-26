@@ -55,7 +55,7 @@ function Upload(props) {
 
 
 	}
-
+	
 	return (
 		<div>
 			<Form>

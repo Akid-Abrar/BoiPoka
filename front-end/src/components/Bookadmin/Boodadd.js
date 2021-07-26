@@ -8,6 +8,7 @@ import {
 } from '../Session';
 import { compose } from 'recompose';
 import Upload from './image'
+import Genre from './genreAdd'
 
 
 
@@ -18,7 +19,6 @@ class Bookadd extends Component {
             books: [],
             newBookData: {
                 name: '',
-                genre: [],
                 publisher :'',
                 release_year: '',
                 description: '',
@@ -30,7 +30,6 @@ class Bookadd extends Component {
             editBookData: {
                 _id:'',
                 name: '',
-                genre: [],
                 release_year: '',
                 publisher :'',
                 description: '',
@@ -70,7 +69,6 @@ class Bookadd extends Component {
             this.setState({
                 books, newBookModal: false, newBookData: {
                     name: '',
-                    genre: [],
                     release_year: '',
                     publisher:'',
                     description: '',
@@ -89,7 +87,7 @@ class Bookadd extends Component {
 
     //for update book
     updateBook() {
-        let { name, genre
+        let { name
             , release_year,
             publisher,
             description,
@@ -98,8 +96,7 @@ class Bookadd extends Component {
         } = this.state.editBookData;
 
         axios.patch('http://localhost:4000/books/' + this.state.editBookData._id, {
-            name, genre
-            , release_year,
+            name, release_year,
             publisher,
             description,
             author,
@@ -112,7 +109,6 @@ class Bookadd extends Component {
                 editBookModal: false, editBookData: { 
                 _id:'',
                 name: '',
-                genre: [],
                 release_year: '',
                 publisher:'',
                 description: '',
@@ -123,9 +119,9 @@ class Bookadd extends Component {
         });
     }
 
-    editBook( _id,name,genre,release_year,publisher,description,author,bookimage) {
+    editBook( _id,name,release_year,publisher,description,author,bookimage) {
         this.setState({
-          editBookData: { _id, name,genre,release_year,publisher,description,author,bookimage}, editBookModal: ! this.state.editBookModal
+          editBookData: { _id, name,release_year,publisher,description,author,bookimage}, editBookModal: ! this.state.editBookModal
         });
       }
 
@@ -152,19 +148,20 @@ class Bookadd extends Component {
             return (
               <tr >
                 <td>{book.name}</td>
-                {/*<td>book.author</td>*/}
                 <td>{book.genre}</td>
-                
+
                 <td>
-                  <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book._id, book.name,book.genre,book.release_year,book.publisher,book.description,book.author,book.bookimage)}>Edit</Button>
+                  <Button color="success" size="sm" className="mr-2" onClick={this.editBook.bind(this,book._id, book.name,book,book.release_year,book.publisher,book.description,book.author,book.bookimage)}>Edit</Button>
                 </td>
                 <td>
                   <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
                  {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
                 </td>
+                
                 <td>
                   <Upload id={book._id}/>
                 </td>
+                <td><Genre bookid={book._id}/></td>
                  
 
                 
@@ -220,16 +217,6 @@ class Bookadd extends Component {
                 }} />
               </FormGroup>
 
-              <FormGroup>
-                <Label for="genre">Genre</Label>
-                <Input id="genre" value={this.state.newBookData.genre} onChange={(e) => {
-                  let { newBookData } = this.state;
-    
-                  newBookData.genre = e.target.value;
-    
-                  this.setState({ newBookData });
-                }} />
-              </FormGroup>
 
               <FormGroup>
                 <Label for="description">Description</Label>
@@ -285,17 +272,6 @@ class Bookadd extends Component {
               </FormGroup>
 
               <FormGroup>
-                <Label for="genre">Genre</Label>
-                <Input id="genre" value={this.state.editBookData.genre} onChange={(e) => {
-                  let { editBookData } = this.state;
-    
-                  editBookData.genre = e.target.value;
-    
-                  this.setState({ editBookData });
-                }} />
-              </FormGroup>
-
-              <FormGroup>
                 <Label for="relyr">Release year</Label>
                 <Input id="relyrr" value={this.state.editBookData.release_year} onChange={(e) => {
                   let { editBookData } = this.state;
@@ -332,6 +308,10 @@ class Bookadd extends Component {
                   <th>Name</th>
                   {/*<th>Author_id</th>*/}
                   <th>Genre</th>
+                  <th>Edit Info</th>
+                  <th>Delete Book</th>
+                  <th>Upload Cover</th>
+                  <th>Genre Choose</th>
                   
                 </tr>
               </thead>

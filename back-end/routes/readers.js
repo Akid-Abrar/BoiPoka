@@ -303,10 +303,6 @@ router.patch('/updatebook/:id', async (req, res) => {
 
 router.patch('/updategenre/:id', async (req, res) => {
   try {
-    Reader.find({ _id: req.params.id }, 'genre -_id', function (err, someValue) {
-      if (err) return next(err);
-      console.log(someValue);
-    });
     Reader.findOneAndUpdate(
       { _id: req.params.id },
       { $push: { genre: req.body.genre } },
