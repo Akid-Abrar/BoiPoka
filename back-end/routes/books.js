@@ -188,6 +188,28 @@ router.patch('/rating/:id', async (req, res) => {
     }
 })
 
+router.patch('/updategenre/:id', async (req, res) => {
+    try {
+        Finder.findOneAndUpdate(
+        { _id: req.params.id },
+        { $push: { genre: req.body.genre } },
+        function (error, success) {
+          if (error) {
+            console.log(error);
+            res.json('error')
+          } else {
+            console.log(success);
+            res.json("success")
+          }
+        });
+  
+  
+    } catch (err) {
+      console.log(err);
+      res.json(err);
+    }
+  })
+
 
 
 

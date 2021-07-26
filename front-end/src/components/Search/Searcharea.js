@@ -50,7 +50,9 @@ const SearchArea =(props) =>
         console.log("Data Unavailabe for handleAuthor in searcharea")
     })
   }
-  const handleChange = async(e) => {
+  const handleChange = (e) => {
+    handlesug();
+    handleauthor();
      
     let searchval = e.target.value;
     let suggestion = [];
@@ -93,13 +95,12 @@ const SearchArea =(props) =>
          })
         })
       })
-     
-      
-    
-      
-      
+ 
     } 
-     
+      // console.log(bookname);
+
+  // newsugest = [].concat(suggestion, bookname);
+    //console.log('final sugestion',newsugest);
     
     setSuggest(suggestion);
    

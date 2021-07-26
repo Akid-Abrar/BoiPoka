@@ -56,19 +56,34 @@ class Recommendation extends Component {
 
         var link1 = 'http://localhost:4000/books/'
         // console.log('reader',this.state.reader.friends)
-        // console.log('id', this.state.id)
+        console.log('id', this.state.genre)
 
         axios.get(link1).then((res) => {
           this.setState({ result: res.data })
           this.state.result.map((r, index) => {
             if ((this.state.reader.wishlist.includes(r._id) === false) && (this.state.reader.books_read.includes(r._id) === false)) {
-              if (this.state.genre !== undefined || this.state.genre !== null || this.state.genre.length !== 0) {
+              if (this.state.genre !== undefined || this.state.genre !== null) {
                 // var isin = this.state.genre.some(function (e) {
                 //   return r.genre.includes(e);
                 // });
                 // if (isin) {
-                  this.state.suggestion.push(r)
+                //   this.state.suggestion.push(r)
                 // }
+                // console.log(r.genre)
+                var flag = false;
+                for (let i=0;i<r.genre.length;i++) {
+                  // console.log(r.genre[i])
+                  if (this.state.genre.includes(r.genre[i].toLowerCase())) {
+                    flag=true;
+                    // console.log("in")
+                    break;
+                    
+                  }
+                }
+                if (flag) {
+                  this.state.suggestion.push(r)
+                }
+
               }
             }
 

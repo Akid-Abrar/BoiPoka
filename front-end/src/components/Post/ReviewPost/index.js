@@ -41,6 +41,7 @@ class ReviewPost extends Component {
       book: '',
       post: '',
       rate: 0,
+      token: 'Save'
     }
 
     this.handlePost = this.handlePost.bind(this);
@@ -96,13 +97,14 @@ class ReviewPost extends Component {
   }
 
   handlePostSubmit(event) {
-    event.preventDefault();
+    // event.preventDefault();
     const post = {
       type: 2,
       creatorid: this.state.id,
       content: this.state.post,
       rating: this.state.rate,
       bookid: this.state.book._id,
+
     }
 
 
@@ -124,31 +126,35 @@ class ReviewPost extends Component {
     const book = { reviews }
 
     axios.patch('http://localhost:4000/books/addreview/' + this.state.book._id, book).then((response) => {
-      console.log('review',response);
+      console.log('review', response);
     }).catch((err) => {
       alert("not valid data")
     })
 
     var rating_giver1 = this.state.book.rating_giver;
     rating_giver1.push(this.state.id);
-    var avg_rating1 = (this.state.book.avg_rating + this.state.rate) / (this.state.book.rating_giver.length);
+    var avg_rating1 = (this.state.book.avg_rating + this.state.rate) / (rating_giver1.length);
 
     const book1 = {
-      rating_giver : rating_giver1,
-      avg_rating : avg_rating1
+      rating_giver: rating_giver1,
+      avg_rating: avg_rating1
     }
 
     axios.patch('http://localhost:4000/books/rating/' + this.state.book._id, book1).then((response) => {
-      console.log('rating',response);
+      console.log('rating', response);
     }).catch((err) => {
       alert("not valid data")
     })
 
+
+    event.preventDefault();
+    this.setState({ token: "Saved" })
     window.location.href = "http://localhost:3000/home"
+
 
   }
 
-  handleRateChange = (newrate) => { this.setState({ rate : newrate }); }
+  handleRateChange = (newrate) => { this.setState({ rate: newrate }); }
 
   render() {
 
@@ -157,9 +163,9 @@ class ReviewPost extends Component {
 
       <Container align="center">
         <div className="p-3">
-        <img src={this.state.book.bookimage} style={{height:"130px"}}/>
+          <img src={this.state.book.bookimage} style={{ height: "130px" }} />
           <h6 className="mt-2">Rate <b>{this.state.book.name}</b></h6>
-          <HoverRating rate = {this.state.rate} onChangeName={this.handleRateChange}/>
+          <HoverRating rate={this.state.rate} onChangeName={this.handleRateChange} />
           {console.log(this.state.rate)}
         </div>
         <div>
@@ -173,7 +179,7 @@ class ReviewPost extends Component {
               className="textarea m-2 p-2"
             />
             <div>
-              <input type="submit" value="Save" />
+              <input type="submit" value={this.state.token} />
             </div>
 
           </Form>

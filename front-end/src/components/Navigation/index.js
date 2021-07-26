@@ -33,6 +33,7 @@ const NavigationAuth = ({ authUser }) => (
 
 
         <SignOutButton />
+        <SearchArea />
 
       </Nav>
 
@@ -44,11 +45,11 @@ const NavigationAuth = ({ authUser }) => (
 
 
     </Navbar>
-    <Row>
+    {/* <Row>
       <Col></Col>
       <Col align="center" className="m-2"><SearchArea /></Col>
       <Col></Col>
-    </Row>
+    </Row> */}
     </div>
 );
 
