@@ -5,6 +5,7 @@ import { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../../styles.css'
 import { Button, Row, Col, Container } from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 class ShowRating extends Component {
     constructor(props) {
@@ -70,7 +71,9 @@ class ShowRating extends Component {
         return (
             <Row>
                 <Col className="col-4 m-2">
+                <Link to={'/info/'+ this.state.book.name}>
                     <img src={this.state.book.bookimage} style={{ height: "130px", padding: "5px"}} />
+                </Link>
                     <div><b>{this.state.book.name}{' '}</b>
                     <i>By</i><br/>
                     {this.state.author.first_name} {' '}{this.state.author.last_name}

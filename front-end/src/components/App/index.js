@@ -8,6 +8,10 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import DiscussionPost from '../Post/DiscussionPost';
+import Bookadd from '../Bookadmin/Boodadd';
+import Authoradd from '../AuthorAdmin/AuthorAdd';
+import Postadd from '../PostAdmin/postAdd';
+import Useradmin from '../Admin/user';
 
 import HomePage from '../Home';
 import AccountPage from '../Account';
@@ -15,7 +19,7 @@ import AdminPage from '../Admin';
 import ReaderPage from '../Reader';
 import AuthorPage from '../Author'
 import Genre from '../Genre'
-//import Books from '../Books/books';
+import SearchArea from '../Search/Searcharea';
 import Info from '../Books/books';
 import ProfileView from '../ProfileView'
 import ReviewPost from '../Post/ReviewPost'
@@ -45,7 +49,12 @@ const App = () => (
       <Route path={ROUTES.GENRE} component={Genre} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
-      <Route path={ROUTES.BOOK} component={Info} />
+      <Route path={ROUTES.BOOK} component={SearchArea} />
+      <Route path={ROUTES.BOOKADMIN} component={Bookadd} />
+      <Route path={ROUTES.AUTHORADMIN} component={Authoradd} />
+      <Route path={ROUTES.POSTADMIN} component={Postadd} />
+      <Route path={ROUTES.USERADMIN} component={Useradmin} />
+      <Route path='/info/:value'  component={Info} />
       <Route path={ROUTES.PROFILE} component={ProfileView} />
       <Route path={ROUTES.REVIEW} component={ReviewPost} />
       <FooterClass />

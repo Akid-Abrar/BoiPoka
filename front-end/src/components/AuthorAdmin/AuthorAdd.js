@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button } from 'reactstrap';
+import { Input, FormGroup, Label, Modal, ModalHeader, ModalBody, ModalFooter, Table, Button,Container } from 'reactstrap';
 import {
   AuthUserContext,
   withAuthorization,
@@ -194,8 +194,14 @@ class Authoradd extends Component {
                 }} />
               </FormGroup>
 
+
+
+
+              
+
               <FormGroup>
               <Label for="bio">Biography</Label>
+              
               <Input id="bio" value={this.state.newAuthorData.biography} onChange={(e) => {
                 let { newAuthorData } = this.state;
   
@@ -254,12 +260,15 @@ class Authoradd extends Component {
             </ModalFooter>
           </Modal>
     
-    
-            <Table>
+            <Container>
+            <Table >
               <thead>
                 <tr>
                   <th>Name</th>
                   <th>Bio</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                  <th>Image Upload</th>
                 </tr>
               </thead>
     
@@ -267,6 +276,7 @@ class Authoradd extends Component {
                 {authors}
               </tbody>
             </Table>
+            </Container>
           </div>
         );
             

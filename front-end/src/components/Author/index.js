@@ -71,7 +71,7 @@ class Author extends Component
         })).catch(errors => {
         
           // react on errors.
-          alert("Data Unavailabe "+errors)
+          alert("Data Unavailabe in author index "+errors)
         
         })
     

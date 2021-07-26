@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { compose } from 'recompose';
-import Info from '../Books/books';
+import SearchArea from '../Search/Searcharea';
 //import Image from '../Imageup/Image';
 import { withAuthorization, withEmailVerification } from '../Session';
 // import './style.css';
@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'react-bootstrap'
 import DiscussionPost from '../Post/DiscussionPost'
 import FriendSuggestion from '../FriendSuggestion'
+import Recommendation from '../Recommendation'
 
 class HomePage extends Component {
 
@@ -16,13 +17,15 @@ class HomePage extends Component {
   render(){
     return (
       <div>
-
+        
         <Row style={{ padding: "20px", marginBottom: "27px" }}>
           <Col className="col">
             <FriendSuggestion />
             </Col>
           <Col className="col-6"><DiscussionPost /></Col>
-          <Col className="col">Recommendation</Col>
+          <Col className="col">
+            <Recommendation/>
+            </Col>
         </Row>
       </div>
     );

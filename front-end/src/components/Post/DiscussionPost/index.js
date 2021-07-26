@@ -80,13 +80,13 @@ class DiscussionPost extends Component {
         }
         )
           .catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe for inner in discussionpost")
           })
 
       }
       )
       .catch(() => {
-        alert("Data Unavailabe")
+        alert("Data Unavailabe for outer in discussionpost")
       })
 
 

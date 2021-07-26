@@ -3,8 +3,6 @@ let Reader = require('../models/reader.model');
 
 
 router.route('/').get(async (req, res) => {
-  const red = await Reader.find({ first_name: "Akid" }, { wishlist: 1 });
-  console.log(red);
   Reader.find()
     .then(reader => res.json(reader))
     .catch(err => res.status(400).json('Error: ' + err));
@@ -106,7 +104,7 @@ router.get('/auth/:id', async (req, res) => {
   try {
     Reader.findOne({ author_id: req.params.id }).then(b => {
       if (b) {
-        console.log(b);
+       // console.log(b);
         res.json(b);
       }
       else {
@@ -279,14 +277,16 @@ router.route('/update/:id').patch(async (req, res) => {
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
   try {
-    Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
+    /*Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
       if (err) return next(err);
       console.log(someValue);
-    });
-    Reader.findOneAndUpdate(
+    });*/
+ const response=  await Reader.findOneAndUpdate(
       { _id: req.params.id },
-      { $push: { wishlist: req.body.wishlist } },
-      function (error, success) {
+      { $push: { wishlist: req.body.wishlist } }
+ );
+ res.json(response);
+     /* function (error, success) {
         if (error) {
           console.log(error);
           res.json('error')
@@ -294,7 +294,7 @@ router.patch('/updatebook/:id', async (req, res) => {
           console.log(success);
           res.json("success")
         }
-      });
+      });*/
 
 
   } catch (err) {

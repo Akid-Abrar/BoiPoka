@@ -6,8 +6,8 @@ const authorSchema = mongoose.Schema({
     last_name:{type:String},
     image:{type:String},
     biography: {type:String},
-    books : [mongoose.Schema.Types.ObjectId],
-    followers: [mongoose.Schema.Types.ObjectId]
+    books : [mongoose.Schema.ObjectId],
+    followers: [mongoose.Schema.ObjectId]
 })
 
 module.exports = mongoose.model('authors', authorSchema);

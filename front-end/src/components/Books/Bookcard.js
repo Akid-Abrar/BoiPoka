@@ -32,30 +32,25 @@ const Bookcard = (props) => {
                     </a>
                 </Col>
                 <Col className="col-6">
-                    <p>Genre:</p>
-                    <ul>
-                        <ListGroup variant="flush" >
-                            {props.genre.map((value, index) => {
+                <p>Genre:</p>
+                <ul>
+                    <ListGroup variant="flush" >
+                        {props.genre.map((value, index) => {
 
-                                return <ListGroup.Item style={{ backgroundColor: "#ebdb82d8" }} key={index}>{value}</ListGroup.Item>
-                            })}
-                        </ListGroup>
-
-                    </ul>
-                    <Card bg={'light'} text={'dark'} style={{ width: '28rem' }} className="mb-2">
-                        <Card.Header style={{ backgroundColor: "#925024" }}>{props.nam}</Card.Header>
-                        <Card.Body>
-                            <Card.Title > Description </Card.Title>
-                            <Card.Text style={{ backgroundColor: "#ebdb82d8" }}>
-                                {props.des}
-                            </Card.Text>
-                        </Card.Body>
-                    </Card>
+                            return <ListGroup.Item style = {{backgroundColor:"#ebdb82d8"}} key={index}>{value}</ListGroup.Item>
+                        })}
+                    </ListGroup>
+                </ul>
+                <Card bg={'light'} text={'dark'}  style={{ width: '28rem' }} className="mb-2">
+                    <Card.Header style = {{backgroundColor:"#925024"}}>{props.nam}</Card.Header>
+                    <Card.Body>
+                        <Card.Title > Description </Card.Title>
+                        <Card.Text style = {{backgroundColor:"#ebdb82d8"}}>
+                            {props.des}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
                 </Col>
-
-
-
-
             </Row>
         </div>
     )

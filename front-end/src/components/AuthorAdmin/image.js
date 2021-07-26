@@ -5,7 +5,7 @@ import '@firebase/firestore';
 import '@firebase/auth';
 import '@firebase/storage'
 import axios from 'axios';
-import {Form,Button,Row,Col} from 'react-bootstrap'
+import {Form,Button,Row,Col,Container} from 'react-bootstrap'
 
 
 function Upload(props) {
@@ -58,14 +58,15 @@ function Upload(props) {
 
 	return (
 		<div>
+			<Container>
 			<Form>
-  				<Form.Group>
 					<Row>
 						<Col sm={8}><Form.File id="exampleFormControlFile1" onChange={(e) => { setImage(e.target.files[0])}}/></Col>
 						<Col sm={4}><Button variant="primary" size="sm" className="mr-2" onClick={upload}>Upload</Button></Col>
 					</Row>
-  				</Form.Group>
+
 			</Form>
+			</Container>
 		</div>
 	);
 }

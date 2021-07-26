@@ -10,10 +10,12 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Container,Row,Col,Table,Card,Image} from 'react-bootstrap'
+import {Container,Row,Col,Table,Card,Image,Button} from 'react-bootstrap'
 import BookPrint from './BookPrint'
 import FriendPrint from './FriendPrint'
 import '../styles.css'
+import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 const Info = () => (
   <AuthUserContext.Consumer>
@@ -51,10 +53,11 @@ class Reader extends Component
         axios.get(link)
           .then((res) => {
             this.setState({reader : res.data[0]})
+            console.log('reader',res.data[0])
           }
           )
           .catch(() => {
-            alert("Data Unavailabe")
+            alert("Data Unavailabe in get reader")
           })
     }
 
@@ -97,7 +100,7 @@ class Reader extends Component
                   </Card.Header>
                   
                   {
-                      (reader.genre !== undefined && reader.genre !== null) ? (reader.genre.length !== 0 ? reader.genre.map((Genre, index) => (
+                      reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
                         <Card.Body key={index} className="genre__display" >
                           <h4>{Genre}</h4>
                         </Card.Body >
@@ -108,11 +111,19 @@ class Reader extends Component
                       </Card.Body >)
                     
                     }
+                    {
+                      /*reader.genre.map((Genre, index) => (
+                        <Card.Body key={index} className="genre__display" >
+                          <h4>{Genre}</h4>
+                        </Card.Body >
+                      )) */
+                    
+                    }
                   </Card>
                 </Row>
                   
                 <Row>
-                    
+                    <Button href={ROUTES.ACCOUNT}>Edit Account</Button>
                 </Row>
                   <br></br>
               </Col>

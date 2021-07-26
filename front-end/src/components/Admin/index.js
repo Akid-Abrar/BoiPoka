@@ -1,30 +1,36 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
 import { compose } from 'recompose';
-import Bookadd from '../Bookadmin/Boodadd';
-import Authoradd from '../AuthorAdmin/AuthorAdd';
 
 import { withAuthorization, withEmailVerification } from '../Session';
-import { UserList, UserItem } from '../Users';
 import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
-import {Row,Col} from 'react-bootstrap'
+import {Row,Col,Button,Container} from 'react-bootstrap'
 
 const AdminPage = () => (
-  <div style = {{marginBottom: "27px"}}>
-    <h1>Admin</h1>
+  <div>
+    <Container>
+    <h1 align="center">Admin</h1>
+    <br></br>
+    <br></br>
+    <br></br>
     <Row>
-      <Col sm={9}><Bookadd /></Col>
-      <Col sm={3}>
-        <Switch>
-          <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
-          <Route exact path={ROUTES.ADMIN} component={UserList} />
-        </Switch>
+      <Col >
+        <Button href={ROUTES.BOOKADMIN}>Book Add</Button> 
+      </Col>
+      <Col >
+        <Button href={ROUTES.AUTHORADMIN}>Author Add</Button>  
+      </Col>
+      <Col >
+        <Button href={ROUTES.POSTADMIN}>Post Monitor</Button>  
+      </Col>
+      <Col>
+        <Button href={ROUTES.USERADMIN}>User</Button>
       </Col>
     </Row>
-    <Row>
-      <Authoradd />
-    </Row>
+    <br></br>
+      <br></br>
+      <br></br>
+    </Container>
   </div>
 );
 

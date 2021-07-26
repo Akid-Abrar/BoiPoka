@@ -5,6 +5,7 @@ import {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
 import {Image,OverlayTrigger,Button,Tooltip} from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 class BookPrint extends Component
 {
@@ -40,9 +41,9 @@ class BookPrint extends Component
 
     render()
     {
-        var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        // var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
         return(
-        <div>    
+            <div>    
             <OverlayTrigger
                 placement="bottom"
                 overlay={<Tooltip id="button-tooltip-2">{this.state.books.name}</Tooltip>}
@@ -62,7 +63,7 @@ class BookPrint extends Component
                             rounded
                             src={this.state.books.bookimage}
                         />
-                        <span className="ml-1">{this.state.books.name}</span>
+                        <Link to={'./info/'+ this.state.books.name}> <span className="ml-1">{this.state.books.name}</span></Link>
                     </Button>
                 )}
             </OverlayTrigger>

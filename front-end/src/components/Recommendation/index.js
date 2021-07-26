@@ -18,19 +18,20 @@ import Suggestion from './suggestion'
 const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <FriendSuggestion authUser={authUser} />
+      <Recommendation authUser={authUser} />
     )}
   </AuthUserContext.Consumer>
 );
 
-class FriendSuggestion extends Component {
+class Recommendation extends Component {
   constructor(props) {
     super(props)
     this.state = {
       id: '',
       reader: '',
-      result:[],
-      suggestion:[],
+      result: [],
+      suggestion: [],
+      genre: []
     }
 
   }
@@ -51,46 +52,51 @@ class FriendSuggestion extends Component {
       .then((res) => {
         this.setState({ reader: res.data[0] })
         this.setState({ id: this.state.reader._id })
+        this.setState({ genre: this.state.reader.genre })
 
-        var link1 = 'http://localhost:4000/readers/'
+        var link1 = 'http://localhost:4000/books/'
         // console.log('reader',this.state.reader.friends)
         // console.log('id', this.state.id)
 
         axios.get(link1).then((res) => {
           this.setState({ result: res.data })
-        //   console.log('result', this.state.result);
           this.state.result.map((r, index) => {
-            // console.log('rid',r._id);
-            if((this.state.reader.friends.includes(r._id) === false) && r._id !== this.state.id){
-              this.state.suggestion.push(r)
+            if ((this.state.reader.wishlist.includes(r._id) === false) && (this.state.reader.books_read.includes(r._id) === false)) {
+              if (this.state.genre !== undefined || this.state.genre !== null || this.state.genre.length !== 0) {
+                // var isin = this.state.genre.some(function (e) {
+                //   return r.genre.includes(e);
+                // });
+                // if (isin) {
+                  this.state.suggestion.push(r)
+                // }
+              }
             }
-            
 
           });
-          
-        //   console.log('suggestion', this.state.suggestion);
+
+          //   console.log('suggestion', this.state.suggestion);
 
         }
         )
           .catch(() => {
-            alert("Data Unavailabe for link1 in friendsuggestion")
+            alert("Data Unavailabe for link1 in recommendation")
           })
 
       }
       )
       .catch(() => {
-        alert("Data Unavailabe for link in friendsuggestion")
+        alert("Data Unavailabe for link in recommendation")
       })
 
 
   }
 
-  
+
 
   displayUser() {
 
     return this.state.suggestion.map((s, index) => (
-      <div key={index} ><Suggestion id={s._id} user={this.state.id}/></div>
+      <div key={index} ><Suggestion id={s._id} user={this.state.id} /></div>
 
     ));
   };
@@ -103,7 +109,7 @@ class FriendSuggestion extends Component {
 
       <div>
         <div className="m-4 p-2" style={{backgroundColor: "#925024", color: "white"}} align="center">
-          <h5>People you may know</h5>
+          <h5>Book Recommendation</h5>
         </div>
         <div className="mt-3">
           {this.displayUser()}
