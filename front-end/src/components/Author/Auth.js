@@ -14,6 +14,8 @@ const Auth = (props) => {
             bio={a["biography"]}
             image={a["image"]}
             follow={a["followers"]}
+            ownid={props.ownid}
+            userid={props.userid}
             handle={props.handlefollow}
             
             

@@ -52,14 +52,14 @@ class ProfileView extends Component {
   GetReader() {
     // const {id} = window.location.href
     // console.log(window.location.pathname.split('/')[2])
-    var link = 'http://localhost:4000/readers/' + window.location.pathname.split('/')[2]
+    var link = 'http://localhost:4000/authors/' + window.location.pathname.split('/')[2]
     console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
     this.setState({id:window.location.pathname.split('/')[3]})
      console.log('link',link)
      console.log('this.state.id : ',this.state.id)
 
 
-    axios.get('http://localhost:4000/readers/' + window.location.pathname.split('/')[3])
+    axios.get('http://localhost:4000/authors/' + window.location.pathname.split('/')[3])
       .then((res) => {
         console.log('1st query',res.data)
         this.setState({ user: res.data})

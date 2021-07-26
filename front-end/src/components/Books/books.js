@@ -10,7 +10,7 @@ import {
     AuthUserContext
 
 } from '../Session';
-import { CardDeck, Card ,Row,Col,Button} from 'react-bootstrap';
+import { CardDeck, Card ,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap';
 
 
 const Info = (props) => (
@@ -30,6 +30,7 @@ const Info = (props) => (
 class Books extends Component {
     constructor(props) {
         super(props);
+       
         this.state = {
             books: [],
             allbook:[],
@@ -37,7 +38,10 @@ class Books extends Component {
             searchfield: props.searchname,
             user: [],
             newAuthor: [],
+            authornew: '',
+            usernew: '',
         }
+
 
     }
 
@@ -66,8 +70,9 @@ class Books extends Component {
         axios.get(link)
 
             .then((res) => {
-                this.setState({ user: res.data })
-                console.log(this.state.user);
+                this.setState({ user: res.data });
+                this.setState({usernew:res.data[0]._id});
+                console.log(res.data[0]._id);
             }
             )
             .catch(() => {
@@ -91,7 +96,7 @@ class Books extends Component {
 
             const author =  response.data[0]['author'] ;
             
-            axios.get("http://localhost:4000/readers/auth/" +author).then((response) => {
+          /*  axios.get("http://localhost:4000/readers/auth/" +author).then((response) => {
                 
                // console.log(response.data);
                 this.setState({ Author: [response.data] });
@@ -101,14 +106,14 @@ class Books extends Component {
             }).catch(() => {
                 alert("Data Unavailabe in book's searchbook(inner) in author from reader")
 
-            })
+            })*/
     
             axios.get("http://localhost:4000/authors/" +author).then((res) => {
                
                 this.setState({ newAuthor: [res.data] });
+                this.setState({authornew:res.data._id});
                 
-               // console.log('new author');
-                //console.log(this.state.newAuthor);
+             // console.log('hi',res.data._id);
                 
                
 
@@ -117,7 +122,7 @@ class Books extends Component {
 
             })
         }).catch(() => {
-            alert("Data Unavailableb in book's searchbook(outer)")
+            console.log("Data Unavailableb in book's searchbook(outer)")
 
         })
 
@@ -131,32 +136,65 @@ class Books extends Component {
 
     }
 
-    handlewish = async(e) => {
+    handlewish = (e) => {
         e.preventDefault();
 
         let book;
+        let bool='false';
         let userid = this.state.user[0]['_id'];
         console.log('userid',userid);
         this.state.books.map((b, i) => {
             
            console.log('bookid',b['_id']);
             book = { wishlist: b['_id'] };
-        })
-console.log('hdbfu',book);
-console.log('w',book.wishlist);
-console.log('link','http://localhost:4000/readers/updatebook/' + userid);
-try{
+        });
+        this.state.user[0]['wishlist'].map((w,i)=>{
+            console.log('w',w);
+            console.log('wish',book.wishlist);
+            if(w=== book.wishlist)
+            {
+               bool='true';
+               console.log(bool);
+            } 
+        });
+
+
+    
+        if(bool==='false')
+        {
+            
+                 axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {
+
+                       
+                       
+                       console.log("KI RE VAI");
+                       console.log(response.data);
+        }).catch((err)=>{
+        console.log(err);
+
+    })
+        }
+        else
+        {
+            
+            console.log('try not');
+            
+        }
+    
+  /* try{
      const res=  await axios.patch('http://localhost:4000/readers/updatebook/' + userid, book);/*.then((response) => {*/
             
-            //console.log(response.data);
-            console.log("KI RE VAI");
-            console.log(res.data);
-        }catch(err)  {
-            alert("not valid data")
-        };
-        console.log("mor hala");
+            
+           // console.log("KI RE VAI");
+          //  console.log(res.data); 
+     /*   }catch(err)  {
+           alert("not valid data"); 
+        }   */
+         
+      
         
-    }
+    
+};
 
     //handle following author
     handlefollow = (e) => {
@@ -176,11 +214,18 @@ try{
             console.log(response.data);
 
         }).catch((err) => {
-            alert("not valid data")
-        })
+            alert("not valid data");
+        });
             
-        })
+        });
 
+    }
+
+    refresh=()=> {
+        if(!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
     }
 
     render() {
@@ -194,6 +239,7 @@ try{
              {/* <Button variant="outline-info"  onClick={this.searchbook}>
         Search </Button>*/}
             {this.searchbook()}
+            {this.refresh()}
              {this.state.books.length >0 ?
                 <CardDeck>
                 <Row style={{padding: 20}}>
@@ -216,9 +262,11 @@ try{
                         <Card.Body >
 
                            
-                           {/*<Authors handlefollow={this.handlefollow} auth={this.state.Author}  />*/}
-                            
-                             <Auth handlefollow={this.handlefollow}  newauth={this.state.newAuthor} />
+                        
+                             <Auth handlefollow={this.handlefollow}  newauth={this.state.newAuthor}
+                             userid={this.state.authornew}
+                              ownid={this.state.usernew}
+                              />
         
                         </Card.Body>
                        

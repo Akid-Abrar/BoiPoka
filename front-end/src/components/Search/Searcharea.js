@@ -6,7 +6,7 @@ import "./Auto.css";
 import axios from 'axios';
 
 import * as ROUTES from '../../constants/routes';
-import {Form,FormControl,Button,Fragment,Dropdown} from 'react-bootstrap'
+import {Form,FormControl,Button,Fragment,Dropdown,Navbar, Nav} from 'react-bootstrap'
 const SearchArea =(props) =>
 {
   
@@ -50,7 +50,7 @@ const SearchArea =(props) =>
         console.log("Data Unavailabe for handleAuthor in searcharea")
     })
   }
-  const handleChange = (e) => {
+  const handleChange = async(e) => {
      
     let searchval = e.target.value;
     let suggestion = [];
@@ -58,12 +58,30 @@ const SearchArea =(props) =>
     let bookid=[];
     let bookname=[];
     let newsugest=[];
-  
+
+   // handlesug();
+   let s=[];
+      
+  axios.get("http://localhost:4000/books").then((res)=>
+   {
+       res.data.map((b,i)=>{
+        s.push(b["name"]);
+        
+       })
+       
+      // console.log(s);
+       setSug(s);
+   }).catch(() => {
+       console.log("Data Unavailabe in handlesug in searcharea")
+   });
+    handleauthor();
     if (searchval.length > 0) {
+     console.log('sug',sug);
         suggestion = sug
         .sort()
         .filter((e) => e.toString().toLowerCase().includes(searchval.toLowerCase()));
-      setResfound(suggestion.length !== 0 ? true : false); 
+     
+      console.log('auth',auth);
       ausug= auth
       .sort()
       .filter((e) => e.toString().toLowerCase().includes(searchval.toLowerCase()));
@@ -81,20 +99,10 @@ const SearchArea =(props) =>
               //bookname.push(res.data["name"]);
              console.log(res.data["name"]);
              suggestion.push(res.data["name"]);
-             
+            // setResfound(suggestion.length !== 0 ? true : false); 
            })
 
-              //now book id theke book name
-    /* bookid.map((b,i)=>{
-        axios.get("http://localhost:4000/books/" +b).then((res)=>{
-           
-           bookname.push(res.data["name"]);
-          
-          
-        })
-        console.log('upore',bookname);
-      
-      })*/
+    
 
            })
          })
@@ -106,19 +114,13 @@ const SearchArea =(props) =>
       
       
     } 
-      // console.log(bookname);
-    
-    
-    
-  // newsugest = [].concat(suggestion, bookname);
-    //console.log('final sugestion',newsugest);
+     
     
     setSuggest(suggestion);
    
     setSearchtext(searchval);
 
-    handlesug();
-    handleauthor();
+    
   };
 
   const suggestedText = (value) => {
@@ -129,7 +131,7 @@ const SearchArea =(props) =>
   };
 
   const getSuggestions = () => {
-    if (suggest.length === 0 && searchtext !== "" && !resfound) {
+    if (suggest.length === 0 && searchtext !== "" ) {
       return(
         <div class="no-suggestions">
           <em>No suggestions, you're on your own!</em>
@@ -165,14 +167,16 @@ const SearchArea =(props) =>
      // doSearch({ keyword })
     }
   }
+ 
 
 return(
     <div className="search-area">
     {/*handlesug()*/}
     {/*handleauthor()*/}
     <Form inline  action="">
-    <FormControl value={searchtext} onChange={handleChange}  type="text" placeholder="Search for books" className="mr-sm-2" />
-    <Link to={'./info/'+searchtext}> <i className="fas fa-search"></i> </Link>
+    <FormControl value={searchtext} onChange={handleChange}  type="text" placeholder="Search for Books" className="mr-sm-2" />
+    
+    <Link to={'/info/'+searchtext}><i className="fas fa-search"></i> </Link>
     </Form>
     <div>{getSuggestions()}</div>
     

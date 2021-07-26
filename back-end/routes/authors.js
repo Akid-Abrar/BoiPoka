@@ -99,7 +99,10 @@ router.patch('/:id', async (req, res) => {
 
                     biography: req.body.biography,
                     books: req.body.books,
-                    followers: req.body.followers
+                    followers: req.body.followers,
+                    first_name:req.body.first_name,
+                    last_name:req.body.last_name,
+                   image:req.body.image
                 }
             }
         );
@@ -112,7 +115,8 @@ router.patch('/:id', async (req, res) => {
 
 router.patch('/updateauthor/:id', async (req, res) => {
     try {
-     Finder.findOneAndUpdate(
+        console.log('follo',req.body.followers);
+           Finder.findOneAndUpdate(
         { _id: req.params.id }, 
         { $push: {followers: req.body.followers } },
         function (error, success) {
@@ -120,7 +124,7 @@ router.patch('/updateauthor/:id', async (req, res) => {
               console.log(error);
               res.json('error')
           } else {
-              console.log(success);
+              //console.log(success);
               res.json(success);
           }
       });
