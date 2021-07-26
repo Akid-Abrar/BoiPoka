@@ -151,7 +151,7 @@ class Post extends Component {
                 ) : (
                         <>
                             <Card>
-                                <div className="post" style={{ backgroundColor: "#d1ecf0d8", border: "7px", bordercolor: "#925024" }}>
+                                <div className="post" style={{ border: "7px", bordercolor: "#925024" }}>
                                     <h5>{post.content}</h5>
                                 </div>
 
