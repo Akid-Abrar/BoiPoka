@@ -11,7 +11,7 @@ const Authcard = (props) => {
         
        
         <h2 style = {{backgroundColor:"#925024"}}>About Author</h2>
-        <a href={`/profile/${props.userid}/${props.ownid}`}>
+        <a href={`/authprofile/${props.userid}/${props.ownid}`}>
         <h3 className="card-title">{props.fname}  {props.lname}</h3>
         </a>
         

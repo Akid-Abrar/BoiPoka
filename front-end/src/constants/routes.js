@@ -19,4 +19,5 @@ export const POSTADMIN ='/postAdmin/postAdd';
 export const USERADMIN ='/admin/user';
 export const USERADMINDETAILS ='/admin/user/:id';
 export const INFO='/info/:value' ;
-export const PROFILE = '/profile/:id/:user'
+export const PROFILE = '/profile/:id/:user';
+export const APROFILE='/authprofile/:id/:user';

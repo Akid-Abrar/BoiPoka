@@ -59,22 +59,7 @@ const SearchArea =(props) =>
     let bookname=[];
     let newsugest=[];
 
-   // handlesug();
-   let s=[];
-      
-  axios.get("http://localhost:4000/books").then((res)=>
-   {
-       res.data.map((b,i)=>{
-        s.push(b["name"]);
-        
-       })
-       
-      // console.log(s);
-       setSug(s);
-   }).catch(() => {
-       console.log("Data Unavailabe in handlesug in searcharea")
-   });
-    handleauthor();
+   
     if (searchval.length > 0) {
      console.log('sug',sug);
         suggestion = sug
@@ -99,7 +84,7 @@ const SearchArea =(props) =>
               //bookname.push(res.data["name"]);
              console.log(res.data["name"]);
              suggestion.push(res.data["name"]);
-            // setResfound(suggestion.length !== 0 ? true : false); 
+             setResfound(suggestion.length !== 0 ? true : false); 
            })
 
     
@@ -131,7 +116,7 @@ const SearchArea =(props) =>
   };
 
   const getSuggestions = () => {
-    if (suggest.length === 0 && searchtext !== "" ) {
+    if (suggest.length === 0 && searchtext !== "" && !resfound) {
       return(
         <div class="no-suggestions">
           <em>No suggestions, you're on your own!</em>
@@ -171,8 +156,9 @@ const SearchArea =(props) =>
 
 return(
     <div className="search-area">
-    {/*handlesug()*/}
-    {/*handleauthor()*/}
+    {searchtext !== "" ? handlesug()
+    : null}
+    
     <Form inline  action="">
     <FormControl value={searchtext} onChange={handleChange}  type="text" placeholder="Search for Books" className="mr-sm-2" />
     

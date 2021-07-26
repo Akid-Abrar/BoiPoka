@@ -11,22 +11,24 @@ import {
 // import { withRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import { Container, Row, Col, Table, Card, Image } from 'react-bootstrap'
-import BookPrint from './BookPrint'
-import FriendPrint from './FriendPrint'
+import { Container, Row, Col, Table, Card, Image,Form,Button } from 'react-bootstrap'
+import BookPrint from './Bookprint';
+import FollowerPrint from './Followerprint';
+
+
 import '../styles.css'
 
 const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div>
-        <ProfileView authUser={authUser} />
+        <AprofileView authUser={authUser} />
       </div>
     )}
   </AuthUserContext.Consumer>
 );
 
-class ProfileView extends Component {
+class AprofileView extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -52,28 +54,28 @@ class ProfileView extends Component {
   GetReader() {
     // const {id} = window.location.href
     // console.log(window.location.pathname.split('/')[2])
-    var link = 'http://localhost:4000/readers/' + window.location.pathname.split('/')[2]
+    var link = 'http://localhost:4000/authors/' + window.location.pathname.split('/')[2]
     console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
     this.setState({id:window.location.pathname.split('/')[3]})
      console.log('link',link)
      console.log('this.state.id : ',this.state.id)
 
 
-    axios.get('http://localhost:4000/readers/' + window.location.pathname.split('/')[3])
+    axios.get('http://localhost:4000/authors/' + window.location.pathname.split('/')[2])
       .then((res) => {
         console.log('1st query',res.data)
         this.setState({ user: res.data})
-        this.setState({ userfriends: this.state.user.friends })
+        this.setState({ userfriends: this.state.user.followers })
         axios.get(link)
           .then((res) => {
 
             this.setState({ reader: res.data})
 
-            if (this.state.user.friends.includes(this.state.reader._id)) {
+           /* if (this.state.user.friends.includes(this.state.reader._id)) {
               this.setState({ token: "Remove Friend" })
             } else {
               this.setState({ token: "Add Friend" })
-            }
+            }*/
 
           }
           )
@@ -123,6 +125,29 @@ class ProfileView extends Component {
 
   }
 
+  //handle following author
+  handlefollow = (event) => {
+    event.preventDefault();
+    
+    let userid = window.location.pathname.split('/')[3];
+    let follower;
+    let writer= window.location.pathname.split('/')[2];;
+    console.log(userid);
+   
+        follower={followers:userid};
+
+        axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
+        console.log("followerlist");
+        console.log(response.data);
+
+    }).catch((err) => {
+        alert("not valid data");
+    });
+        
+    
+
+}
+
   displayReader(reader) {
     // var imgsrc=
     return (
@@ -143,40 +168,33 @@ class ProfileView extends Component {
                       />
                     </Col>
                     <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2>
-                    {this.state.id !== this.state.reader._id ? <input type="submit" value={this.state.token} onClick={this.handleAddFriend} /> : <></>}
+                    
+                    <div >
+                    <Form inline onSubmit={this.handlefollow}  action="">
+                    
+                    <Button label="Follow" style = {{backgroundColor:"#925024"}} className="mx-auto my-2" type="submit" >Follow Author</Button>
+                    
+                    </Form>
+                    </div>
+
                       
                     </Col>
                   </Row>
                 </Card.Body>
               </Card>
               <br></br>
-              <font style={{ color: "black" }} size="5"><b>Friends</b></font>
+              
+              <font style={{ color: "black" }} size="5"><b>Followers</b></font>
               <br></br>
               <br></br>
               <Row>
                 <br></br>
                 {/* {console.log(reader.friends)} */}
-                {this.displayFriend(reader.friends)}
+                {this.displayFriend(reader.followers)}
                 <br></br>
               </Row>
               <Row>
-                <Card style={{ width: '10rem', backgroundColor: "#d1ecf0d8", border: "0px" }} >
-                  <Card.Header>
-                    Favourite Genras
-                  </Card.Header>
-
-                  {
-                    reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
-                      <Card.Body key={index} className="genre__display" >
-                        <h4>{Genre}</h4>
-                      </Card.Body >
-                    )) : (<Card.Body className="genre__display" >
-                      <h4>No Genre</h4>
-                    </Card.Body >)) : (<Card.Body className="genre__display" >
-                      <h4>No Genre</h4>
-                    </Card.Body >)
-                  }
-                </Card>
+                
               </Row>
 
               <Row>
@@ -188,13 +206,13 @@ class ProfileView extends Component {
               <Table width="700px" border="7" bordercolor="#925024" >
                 <thead className="tableheader-style">
                   <tr align="center">
-                    <th align="center"><font style={{ color: "#ebdb82d8" }} size="5">Books Read</font></th>
+                    <th align="center"><font style={{ color: "#ebdb82d8" }} size="5">Books</font></th>
                   </tr>
                 </thead>
                 <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
                   <p></p>
                   <tr>
-                    {this.displayBook(reader.books_read)}
+                    {this.displayBook(reader.books)}
 
                   </tr>
 
@@ -206,12 +224,12 @@ class ProfileView extends Component {
               <Table border="7" bordercolor="#925024">
                 <thead bgcolor="#925024" align="center">
                   <tr align="center">
-                    <th><font style={{ color: "#ebdb82d8" }} size="5">Wish List</font></th>
+                    <th><font style={{ color: "#ebdb82d8" }} size="5">Bio-graphy</font></th>
                   </tr>
                 </thead>
                 <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
                   <br></br>
-                  {this.displayBook(reader.wishlist)}
+                  <div className="card-text" style = {{backgroundColor:"#ebdb82d8"}}>{reader.biography}  </div>
                 </tbody>
               </Table>
             </Col>
@@ -224,6 +242,8 @@ class ProfileView extends Component {
       </div>
     )
   };
+
+  
 
   displayBook(bookIds) {
 
@@ -240,27 +260,27 @@ class ProfileView extends Component {
       <div>No Books</div>
       <br></br>
     </div>))
-  };
+     };
 
-  displayFriend(friendIds) {
+ displayFriend(friendIds) {
 
     if (friendIds !== undefined) {
       return friendIds.length !== 0 ? (friendIds.map((friendId, index) => (
         <Col key={index} className="friend__display" sm={3}>
-          <FriendPrint friendid={friendId} userid={this.state.id} />
+          <FollowerPrint friendid={friendId} userid={this.state.id} />
         </Col>
       ))) : (<Col className="friend__display" sm={3}>
-        <Container style={{ paddingBottom: "20px" }}>No Friends</Container>
+        <Container style={{ paddingBottom: "20px" }}>No Followers</Container>
       </Col>)
     } else {
       return (
         <Col className="friend__display" sm={3}>
-          <Container>No Friends</Container>
+          <Container>No Followers</Container>
         </Col>
       )
     }
 
-  };
+};
 
 
 
