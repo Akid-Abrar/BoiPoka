@@ -95,20 +95,7 @@ class Books extends Component {
             this.setState({ books: response.data });
 
             
-          //  this.state.user[0].wishlist.map((wish,i)=>{
-               // console.log('wih',wish);
-               // console.log('id',this.state.books[0]._id);
-              /*  if(wish===this.state.books[0]._id)
-                {
-                    console.log('state',this.state.token);
-                    console.log('true',wish);
-                    this.setState({ token: "Remove from list" });
-                }
-                else
-                {
-                    this.setState({ token: "Add to wishlist" });
-                }
-            }); */
+          
 
             if(this.state.user[0].wishlist.includes(this.state.books[0]._id))
                 {
@@ -184,16 +171,7 @@ class Books extends Component {
            console.log('bookid',b['_id']);
             book = { wishlist: b['_id'] };
         });
-       /* this.state.user[0]['wishlist'].map((w,i)=>{
-            console.log('w',w);
-            console.log('wish',book.wishlist);
-            if(w=== book.wishlist)
-            {
-               bool='true';
-               console.log(bool);
-            } 
-        });  */
-
+      
 
         if (this.state.token === "Add to wishlist") {
             e.preventDefault();
@@ -236,15 +214,21 @@ class Books extends Component {
         let userid = this.state.user[0]._id;
         
         let writer=this.state.newAuthor[0]._id;
-        console.log(userid);
-        console.log(writer);
+        let folauth={following:writer};
        
             follower={followers:userid};
             if (this.state.ftoken === "Follow Author") {
                 e.preventDefault();
 
             axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
-            console.log("followerlist");
+           // console.log("followerlist");
+            //console.log(response.data);
+
+        }).catch((err) => {
+            alert("not valid data");
+        });
+        axios.patch('http://localhost:4000/readers/updatefollow/' +userid , folauth).then((response) => {
+            console.log("followinglist");
             console.log(response.data);
 
         }).catch((err) => {
@@ -258,6 +242,14 @@ class Books extends Component {
 
         axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
         console.log("followerlist");
+        console.log(response.data);
+
+    }).catch((err) => {
+        alert("not valid data");
+    });
+
+    axios.patch('http://localhost:4000/readers/removefollow/' +userid , folauth).then((response) => {
+        console.log("followinglist");
         console.log(response.data);
 
     }).catch((err) => {

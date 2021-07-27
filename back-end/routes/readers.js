@@ -276,23 +276,7 @@ router.route('/update/:id').patch(async (req, res) => {
 
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
- // try {
-    /*Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
-      if (err) return next(err);
-      console.log(someValue);
-    });*/
- /*const response=  await Reader.findOneAndUpdate(
-      { _id: req.params.id },
-      { $push: { wishlist: req.body.wishlist } }
- );
- res.json(response); 
-     
-
-
-  } catch (err) {
-    console.log(err);
-    res.json(err);
-  } */
+ 
 
   try {
     Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
@@ -302,6 +286,64 @@ router.patch('/updatebook/:id', async (req, res) => {
     Reader.findOneAndUpdate(
       { _id: req.params.id },
       { $push: { wishlist: req.body.wishlist } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+          res.json('error')
+        } else {
+          console.log(success);
+          res.json("success")
+        }
+      });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
+//router er following list e add
+router.patch('/updatefollow/:id', async (req, res) => {
+ 
+
+  try {
+    Reader.find({ _id: req.params.id }, 'following -_id', function (err, someValue) {
+      if (err) return next(err);
+      // console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { following: req.body.following } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+          res.json('error')
+        } else {
+          console.log(success);
+          res.json("success")
+        }
+      });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
+//reader r follwing list theke remove
+router.patch('/removefollow/:id', async (req, res) => {
+ 
+
+  try {
+    Reader.find({ _id: req.params.id }, 'following -_id', function (err, someValue) {
+      if (err) return next(err);
+      // console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { following: req.body.following } },
       function (error, success) {
         if (error) {
           console.log(error);
