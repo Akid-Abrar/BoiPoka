@@ -10,7 +10,7 @@ import {
     AuthUserContext
 
 } from '../Session';
-import { CardDeck, Card ,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap';
+import { CardDeck, Card ,Row,Col,Button} from 'react-bootstrap';
 
 
 const Info = (props) => (
@@ -23,10 +23,6 @@ const Info = (props) => (
         )}
     </AuthUserContext.Consumer>
 );
-
-
-
-
 class Books extends Component {
     constructor(props) {
         super(props);
@@ -40,16 +36,20 @@ class Books extends Component {
             newAuthor: [],
             authornew: '',
             usernew: '',
-            token: '',
-            ftoken:'',
+            token: 'Add to wishlist',
+            ftoken:'Follow Author',
+            rtoken:'Read'
         }
         this.handlewish = this.handlewish.bind(this);
         this.handlefollow=this.handlefollow.bind(this);
+        this.handleread = this.handleread.bind(this);
 
     }
 
     componentDidMount() {
-
+        
+        
+        this.searchbook();
         let suggestion = [];
         this.GetReader(this.props.authUser.email);
         axios.get("http://localhost:4000/books").then((res)=>
@@ -62,7 +62,7 @@ class Books extends Component {
         }).catch(() => {
             alert("Data Unavailabe in book's componentDidMount")
         })
-        this.searchbook();
+      //  this.searchbook();
 
     }
 
@@ -92,31 +92,33 @@ class Books extends Component {
             //console.log(this.state.user);
             this.setState({ books: response.data });
 
-            
-            this.state.user[0].wishlist.map((wish,i)=>{
-               // console.log('wih',wish);
-                if(wish.includes(this.state.books[0]._id))
+            if(this.state.user[0].wishlist.includes(this.state.books[0]._id))
                 {
-                    this.setState({ token: "Remove from list" });
+                    
+                    this.setState({ token: "Remove from wishlist" });
                 }
                 else
                 {
                     this.setState({ token: "Add to wishlist" });
                 }
-            });
+            if(this.state.user[0].books_read.includes(this.state.books[0]._id))
+                {
+                    
+                    this.setState({ rtoken: "Remove from Read" });
+                }
+                else
+                {
+                    this.setState({ rtoken: "Read" });
+                }
 
             const author =  response.data[0].author ;
-            
-          
-    
             axios.get("http://localhost:4000/authors/" +author).then((res) => {
                
                 this.setState({ newAuthor: [res.data] });
 
                 this.setState({authornew:res.data._id});
-                this.state.newAuthor[0].followers.map((a,i)=>{
-                    console.log('usernew',this.state.usernew);
-                    if(a.includes(this.state.usernew))
+
+                if(this.state.newAuthor[0].followers.includes(this.state.usernew))
                     {
                         this.setState({ftoken:"Unfollow Author"});
                     }
@@ -124,12 +126,6 @@ class Books extends Component {
                     {
                         this.setState({ftoken:"Follow Author"});
                     }
-                }); 
-                
-             
-                
-               
-
             }).catch(() => {
                console.log("Data Unavailabe in book's searchbook(inner) author from author");
 
@@ -138,73 +134,81 @@ class Books extends Component {
             console.log("Data Unavailableb in book's searchbook(outer)")
 
         })
-
-
-
     }
 
     handlesearch = (e) => {
         console.log(e.target.value);
-        
-
     }
 
     handlewish = (e) => {
-        
-
         let book;
-        let bool='false';
         let userid = this.state.user[0]['_id'];
         //console.log('userid',userid);
         this.state.books.map((b, i) => {
-            
-           console.log('bookid',b['_id']);
             book = { wishlist: b['_id'] };
         });
-       /* this.state.user[0]['wishlist'].map((w,i)=>{
-            console.log('w',w);
-            console.log('wish',book.wishlist);
-            if(w=== book.wishlist)
-            {
-               bool='true';
-               console.log(bool);
-            } 
-        });  */
-
-
         if (this.state.token === "Add to wishlist") {
             e.preventDefault();
-                 axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {
-
-                       
-                       
-                       
-                       console.log(response.data);
+            axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {       
+                console.log(response.data);
         }).catch((err)=>{
-        console.log(err);
+            console.log(err);
         });
 
-        
-      this.setState({ token: "Remove from list" });
+            this.setState({ token: "Remove from wishlist" });
      
-    }
-    else{
-        e.preventDefault();
-        axios.patch('http://localhost:4000/readers/pullbook/' + userid, book).then((response) => {
+        }
+        else{
+            e.preventDefault();
+            axios.patch('http://localhost:4000/readers/pullbook/' + userid, book).then((response) => {
+            }).catch((err)=>{
+                console.log(err);
+            });
 
-            console.log(response.data);
+            this.setState({ token: "Add to wishlist" });
+        
+        }
+    }
+
+    handleread = (e) => {
+        let book;
+        let userid = this.state.user[0]['_id'];
+        //console.log('userid',userid);
+        this.state.books.map((b, i) => {
+            book = { books_read: b['_id'] };
+        });
+        if (this.state.rtoken === "Read") {
+            e.preventDefault();
+            axios.patch('http://localhost:4000/readers/updateBookRead/' + userid, book).then((response) => {       
+                console.log(response.data);
         }).catch((err)=>{
-        console.log(err);
+            console.log(err);
         });
 
-       
-      this.setState({ token: "Add to wishlist" });
-      
-    }
-    }
-        
-    
+            this.setState({ rtoken: "Remove from Read" });
 
+            if(this.state.user[0].wishlist.includes(this.state.books[0]._id))
+                {
+                    this.setState({ token: "Remove from wishlist" });
+                    this.handlewish(e)
+                }
+
+     
+        }
+        else{
+            console.log('inside else')
+            e.preventDefault();
+            axios.patch('http://localhost:4000/readers/pullReadBook/' + userid, book).then((response) => {
+
+                console.log(response.data);
+            }).catch((err)=>{
+            console.log(err);
+            });
+
+            this.setState({ rtoken: "Read" });
+        
+        }
+    }
     //handle following author
     handlefollow = (e) => {
         //e.preventDefault();
@@ -230,18 +234,18 @@ class Books extends Component {
         this.setState({ ftoken: "Unfollow Author" });
     }
     else if(this.state.ftoken === "Unfollow Author")
-    {
-        e.preventDefault();
+        {
+            e.preventDefault();
 
-        axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
-        console.log("followerlist");
-        console.log(response.data);
+            axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
+            console.log("followerlist");
+            console.log(response.data);
 
-    }).catch((err) => {
-        alert("not valid data");
-    });
-    this.setState({ ftoken: "Follow Author" });
-    }
+        }).catch((err) => {
+            alert("not valid data");
+        });
+        this.setState({ ftoken: "Follow Author" });
+        }
             
        
 
@@ -254,10 +258,7 @@ class Books extends Component {
         }
     }
 
-    render() {
-        
-               
-           
+    render() {    
         return (
             <div style = {{marginBottom: "27px"}}>
             
@@ -269,18 +270,20 @@ class Books extends Component {
              {this.state.books.length >0 ?
                 <CardDeck>
                 <Row style={{padding: 20}}>
-                    
-
-                       
                        <Col className="col">
                          
                        <Card >
                         <Card.Body > 
-                        <div >
-     
-                        <input type="submit" value={this.state.token} onClick={this.handlewish} />
-                        
-                        </div>
+                            <Row>
+                            <Col sm={6} >
+        
+                                <Button type="submit" onClick={this.handlewish} >{this.state.token}</Button>
+                            
+                            </Col>
+                            <Col sm={6} >
+                                <Button type="submit" onClick={this.handleread} >{this.state.rtoken}</Button>
+                            </Col>
+                        </Row>
                             <Booklist val={this.state.token} handlewish={this.handlewish}  books={this.state.books} />
                             </Card.Body> 
                             </Card> 
@@ -290,14 +293,11 @@ class Books extends Component {
                        <Col className="col-4">
                     <Card>
                         <Card.Body >
-
-                           
-                        
                              <Auth  val={this.state.ftoken} handlefollow={this.handlefollow}  newauth={this.state.newAuthor}
                              userid={this.state.authornew}
                               ownid={this.state.usernew}
                              
-                              />
+                            />
         
                         </Card.Body>
                        

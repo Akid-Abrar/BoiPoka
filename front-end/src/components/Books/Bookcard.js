@@ -18,10 +18,6 @@ const Bookcard = (props) => {
                         rounded
                         src={props.bookimage}
                     />
-
-
-
-
                     <h5>Avg_rating:{props.avg_rating}</h5>
 
                     {/*<Addwish handlewish={props.wish} />*/}

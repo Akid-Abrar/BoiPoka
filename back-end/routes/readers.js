@@ -276,23 +276,6 @@ router.route('/update/:id').patch(async (req, res) => {
 
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
- // try {
-    /*Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
-      if (err) return next(err);
-      console.log(someValue);
-    });*/
- /*const response=  await Reader.findOneAndUpdate(
-      { _id: req.params.id },
-      { $push: { wishlist: req.body.wishlist } }
- );
- res.json(response); 
-     
-
-
-  } catch (err) {
-    console.log(err);
-    res.json(err);
-  } */
 
   try {
     Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
@@ -319,6 +302,34 @@ router.patch('/updatebook/:id', async (req, res) => {
   }
 })
 
+
+router.patch('/updateBookRead/:id', async (req, res) => {
+
+  try {
+    Reader.find({ _id: req.params.id }, 'books_read -_id', function (err, someValue) {
+      if (err) return next(err);
+      // console.log(someValue);
+    });
+    Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { books_read: req.body.books_read } },
+      function (error, success) {
+        if (error) {
+          console.log(error);
+          res.json('error')
+        } else {
+          console.log(success);
+          res.json("success")
+        }
+      });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
 //router er wishlist theke remove
 router.patch('/pullbook/:id', async (req, res) => {
   try {
@@ -328,9 +339,20 @@ router.patch('/pullbook/:id', async (req, res) => {
       { $pull: { wishlist: req.body.wishlist } }
  );
  res.json(response);
-     
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
 
-
+router.patch('/pullReadBook/:id', async (req, res) => {
+  try {
+    
+ const response=  await Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { books_read: req.body.books_read } }
+ );
+ res.json(response);
   } catch (err) {
     console.log(err);
     res.json(err);
@@ -410,8 +432,6 @@ router.patch('/addauthor/:id', async (req, res) => {
     res.json(err);
   }
 })
-
-
 
 router.patch('/updatefriend/:id', async (req, res) => {
   try {
