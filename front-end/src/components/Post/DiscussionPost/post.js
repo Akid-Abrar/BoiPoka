@@ -5,6 +5,7 @@ import { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './style.css'
 import User from './user'
+import ShowRating from './showrating'
 import { Button, Card, Col, Container, Form } from 'react-bootstrap'
 
 // import { AiOutlineLike } from 'react-icons/AiOutlineLike';
@@ -15,8 +16,9 @@ class Post extends Component {
         this.state = {
             post: '',
             comment: '',
-            likes:[],
+            likes: [],
             isLiked: '',
+            commenterDate:'',
         }
 
         this.handleComment = this.handleComment.bind(this);
@@ -25,7 +27,7 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
 
@@ -49,8 +51,12 @@ class Post extends Component {
     PrintComments(comments) {
         if (comments.length !== 0) {
             return comments.map((comment, index) => (
+                
                 <div key={index} className="comment-dark p-2">
-                    <User id={comment.commentatorid} userid={this.props.currentuserid}/>
+                    {/* {this.state.commenterDate = new Date(comment.createdAt)}
+                    <div align="right"><i>{this.state.commenterDate.getHours()}:{this.state.commenterDate.getMinutes()}:{this.state.commenterDate.getSeconds()} {' '} at {this.state.commenterDate.getDay()}-{this.state.commenterDate.getMonth()}-{this.state.commenterDate.getFullYear()}
+                    </i></div> */}
+                    <User id={comment.commentatorid} userid={this.props.currentuserid} />
                     <Card className="comment" key={index}>
                         {comment.comment}
                     </Card>
@@ -81,18 +87,18 @@ class Post extends Component {
         })
         // window.location.reload(false);
         event.preventDefault();
-        this.setState({comment: ''})
+        this.setState({ comment: '' })
         // window.location.reload(false);
         // this.componentDidMount();
 
     }
 
-    handleLike=(event)=>{
-        
+    handleLike = (event) => {
+
         this.state.isLiked = !this.state.isLiked
         if (this.state.isLiked) {
             this.state.likes.push(this.props.currentuserid)
-        }else{
+        } else {
             this.state.likes.pop(this.props.currentuserid)
         }
 
@@ -109,11 +115,11 @@ class Post extends Component {
         event.preventDefault();
     }
 
-    updateLike(post){
+    updateLike(post) {
         if (post.like != null) {
             this.state.likes = post.like
         }
-        
+
         if (this.state.likes.includes(this.props.currentuserid)) {
             this.state.isLiked = true
         }
@@ -125,19 +131,36 @@ class Post extends Component {
         var like = <i className="fas fa-heart mr-1"></i>
         var unlike = <i className="far fa-heart mr-1"></i>
         this.updateLike(post)
+        var date = new Date(post.createdAt)
 
         return (
             <Card>
-                <User id={post.creatorid} userid={this.props.currentuserid}/>
-                <Card>
-                    <div className="post" style={{ backgroundColor: "#d1ecf0d8", border: "7px", bordercolor: "#925024" }}>
-                        <h5>{post.content}</h5>
-                    </div>
+                <div align="right"><i> {date.getDate()}-{date.getMonth()+1}-{date.getFullYear()}{' '} at  {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
+                </i></div>
+                <User id={post.creatorid} userid={this.props.currentuserid} />
+                {post.type === 2 ? (
+                    <>
+                        <ShowRating postid={post._id} />
+                        <Card>
+                            <div className="post" style={{ border: "7px", bordercolor: "#925024" }}>
+                                <h5>{post.content}</h5>
+                            </div>
 
-                </Card>
+                        </Card>
+                    </>
+                ) : (
+                        <>
+                            <Card>
+                                <div className="post" style={{ border: "7px", bordercolor: "#925024" }}>
+                                    <h5>{post.content}</h5>
+                                </div>
+
+                            </Card>
+                        </>
+                    )}
                 <div>
-                <a href="#"  onClick={this.handleLike}> {this.state.isLiked==false ? unlike:like} </a>{this.state.likes.length}
-                <a href="#comment"><i className="far fa-comment fa-1.5x ml-4">{" "}{post.comments.length}</i></a>
+                    <a href="#" onClick={this.handleLike}> {this.state.isLiked === false ? unlike : like} </a>{this.state.likes.length}
+                    <a href="#comment"><i className="far fa-comment fa-1.5x ml-4">{" "}{post.comments.length}</i></a>
                 </div>
                 { this.PrintComments(post.comments)}
 
@@ -150,7 +173,7 @@ class Post extends Component {
                         placeholder="Add a comment"
                         className="mr-2"
                     />
-                    <input type="submit" value="Add"/>
+                    <input type="submit" value="Add" />
                 </Form>
                 {/* {console.log("hello", post)} */}
             </Card >

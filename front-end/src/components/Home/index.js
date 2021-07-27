@@ -8,21 +8,28 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col } from 'react-bootstrap'
 import DiscussionPost from '../Post/DiscussionPost'
 import FriendSuggestion from '../FriendSuggestion'
+import AuthorSuggestion from '../AuthorSuggestion'
+import Recommendation from '../Recommendation'
 
 class HomePage extends Component {
 
-  componentDidMount(){}
+  componentDidMount() { }
 
-  render(){
+  render() {
     return (
       <div>
-        
+
         <Row style={{ padding: "20px", marginBottom: "27px" }}>
           <Col className="col">
             <FriendSuggestion />
-            </Col>
+            <br />
+            <br />
+            <AuthorSuggestion />
+          </Col>
           <Col className="col-6"><DiscussionPost /></Col>
-          <Col className="col">Recommendation</Col>
+          <Col className="col">
+            <Recommendation />
+          </Col>
         </Row>
       </div>
     );

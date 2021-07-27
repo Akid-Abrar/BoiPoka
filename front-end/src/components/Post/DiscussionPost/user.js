@@ -46,6 +46,7 @@ class User extends Component {
                 <img className="profile" src={this.state.image} />
                 </a>
                 {this.state.first_name} {this.state.last_name}
+                
             </div>
         );
 

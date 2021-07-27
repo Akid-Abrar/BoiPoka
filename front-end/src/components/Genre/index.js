@@ -105,12 +105,12 @@ class Genre extends Component
             
           )
 
-          
+         window.location.href = "http://localhost:3000/reader" 
           
         }
         return(
           <div>
-            <center><h1>Choose Your Genras</h1></center>
+            <center><h1>Choose Your Genres</h1></center>
             <br></br>
             <Row>
               <Col sm={3}></Col>

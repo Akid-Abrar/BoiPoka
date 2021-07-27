@@ -49,9 +49,7 @@ class Books extends Component {
     }
 
     componentDidMount() {
-        
-        
-       
+
         let suggestion = [];
         this.GetReader(this.props.authUser.email);
         axios.get("http://localhost:4000/books").then((res)=>

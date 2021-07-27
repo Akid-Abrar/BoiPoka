@@ -18,12 +18,12 @@ import Suggestion from './suggestion'
 const Info = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <FriendSuggestion authUser={authUser} />
+      <AuthorSuggestion authUser={authUser} />
     )}
   </AuthUserContext.Consumer>
 );
 
-class FriendSuggestion extends Component {
+class AuthorSuggestion extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -52,7 +52,7 @@ class FriendSuggestion extends Component {
         this.setState({ reader: res.data[0] })
         this.setState({ id: this.state.reader._id })
 
-        var link1 = 'http://localhost:4000/readers/'
+        var link1 = 'http://localhost:4000/authors/'
         // console.log('reader',this.state.reader.friends)
         // console.log('id', this.state.id)
 
@@ -61,7 +61,7 @@ class FriendSuggestion extends Component {
         //   console.log('result', this.state.result);
           this.state.result.map((r, index) => {
             // console.log('rid',r._id);
-            if((this.state.reader.friends.includes(r._id) === false) && r._id !== this.state.id){
+            if(this.state.reader.following.includes(r._id) === false){
               this.state.suggestion.push(r)
             }
             
@@ -73,13 +73,13 @@ class FriendSuggestion extends Component {
         }
         )
           .catch(() => {
-            alert("Data Unavailabe for link1 in friendsuggestion")
+            alert("Data Unavailabe for link1 in Authorsuggestion")
           })
 
       }
       )
       .catch(() => {
-        alert("Data Unavailabe for link in friendsuggestion")
+        alert("Data Unavailabe for link in Authorsuggestion")
       })
 
 
@@ -103,7 +103,7 @@ class FriendSuggestion extends Component {
 
       <div>
         <div className="m-4 p-2" style={{backgroundColor: "#925024", color: "white"}} align="center">
-          <h5>People you may know</h5>
+          <h5>Authors you may follow</h5>
         </div>
         <div className="mt-3">
           {this.displayUser()}

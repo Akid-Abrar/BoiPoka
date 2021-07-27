@@ -14,6 +14,7 @@ import '../styles.css'
 import { Container, Row, Col, Table, Card, Image } from 'react-bootstrap'
 import BookPrint from './BookPrint'
 import FriendPrint from './FriendPrint'
+import AuthorPrint from './AuthorPrint'
 import '../styles.css'
 
 const Info = () => (
@@ -159,6 +160,16 @@ class ProfileView extends Component {
                 {this.displayFriend(reader.friends)}
                 <br></br>
               </Row>
+              <br></br>
+                <font style = {{color:"black"}} size="5"><b>Following</b></font>
+                <br></br>
+                <br></br>
+                <Row>
+                  <br></br>
+                  {/* {console.log(reader.friends)} */}
+                  {this.displayAuthor(reader.following)}
+                  <br></br>
+                </Row>
               <Row>
                 <Card style={{ width: '10rem', backgroundColor: "#d1ecf0d8", border: "0px" }} >
                   <Card.Header>
@@ -260,6 +271,25 @@ class ProfileView extends Component {
       )
     }
 
+  };
+
+  displayAuthor(friendIds) {
+
+    if (friendIds !== undefined) {
+      return friendIds.length !== 0 ? (friendIds.map((friendId, index) => (
+        <Col key={index} className="friend__display" sm={3}>
+          <AuthorPrint authorid={friendId} user={this.state.reader._id} />
+        </Col>
+      ))) : (<Col className="friend__display" sm={3}>
+        <Container style={{ paddingBottom: "20px" }}>No Author</Container>
+      </Col>)
+    } else {
+      return (
+        <Col className="friend__display" sm={3}>
+          <Container>No Author</Container>
+        </Col>
+      )
+    }
   };
 
 

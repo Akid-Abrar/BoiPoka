@@ -8,7 +8,7 @@ import * as ROLES from '../../constants/roles';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import {Form,Button} from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 const SignUpPage = () => (
   <div>
@@ -55,20 +55,29 @@ class SignUpFormBase extends Component {
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         // Create a user in your Firebase realtime database
-        axios.post('http://localhost:4000/readers/add',{
-          first_name:firstname,
-          last_name:lastname,
-          email:this.state.email,
-          
+        axios.post('http://localhost:4000/readers/add', {
+          first_name: firstname,
+          last_name: lastname,
+          email: this.state.email,
+          is_author: false,
+          friends: [],
+          following: [],
+          books_read: [],
+          wishlist: [],
+          reviews: [],
+          posts: [],
+          genre: [],
+          image: '',
+
         }).then(response =>
-        console.log(response.data)
-      )
-      return this.props.firebase.user(authUser.user.uid).set({
-        firstname,
-        lastname,
-        email,
-        roles,
-      });
+          console.log(response.data)
+        )
+        return this.props.firebase.user(authUser.user.uid).set({
+          firstname,
+          lastname,
+          email,
+          roles,
+        });
 
       })
       .then(() => {
@@ -118,70 +127,70 @@ class SignUpFormBase extends Component {
     return (
       <div class="container mt-2" align='center'>
         <h2>Sign Up</h2>
-      <Form onSubmit={this.onSubmit}>
-      <Form.Group controlId="first_name">
-        <input
-          name="firstname"
-          value={firstname}
-          onChange={this.onChange}
-          type="text"
-          placeholder="First Name"
-        />
-        </Form.Group>
-        <Form.Group controlId="last_name">
-        <input
-          name="lastname"
-          value={lastname}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Last Name"
-        />
-        </Form.Group>
-        <Form.Group controlId="email">
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        </Form.Group>
-        <Form.Group controlId="password">
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        </Form.Group>
-        <Form.Group controlId="confirm-password">
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        </Form.Group>
-        <br/>
-        <label>
-          Admin:
+        <Form onSubmit={this.onSubmit}>
+          <Form.Group controlId="first_name">
+            <input
+              name="firstname"
+              value={firstname}
+              onChange={this.onChange}
+              type="text"
+              placeholder="First Name"
+            />
+          </Form.Group>
+          <Form.Group controlId="last_name">
+            <input
+              name="lastname"
+              value={lastname}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Last Name"
+            />
+          </Form.Group>
+          <Form.Group controlId="email">
+            <input
+              name="email"
+              value={email}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Email Address"
+            />
+          </Form.Group>
+          <Form.Group controlId="password">
+            <input
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Group>
+          <Form.Group controlId="confirm-password">
+            <input
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </Form.Group>
+          <br />
+          <label>
+            Admin:
           <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
-        </label>
-        <br/><br/>
-        <Button disabled={isInvalid} type="submit">
-          Sign Up
+              name="isAdmin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={this.onChangeCheckbox}
+            />
+          </label>
+          <br /><br />
+          <Button disabled={isInvalid} type="submit">
+            Sign Up
         </Button>
 
-        {error && <p>{error.message}</p>}
-      </Form>
-      <br/>
+          {error && <p>{error.message}</p>}
+        </Form>
+        <br />
       </div>
     );
   }

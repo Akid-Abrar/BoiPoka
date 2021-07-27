@@ -5,36 +5,35 @@ import {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
 import {Image,OverlayTrigger,Button,Tooltip} from 'react-bootstrap'
-import { Link } from 'react-router-dom';
 
-class BookPrint extends Component
+class AuthorPrint extends Component
 {
     constructor(props)
     {
         super(props)
         this.state = {
-          books: [],
+          authors: [],
         }
 
     }
 
     componentDidMount()
     {
-        this.GetBook(this.props.bookid)
+        this.GetAuthor(this.props.authorid)
     }
     
   
-    GetBook (bookid)
+    GetAuthor (authorid)
     {
-          var link = 'http://localhost:4000/books/'+bookid
-          console.log(link)
+          var link = 'http://localhost:4000/authors/'+authorid
           axios.get(link)
             .then((res) => {
-              this.setState({books : res.data})
+              this.setState({authors : res.data})
+              
             }
             )
             .catch(() => {
-                var msg = "Book Unavailabe for id "+bookid
+                var msg = "User Unavailabe for id "+authorid
                 alert(msg)
             })
     }
@@ -43,35 +42,36 @@ class BookPrint extends Component
     {
         // var imgsrc="https://images.unsplash.com/photo-1591055749071-927e6ddffc82?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
         return(
-            <div>    
+
+            <div>
             <OverlayTrigger
                 placement="bottom"
-                overlay={<Tooltip id="button-tooltip-2">{this.state.books.name}</Tooltip>}
+                overlay={<Tooltip id="button-tooltip-2">{this.state.authors.first_name} {this.state.authors.last_name}</Tooltip>}
                 >
                 {({ ref, ...triggerHandler }) => (
+                    <a href={`/authprofile/${this.props.authorid}/${this.props.user}`}>
                     <Button
                         variant="light"
-                        borderless
-                        style = {{backgroundColor:"#ebdb82d8" , border:"0px"}}
+                        style = {{backgroundColor:"#d1ecf0d8" , border:"0px"}}
                         {...triggerHandler}
                         className="d-inline-flex align-items-center"
                     >
                         <Image
                             ref={ref}
                             height={40}
-                            width={30}
-                            rounded
-                            src={this.state.books.bookimage}
+                            width={40}
+                            roundedCircle
+                            src={this.state.authors.image}
                         />
-                        <Link to={'/info/'+ this.state.books.name}> <span className="ml-1">{this.state.books.name}</span></Link>
                     </Button>
+                    </a>
                 )}
             </OverlayTrigger>
-            <br />
-        </div>
-  
+            <p>{this.state.authors.first_name}{' '}{this.state.authors.last_name}</p>
+            </div>
           );
     }
 }
 
-export default BookPrint
+export default AuthorPrint
+
