@@ -58,16 +58,7 @@ class SignUpFormBase extends Component {
         axios.post('http://localhost:4000/readers/add', {
           first_name: firstname,
           last_name: lastname,
-          email: this.state.email,
-          is_author: false,
-          friends: [],
-          following: [],
-          books_read: [],
-          wishlist: [],
-          reviews: [],
-          posts: [],
-          genre: [],
-          image: '',
+          email: this.state.email
 
         }).then(response =>
           console.log(response.data)

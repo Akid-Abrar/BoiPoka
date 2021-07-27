@@ -22,6 +22,7 @@ router.route('/add').post((req, res) => {
   const reviews = req.body.reviews;
   const posts = req.body.posts;
   const author_id = req.body.author_id;
+  const genre = req.body.genre;
   const image = req.body.image;
 
 
@@ -36,10 +37,10 @@ router.route('/add').post((req, res) => {
     following,
     books_read,
     wishlist,
-    genre,
     reviews,
     posts,
     author_id,
+    genre,
     image
   });
 
