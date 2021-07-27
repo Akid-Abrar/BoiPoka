@@ -22,7 +22,7 @@ import Genre from '../Genre'
 import SearchArea from '../Search/Searcharea';
 import Info from '../Books/books';
 import ProfileView from '../ProfileView'
-
+import AprofileView from '../Authorview';
 
 
 import * as ROUTES from '../../constants/routes';
@@ -56,6 +56,7 @@ const App = () => (
       <Route path={ROUTES.USERADMIN} component={Useradmin} />
       <Route path='/info/:value'  component={Info} />
       <Route path={ROUTES.PROFILE} component={ProfileView} />
+      <Route path={ROUTES.APROFILE} component={AprofileView} />
       <FooterClass />
     </div>
   </Router>

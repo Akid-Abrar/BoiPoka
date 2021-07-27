@@ -56,9 +56,7 @@ class Genre extends Component
           {value:'6',label:'Magical Realism'},
           {value:'7',label:'Political Satire'},
           {value:'6',label:'Autobiography'},
-          {value:'7',label:'Biography'},
-
-          
+          {value:'7',label:'Biography'},  
         ]
 
         var handler = (e) =>
@@ -100,9 +98,7 @@ class Genre extends Component
             }
             
           )
-
-          
-          
+  
         }
         return(
           <div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image } from 'react-bootstrap';
-
+import Followauth from '../Follow_author/FollowAuthor';
 
 const Authcard = (props) => {
     return (
@@ -9,6 +9,16 @@ const Authcard = (props) => {
         <div className="card-body">
         <div className="card-title">
         
+       
+        <h2 style = {{backgroundColor:"#925024"}}>About Author</h2>
+        <a href={`/authprofile/${props.userid}/${props.ownid}`}>
+        <h3 className="card-title">{props.fname}  {props.lname}</h3>
+        </a>
+        
+        
+    
+       
+        <Followauth val={props.val} handlefollow={props.handle} />
         <Image
         height={100}
         width={100}

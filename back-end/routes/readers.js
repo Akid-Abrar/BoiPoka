@@ -276,10 +276,28 @@ router.route('/update/:id').patch(async (req, res) => {
 
 //reader er wishlist e book add
 router.patch('/updatebook/:id', async (req, res) => {
+ // try {
+    /*Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
+      if (err) return next(err);
+      console.log(someValue);
+    });*/
+ /*const response=  await Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { wishlist: req.body.wishlist } }
+ );
+ res.json(response); 
+     
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  } */
+
   try {
     Reader.find({ _id: req.params.id }, 'wishlist -_id', function (err, someValue) {
       if (err) return next(err);
-      console.log(someValue);
+      // console.log(someValue);
     });
     Reader.findOneAndUpdate(
       { _id: req.params.id },
@@ -293,6 +311,24 @@ router.patch('/updatebook/:id', async (req, res) => {
           res.json("success")
         }
       });
+
+
+  } catch (err) {
+    console.log(err);
+    res.json(err);
+  }
+})
+
+//router er wishlist theke remove
+router.patch('/pullbook/:id', async (req, res) => {
+  try {
+    
+ const response=  await Reader.findOneAndUpdate(
+      { _id: req.params.id },
+      { $pull: { wishlist: req.body.wishlist } }
+ );
+ res.json(response);
+     
 
 
   } catch (err) {

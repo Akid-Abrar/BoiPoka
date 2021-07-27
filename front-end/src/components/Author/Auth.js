@@ -9,10 +9,15 @@ const Auth = (props) => {
             props.newauth.map((a, i) => {
             return <Authcard 
             key={i}
-            
+            fname={a["first_name"]}
+            lname={a["last_name"]}
             bio={a["biography"]}
             image={a["image"]}
             follow={a["followers"]}
+            ownid={props.ownid}
+            userid={props.userid}
+            handle={props.handlefollow}
+            val={props.val}
             
             
             />

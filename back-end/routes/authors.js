@@ -99,7 +99,10 @@ router.patch('/:id', async (req, res) => {
 
                     biography: req.body.biography,
                     books: req.body.books,
-                    followers: req.body.followers
+                    followers: req.body.followers,
+                    first_name:req.body.first_name,
+                    last_name:req.body.last_name,
+                   image:req.body.image
                 }
             }
         );
@@ -112,7 +115,8 @@ router.patch('/:id', async (req, res) => {
 
 router.patch('/updateauthor/:id', async (req, res) => {
     try {
-     Finder.findOneAndUpdate(
+        console.log('follo',req.body.followers);
+           Finder.findOneAndUpdate(
         { _id: req.params.id }, 
         { $push: {followers: req.body.followers } },
         function (error, success) {
@@ -120,8 +124,8 @@ router.patch('/updateauthor/:id', async (req, res) => {
               console.log(error);
               res.json('error')
           } else {
-              console.log(success);
-              res.json("successfully added followers")
+              //console.log(success);
+              res.json(success);
           }
       });
     
@@ -132,6 +136,55 @@ router.patch('/updateauthor/:id', async (req, res) => {
       res.json(err);
     }
     })
+
+    router.patch('/pullauthor/:id', async (req, res) => {
+        try {
+           // console.log('follo',req.body.followers);
+               Finder.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { $pull: {followers: req.body.followers } },
+            function (error, success) {
+              if (error) {
+                  console.log(error);
+                  res.json('error')
+              } else {
+                  //console.log(success);
+                  res.json(success);
+              }
+          });
+        
+          
+        }catch(err)
+        {
+          console.log(err);
+          res.json(err);
+        }
+        })
+    //add books into author book array
+
+    router.patch('/updateauthorbook/:id', async (req, res) => {
+        try {
+           
+               Finder.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { $push: {books: req.body.books } },
+            function (error, success) {
+              if (error) {
+                  console.log(error);
+                  res.json('error')
+              } else {
+                  //console.log(success);
+                  res.json(success);
+              }
+          });
+        
+          
+        }catch(err)
+        {
+          console.log(err);
+          res.json(err);
+        }
+        })
 
     router.patch('/updatebio/:id', async (req, res) => {
         try {

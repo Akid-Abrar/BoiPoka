@@ -78,7 +78,11 @@ class Bookadd extends Component {
                 }
             });
         });
+        //const books = {books:}
+        //axios.patch('http://localhost:4000/authors/updateauthorbook/'+this.state.newBookData.author,)
     }
+
+   
 
     imageadd(_id)
     {
@@ -132,6 +136,15 @@ class Bookadd extends Component {
           this._refreshBooks();
         });
       }
+
+      bookauthor(_id,id2)
+      {
+        const books={books:id2};
+        axios.patch('http://localhost:4000/authors/updateauthorbook/'+_id,books).then((res)=>{
+          console.log(res.data);
+
+        });
+      }
       _refreshBooks() {
         axios.get('http://localhost:4000/books').then((response) => {
          // console.log(response.data);
@@ -155,7 +168,7 @@ class Bookadd extends Component {
                 </td>
                 <td>
                   <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
-                 {/* <Button color="danger" sizez="sm" Upload id={book._id}>Upload image</Button>*/}
+                 { <Button color="success" size="sm" className="mr-2" onClick={this.bookauthor.bind(this,book.author,book._id)}>Add to author</Button>}
                 </td>
                 
                 <td>

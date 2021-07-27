@@ -24,7 +24,7 @@ const Bookcard = (props) => {
 
                 <h5>Avg_rating:{props.avg_rating}</h5>
                 
-                <Addwish handlewish={props.wish} />
+               {/* <Addwish val={props.val} handlewish={props.wish} /> */}
                 </Col>
                 <Col className="col-6">
                 <p>Genre:</p>
