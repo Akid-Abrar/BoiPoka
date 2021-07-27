@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const review = mongoose.Schema({
     reviewer: mongoose.Schema.ObjectId,
-    content: String
+    content: String,
 })
 
 const bookSchema = mongoose.Schema({
@@ -12,6 +12,7 @@ const bookSchema = mongoose.Schema({
     publisher: { type: mongoose.Schema.ObjectId, required: true },
     bookimage: { type: String },
     avg_rating: Number,
+    ratings: Number,
     rating_giver: [mongoose.Schema.ObjectId],
     release_year: Number,
     genre: [String],

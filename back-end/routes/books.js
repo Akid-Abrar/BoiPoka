@@ -67,6 +67,7 @@ router.post('/', async (req, res) => {
         bookimage: req.body.bookimage,
         avg_rating: req.body.avg_rating,
         rating_giver: req.body.rating_giver,
+        ratings: req.body.ratings,
         release_year: req.body.release_year,
         genre: req.body.genre,
         description: req.body.description,
@@ -110,6 +111,7 @@ router.patch('/:id', async (req, res) => {
                     bookimage: req.body.bookimage,
                     avg_rating: req.body.avg_rating,
                     rating_giver: req.body.rating_giver,
+                    ratings: req.body.ratings,
                     release_year: req.body.release_year,
                     genre: req.body.genre,
                     description: req.body.description,
@@ -177,6 +179,7 @@ router.patch('/rating/:id', async (req, res) => {
                 $set: {
 
                     avg_rating: req.body.avg_rating,
+                    ratings: req.body.ratings,
                     rating_giver: req.body.rating_giver
 
                 }

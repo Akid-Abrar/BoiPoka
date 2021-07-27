@@ -97,7 +97,7 @@ class ReviewPost extends Component {
   }
 
   handlePostSubmit(event) {
-    // event.preventDefault();
+    event.preventDefault();
     const post = {
       type: 2,
       creatorid: this.state.id,
@@ -127,29 +127,30 @@ class ReviewPost extends Component {
 
     axios.patch('http://localhost:4000/books/addreview/' + this.state.book._id, book).then((response) => {
       console.log('review', response);
+      var rating_giver1 = this.state.book.rating_giver;
+      rating_giver1.push(this.state.id);
+      var ratings = (this.state.book.ratings === null || this.state.book.ratings === undefined) ? 0 :this.state.book.ratings;
+      ratings = ratings + this.state.rate;
+      
+      var avg_rating1 = ratings / (rating_giver1.length);
+
+      const book1 = {
+        rating_giver: rating_giver1,
+        avg_rating: avg_rating1.toFixed(2),
+        ratings: ratings
+      }
+
+      axios.patch('http://localhost:4000/books/rating/' + this.state.book._id, book1).then((response) => {
+        console.log('rating', response);
+        this.setState({ token: "Saved" })
+        window.location.href = "http://localhost:3000/home"
+      }).catch((err) => {
+        alert("not valid data")
+      })
     }).catch((err) => {
       alert("not valid data")
     })
 
-    var rating_giver1 = this.state.book.rating_giver;
-    rating_giver1.push(this.state.id);
-    var avg_rating1 = (this.state.book.avg_rating + this.state.rate) / (rating_giver1.length);
-
-    const book1 = {
-      rating_giver: rating_giver1,
-      avg_rating: avg_rating1
-    }
-
-    axios.patch('http://localhost:4000/books/rating/' + this.state.book._id, book1).then((response) => {
-      console.log('rating', response);
-    }).catch((err) => {
-      alert("not valid data")
-    })
-
-
-    event.preventDefault();
-    this.setState({ token: "Saved" })
-    window.location.href = "http://localhost:3000/home"
 
 
   }
