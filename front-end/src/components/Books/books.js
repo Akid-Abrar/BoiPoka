@@ -40,8 +40,8 @@ class Books extends Component {
             newAuthor: [],
             authornew: '',
             usernew: '',
-            token: '',
-            ftoken: '',
+            token: 'Add to wishlist',
+            ftoken:'Follow Author',
             posts: []
         }
         this.handlewish = this.handlewish.bind(this);
@@ -51,9 +51,9 @@ class Books extends Component {
     }
 
     componentDidMount() {
-
-
-
+        
+        
+        this.searchbook();
         let suggestion = [];
         this.GetReader(this.props.authUser.email);
         axios.get("http://localhost:4000/books").then((res) => {
@@ -65,7 +65,7 @@ class Books extends Component {
         }).catch(() => {
             alert("Data Unavailabe in book's componentDidMount")
         })
-        this.searchbook();
+      //  this.searchbook();
 
     }
 
@@ -96,16 +96,30 @@ class Books extends Component {
             this.setState({ books: response.data });
             this.GetPosts();
 
+            
+          //  this.state.user[0].wishlist.map((wish,i)=>{
+               // console.log('wih',wish);
+               // console.log('id',this.state.books[0]._id);
+              /*  if(wish===this.state.books[0]._id)
+                {
+                    console.log('state',this.state.token);
+                    console.log('true',wish);
+                    this.setState({ token: "Remove from list" });
+                }
+                else
+                {
+                    this.setState({ token: "Add to wishlist" });
+                }
+            }); */
 
-            this.state.user[0].wishlist.map((wish, i) => {
-                // console.log('wih',wish);
-                if (wish === this.state.books[0]._id) {
+            if(this.state.user[0].wishlist.includes(this.state.books[0]._id))
+                {
+                    
                     this.setState({ token: "Remove from list" });
                 }
                 else {
                     this.setState({ token: "Add to wishlist" });
                 }
-            });
 
             const author = response.data[0].author;
 
@@ -115,20 +129,29 @@ class Books extends Component {
 
                 this.setState({ newAuthor: [res.data] });
 
-                this.setState({ authornew: res.data._id });
-                this.state.newAuthor[0].followers.map((a, i) => {
-                    console.log('usernew', this.state.usernew);
-                    if (a.includes(this.state.usernew)) {
-                        this.setState({ ftoken: "Unfollow Author" });
+                this.setState({authornew:res.data._id});
+               /* this.state.newAuthor[0].followers.map((a,i)=>{
+                    console.log('usernew',this.state.usernew);
+                    if(a.includes(this.state.usernew))
+                    {
+                        this.setState({ftoken:"Unfollow Author"});
                     }
                     else {
                         this.setState({ ftoken: "Follow Author" });
                     }
-                });
+                }); */
 
-
-
-
+                if(this.state.newAuthor[0].followers.includes(this.state.usernew))
+                    {
+                        this.setState({ftoken:"Unfollow Author"});
+                    }
+                    else
+                    {
+                        this.setState({ftoken:"Follow Author"});
+                    }
+             
+                
+               
 
             }).catch(() => {
                 console.log("Data Unavailabe in book's searchbook(inner) author from author");
@@ -282,7 +305,7 @@ class Books extends Component {
           );
         } else {
           return (
-            <div>No posts to show</div>
+            <div>No Review to show</div>
           )
         }
       };

@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ Component } from 'react';
 import { Link } from 'react-router-dom';
 import Info from '../Books/books';
 import "./Auto.css";
@@ -7,18 +7,28 @@ import axios from 'axios';
 
 import * as ROUTES from '../../constants/routes';
 import {Form,FormControl,Button,Fragment,Dropdown,Navbar, Nav} from 'react-bootstrap'
-const SearchArea =(props) =>
-{
+//const SearchArea =(props) =>
+class SearchArea extends Component {
+  constructor(props) {
+
+      super(props);
+      this.state = {
+        searchtext:'',
+        suggest:[],
+        sug:[],
+        auth:[],
+      }
+  }
+//{
   
     
-  const [searchtext, setSearchtext] = useState("");
+ /* const [searchtext, setSearchtext] = useState("");
   const [suggest, setSuggest] = useState([]);
   const [resfound, setResfound] = useState(true);
   const [sug,setSug]= useState([]);
-  const [auth,setAuth]= useState([]);
-  
-  const handlesug =() => {
-      let s=[];
+  const [auth,setAuth]= useState([]);*/
+componentDidMount(){
+  let s=[];
       
       axios.get("http://localhost:4000/books").then((res)=>
       {
@@ -27,8 +37,9 @@ const SearchArea =(props) =>
            
           })
           
-          //console.log(s);
-          setSug(s);
+          
+         // setSug(s);
+         this.setState({sug:s});
       }).catch(() => {
           console.log("Data Unavailabe in handlesug in searcharea")
       });
@@ -42,14 +53,51 @@ const SearchArea =(props) =>
            
         })
        // console.log(authors);
-        setAuth(authors);
+       // setAuth(authors);
+       this.setState({auth:authors});
     }).catch(() => {
         console.log("Data Unavailabe for handleAuthor in searcharea")
     })
-  }
+
+    
+}
+ 
+  
+  /* handlesug =() => {
+      let s=[];
+      
+      axios.get("http://localhost:4000/books").then((res)=>
+      {
+          res.data.map((b,i)=>{
+           s.push(b["name"]);
+           
+          })
+          
+          
+         // setSug(s);
+         this.setState({sug:s});
+      }).catch(() => {
+          console.log("Data Unavailabe in handlesug in searcharea")
+      });
+
+      let authors=[];
+    axios.get("http://localhost:4000/authors").then((res)=>
+    {
+        res.data.map((b,i)=>{
+        
+            authors.push(b["first_name"]);
+           
+        })
+       // console.log(authors);
+       // setAuth(authors);
+       this.setState({auth:authors});
+    }).catch(() => {
+        console.log("Data Unavailabe for handleAuthor in searcharea")
+    })
+  }*/
 
   
-  const handleChange = async(e) => {
+  handleChange = async(e) => {
      
     let searchval = e.target.value;
     let suggestion = [];
@@ -60,18 +108,18 @@ const SearchArea =(props) =>
 
    
     if (searchval.length > 0) {
-     console.log('sug',sug);
-        suggestion = sug
+     console.log('sug',this.state.sug);
+        suggestion = this.state.sug
         .sort()
         .filter((e) => e.toString().toLowerCase().includes(searchval.toLowerCase()));
      
-      console.log('auth',auth);
-      ausug= auth
+      console.log('auth',this.state.auth);
+      ausug= this.state.auth
       .sort()
       .filter((e) => e.toString().toLowerCase().includes(searchval.toLowerCase()));
       //console.log(ausug);
       //auth theke books pabo
-     await ausug.map((a,i)=>{
+     ausug.map((a,i)=>{
       axios.get("http://localhost:4000/authors/authorname/" +a) .then((res) =>{
           
          res.data.map((bid,j)=>{
@@ -81,8 +129,11 @@ const SearchArea =(props) =>
            axios.get("http://localhost:4000/books/" +bk).then((response)=>{
            
               //bookname.push(res.data["name"]);
-             console.log(response.data["name"]);
+            // console.log(response.data["name"]);
              suggestion.push(response.data["name"]);
+             this.setState({suggest:suggestion});
+            // console.log('final suggestion',this.state.suggest.length);
+            // this.getSuggestions();
             
            });
             
@@ -93,7 +144,7 @@ const SearchArea =(props) =>
        })
       })
      
-      setResfound(suggestion.length !== 0 ? true : false);
+     // setResfound(suggestion.length !== 0 ? true : false);
     
       
       
@@ -103,40 +154,48 @@ const SearchArea =(props) =>
   // newsugest = [].concat(suggestion, bookname);
     //console.log('final sugestion',newsugest);
     
-    setSuggest(suggestion);
+    //setSuggest(suggestion);
    
-    setSearchtext(searchval);
+    //setSearchtext(searchval);
+    //this.setState({suggest:suggestion});
+    //this.getSuggestions();
+    this.setState({searchtext:searchval});
 
     
   };
 
-  const suggestedText = (value) => {
+   suggestedText = (value) => {
    // console.log(value);
-    setSearchtext(value);
-    console.log('val',searchtext);
-    setSuggest([]);
+   // setSearchtext(value);
+   this.setState({searchtext:value});
+    //this.state.searchtext);
+   // setSuggest([]);
+   this.setState({suggest:[]});
   };
 
-  const getSuggestions = () => {
-    if (suggest.length === 0 && searchtext !== "" && !resfound) {
+   getSuggestions = () => {
+     console.log('inside getsugeston',this.state.suggest);
+    if (this.state.suggest.length === 0 && this.state.searchtext !== "" ) {
       return(
         <div class="no-suggestions">
           <em>No suggestions, you're on your own!</em>
         </div>
       );
     }
-  if(suggest.length >0){
+  if(this.state.suggest.length >0){
     return (
       <div className="suggestions" style={ {backgroundColor:"#F0ECEC"}}>
       <ul class="suggestions">
-        {suggest.map((item, index) => {
-          return (
+      
+        {this.state.suggest.map((item, index) => (
+          
             <div key={index}>
-              <li onClick={() => suggestedText(item)}><font style = {{color:"black"}}>{item}</font></li>
-              {index !== suggest.length - 1 && <hr />}
+            
+              <li onClick={() =>this.suggestedText(item)}><font style = {{color:"black"}}>{item}</font></li>
+              {index !== this.state.suggest.length - 1 && <hr />}
             </div>
-          );
-        })}
+          
+        ))}
       </ul>
       </div>
       
@@ -145,32 +204,23 @@ const SearchArea =(props) =>
     
   };
 
-  const handleSearch = (searchType) => {
-    if (searchType) {
-      // search with type (Author or Book)
-      //doSearch({ keyword, type })
-    } else {
-      // search with keyword only
-     // doSearch({ keyword })
-    }
-  }
- 
-
+  
+render() {
 return(
     <div className="search-area">
-    {searchtext !== "" ? handlesug()
-    : null}
+    
     
     <Form inline  action="">
-    <FormControl value={searchtext} onChange={handleChange}  type="text" placeholder="Search for Books" className="mr-sm-2" />
+    <FormControl value={this.state.searchtext} onChange={this.handleChange}  type="text" placeholder="Search for Books" className="mr-sm-2" />
     
-    <Link to={'/info/'+searchtext}><i className="fas fa-search"></i> </Link>
+    <Link to={'/info/'+this.state.searchtext}><i className="fas fa-search"></i> </Link>
     </Form>
-    <div>{getSuggestions()}</div>
+    <div>{this.getSuggestions()}</div>
     
     </div>
 )
 
+}
 }
  
 export default SearchArea;
