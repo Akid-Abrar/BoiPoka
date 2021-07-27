@@ -63,39 +63,7 @@ componentDidMount(){
 }
  
   
-  /* handlesug =() => {
-      let s=[];
-      
-      axios.get("http://localhost:4000/books").then((res)=>
-      {
-          res.data.map((b,i)=>{
-           s.push(b["name"]);
-           
-          })
-          
-          
-         // setSug(s);
-         this.setState({sug:s});
-      }).catch(() => {
-          console.log("Data Unavailabe in handlesug in searcharea")
-      });
-
-      let authors=[];
-    axios.get("http://localhost:4000/authors").then((res)=>
-    {
-        res.data.map((b,i)=>{
-        
-            authors.push(b["first_name"]);
-           
-        })
-       // console.log(authors);
-       // setAuth(authors);
-       this.setState({auth:authors});
-    }).catch(() => {
-        console.log("Data Unavailabe for handleAuthor in searcharea")
-    })
-  }*/
-
+  
   
   handleChange = async(e) => {
      
@@ -128,12 +96,9 @@ componentDidMount(){
              bookid.push(bk);
            axios.get("http://localhost:4000/books/" +bk).then((response)=>{
            
-              //bookname.push(res.data["name"]);
-            // console.log(response.data["name"]);
+              
              suggestion.push(response.data["name"]);
-             this.setState({suggest:suggestion});
-            // console.log('final suggestion',this.state.suggest.length);
-            // this.getSuggestions();
+            
             
            });
             
@@ -154,7 +119,7 @@ componentDidMount(){
     //setSuggest(suggestion);
    
     //setSearchtext(searchval);
-    //this.setState({suggest:suggestion});
+    this.setState({suggest:suggestion});
     //this.getSuggestions();
     this.setState({searchtext:searchval});
 
@@ -181,7 +146,7 @@ componentDidMount(){
     }
   if(this.state.suggest.length >0){
     return (
-      <div className="suggestions" style={ {backgroundColor:"#F0ECEC"}}>
+      <div  style={ {backgroundColor:"#F0ECEC"}}>
       <ul class="suggestions">
       
         {this.state.suggest.map((item, index) => (

@@ -217,15 +217,21 @@ class Books extends Component {
         let userid = this.state.user[0]._id;
         
         let writer=this.state.newAuthor[0]._id;
-        console.log(userid);
-        console.log(writer);
+        let folauth={following:writer};
        
             follower={followers:userid};
             if (this.state.ftoken === "Follow Author") {
                 e.preventDefault();
 
             axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
-            console.log("followerlist");
+           // console.log("followerlist");
+            //console.log(response.data);
+
+        }).catch((err) => {
+            alert("not valid data");
+        });
+        axios.patch('http://localhost:4000/readers/updatefollow/' +userid , folauth).then((response) => {
+            console.log("followinglist");
             console.log(response.data);
 
         }).catch((err) => {
@@ -241,11 +247,19 @@ class Books extends Component {
             console.log("followerlist");
             console.log(response.data);
 
-        }).catch((err) => {
-            alert("not valid data");
-        });
-        this.setState({ ftoken: "Follow Author" });
-        }
+    }).catch((err) => {
+        alert("not valid data");
+    });
+
+    axios.patch('http://localhost:4000/readers/removefollow/' +userid , folauth).then((response) => {
+        console.log("followinglist");
+        console.log(response.data);
+
+    }).catch((err) => {
+        alert("not valid data");
+    });
+    this.setState({ ftoken: "Follow Author" });
+    }
             
        
 
