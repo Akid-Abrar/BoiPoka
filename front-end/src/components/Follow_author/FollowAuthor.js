@@ -12,11 +12,9 @@ const Followauth =(props) =>
 {
     return(
         <div >
-    <Form inline onSubmit={props.handlefollow} action="">
-    <OverlayTrigger rootClose placement="right" trigger="click" placement="right" overlay={popover}>
-    <Button label="Follow" style = {{backgroundColor:"#925024"}} className="mx-auto my-2" type="submit" >Follow Author</Button>
-    </OverlayTrigger>
-    </Form>
+    
+        <input type="submit" value={props.val} onClick={props.handlefollow} />
+    
     </div>
     )
 }

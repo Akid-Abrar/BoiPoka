@@ -7,16 +7,18 @@ const Booklist = (props) => {
             {
 
                 props.books.map((book, i) => {
-                    return <Bookcard
-                        key={i}
-                        avg_rating={book["avg_rating"]}
-                        genre={book["genre"]}
-                        des={book["description"]}
-                        nam={book["name"]}
-                        bookimage={book["bookimage"]}
-                        wish={props.handlewish}
-                        id={book["_id"]}
-                    />
+                 return <Bookcard 
+                 key={i}
+                 avg_rating={book["avg_rating"]}
+                 genre={book["genre"]}
+                 des={book["description"]}
+                 nam={book["name"]}
+                 bookimage={book["bookimage"]}
+                 id={book["_id"]}
+                 wish={props.handlewish}
+                 val={props.val}
+                 user = {props.user}
+                 />
                 })
             }
         </div>

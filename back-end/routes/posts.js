@@ -21,6 +21,16 @@ router.get('/:Id', async (req, res) => {
     }
 })
 
+//get post by book id
+router.get('/book/:bookid', async (req, res) => {
+    try {
+        const posts = await Finder.find({bookid : req.params.bookid});
+        res.json(posts)
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
 router.get('comments/:Id', async (req, res) => {
     try {
         const posts = await Finder.find({ comments : req.params.Id });

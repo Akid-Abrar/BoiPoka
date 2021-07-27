@@ -134,7 +134,7 @@ class Post extends Component {
         var date = new Date(post.createdAt)
 
         return (
-            <Card>
+            <Card className="m-2 p-2">
                 <div align="right"><i> {date.getDate()}-{date.getMonth()+1}-{date.getFullYear()}{' '} at  {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
                 </i></div>
                 <User id={post.creatorid} userid={this.props.currentuserid} />

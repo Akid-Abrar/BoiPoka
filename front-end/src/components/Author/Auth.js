@@ -17,6 +17,7 @@ const Auth = (props) => {
             ownid={props.ownid}
             userid={props.userid}
             handle={props.handlefollow}
+            val={props.val}
             
             
             />

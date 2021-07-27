@@ -33,7 +33,7 @@ const NavigationAuth = ({ authUser }) => (
 
 
         <SignOutButton />
-        <SearchArea />
+        {/* <SearchArea /> */}
 
       </Nav>
 
