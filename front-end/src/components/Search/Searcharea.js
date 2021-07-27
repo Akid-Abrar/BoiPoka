@@ -31,12 +31,9 @@ const SearchArea =(props) =>
           setSug(s);
       }).catch(() => {
           console.log("Data Unavailabe in handlesug in searcharea")
-      })
-  }
+      });
 
-  const handleauthor =() => {
-    
-    let authors=[];
+      let authors=[];
     axios.get("http://localhost:4000/authors").then((res)=>
     {
         res.data.map((b,i)=>{
@@ -50,6 +47,8 @@ const SearchArea =(props) =>
         console.log("Data Unavailabe for handleAuthor in searcharea")
     })
   }
+
+  
   const handleChange = async(e) => {
      
     let searchval = e.target.value;
@@ -72,29 +71,29 @@ const SearchArea =(props) =>
       .filter((e) => e.toString().toLowerCase().includes(searchval.toLowerCase()));
       //console.log(ausug);
       //auth theke books pabo
-      ausug.map((a,i)=>{
-        axios.get("http://localhost:4000/authors/authorname/" +a).then((res)=>{
+     await ausug.map((a,i)=>{
+      axios.get("http://localhost:4000/authors/authorname/" +a) .then((res) =>{
           
          res.data.map((bid,j)=>{
          // console.log('data',bid["books"]);
            bid["books"].map((bk,k)=>{
              bookid.push(bk);
-             axios.get("http://localhost:4000/books/" +bk).then((res)=>{
+           axios.get("http://localhost:4000/books/" +bk).then((response)=>{
            
               //bookname.push(res.data["name"]);
-             console.log(res.data["name"]);
-             suggestion.push(res.data["name"]);
-             setResfound(suggestion.length !== 0 ? true : false); 
-           })
-
+             console.log(response.data["name"]);
+             suggestion.push(response.data["name"]);
+            
+           });
+            
     
 
-           })
-         })
-        })
+           });
+         });
+       })
       })
      
-      
+      setResfound(suggestion.length !== 0 ? true : false);
     
       
       

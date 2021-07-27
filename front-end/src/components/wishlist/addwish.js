@@ -12,11 +12,9 @@ const Addwish =(props) =>
 {
     return(
         <div >
-    <Form inline onSubmit={props.handlewish} action="">
+     
+    <input type="submit" value={props.val} onClick={props.handlewish} />
     
-    <Button label="Add to wishlist" style = {{backgroundColor:"#925024"}} type="submit">Add to wishlist</Button>
-    
-    </Form>
     </div>
     )
 }

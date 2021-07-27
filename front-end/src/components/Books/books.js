@@ -18,7 +18,7 @@ const Info = (props) => (
         {authUser => (
             <div >
                
-                <Books searchname={props.match.params.value} authUser={authUser} />
+                <Books   searchname={props.match.params.value} authUser={authUser} />
             </div>
         )}
     </AuthUserContext.Consumer>
@@ -40,15 +40,18 @@ class Books extends Component {
             newAuthor: [],
             authornew: '',
             usernew: '',
+            token: '',
+            ftoken:'',
         }
-
+        this.handlewish = this.handlewish.bind(this);
+        this.handlefollow=this.handlefollow.bind(this);
 
     }
 
     componentDidMount() {
         
         
-
+       
         let suggestion = [];
         this.GetReader(this.props.authUser.email);
         axios.get("http://localhost:4000/books").then((res)=>
@@ -61,6 +64,7 @@ class Books extends Component {
         }).catch(() => {
             alert("Data Unavailabe in book's componentDidMount")
         })
+        this.searchbook();
 
     }
 
@@ -73,6 +77,7 @@ class Books extends Component {
                 this.setState({ user: res.data });
                 this.setState({usernew:res.data[0]._id});
                 console.log(res.data[0]._id);
+
             }
             )
             .catch(() => {
@@ -82,43 +87,53 @@ class Books extends Component {
      
     searchbook = () => {
        
-      // console.log(this.props.match.params.value);
-       
-        //const search = { name:this.props.match.params.value  };
-        //console.log(id);
+      
         const search = { name: this.props.searchname };
         
         axios.post("http://localhost:4000/books/bookname", search).then((response) => {
             //console.log(this.state.user);
             this.setState({ books: response.data });
-            //console.log("book array");
-           // console.log(this.state.books);
 
-            const author =  response.data[0]['author'] ;
             
-          /*  axios.get("http://localhost:4000/readers/auth/" +author).then((response) => {
-                
-               // console.log(response.data);
-                this.setState({ Author: [response.data] });
-               // console.log('author');
-                //console.log(this.state.Author);
+            this.state.user[0].wishlist.map((wish,i)=>{
+               // console.log('wih',wish);
+                if(wish.includes(this.state.books[0]._id))
+                {
+                    this.setState({ token: "Remove from list" });
+                }
+                else
+                {
+                    this.setState({ token: "Add to wishlist" });
+                }
+            });
 
-            }).catch(() => {
-                alert("Data Unavailabe in book's searchbook(inner) in author from reader")
-
-            })*/
+            const author =  response.data[0].author ;
+            
+          
     
             axios.get("http://localhost:4000/authors/" +author).then((res) => {
                
                 this.setState({ newAuthor: [res.data] });
+
                 this.setState({authornew:res.data._id});
+                this.state.newAuthor[0].followers.map((a,i)=>{
+                    console.log('usernew',this.state.usernew);
+                    if(a.includes(this.state.usernew))
+                    {
+                        this.setState({ftoken:"Unfollow Author"});
+                    }
+                    else
+                    {
+                        this.setState({ftoken:"Follow Author"});
+                    }
+                }); 
                 
-             // console.log('hi',res.data._id);
+             
                 
                
 
             }).catch(() => {
-                alert("Data Unavailabe in book's searchbook(inner) author from author")
+               console.log("Data Unavailabe in book's searchbook(inner) author from author");
 
             })
         }).catch(() => {
@@ -137,18 +152,18 @@ class Books extends Component {
     }
 
     handlewish = (e) => {
-        e.preventDefault();
+        
 
         let book;
         let bool='false';
         let userid = this.state.user[0]['_id'];
-        console.log('userid',userid);
+        //console.log('userid',userid);
         this.state.books.map((b, i) => {
             
            console.log('bookid',b['_id']);
             book = { wishlist: b['_id'] };
         });
-        this.state.user[0]['wishlist'].map((w,i)=>{
+       /* this.state.user[0]['wishlist'].map((w,i)=>{
             console.log('w',w);
             console.log('wish',book.wishlist);
             if(w=== book.wishlist)
@@ -156,58 +171,56 @@ class Books extends Component {
                bool='true';
                console.log(bool);
             } 
-        });
+        });  */
 
 
-    
-        if(bool==='false')
-        {
-            
+        if (this.state.token === "Add to wishlist") {
+            e.preventDefault();
                  axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {
 
                        
                        
-                       console.log("KI RE VAI");
+                       
                        console.log(response.data);
         }).catch((err)=>{
         console.log(err);
+        });
 
-    })
-        }
-        else
-        {
-            
-            console.log('try not');
-            
-        }
-    
-  /* try{
-     const res=  await axios.patch('http://localhost:4000/readers/updatebook/' + userid, book);/*.then((response) => {*/
-            
-            
-           // console.log("KI RE VAI");
-          //  console.log(res.data); 
-     /*   }catch(err)  {
-           alert("not valid data"); 
-        }   */
-         
+        
+      this.setState({ token: "Remove from list" });
+     
+    }
+    else{
+        e.preventDefault();
+        axios.patch('http://localhost:4000/readers/pullbook/' + userid, book).then((response) => {
+
+            console.log(response.data);
+        }).catch((err)=>{
+        console.log(err);
+        });
+
+       
+      this.setState({ token: "Add to wishlist" });
       
+    }
+    }
         
     
-};
 
     //handle following author
     handlefollow = (e) => {
-        e.preventDefault();
-        
-        let userid = this.state.user[0]['_id'];
+        //e.preventDefault();
+        console.log('hlloo');
         let follower;
-        let writer;
+        let userid = this.state.user[0]._id;
+        
+        let writer=this.state.newAuthor[0]._id;
         console.log(userid);
-        this.state.newAuthor.map((b, i) => {
-            console.log( b['_id']);
-            writer=b['_id'];
+        console.log(writer);
+       
             follower={followers:userid};
+            if (this.state.ftoken === "Follow Author") {
+                e.preventDefault();
 
             axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
             console.log("followerlist");
@@ -216,8 +229,23 @@ class Books extends Component {
         }).catch((err) => {
             alert("not valid data");
         });
+        this.setState({ ftoken: "Unfollow Author" });
+    }
+    else if(this.state.ftoken === "Unfollow Author")
+    {
+        e.preventDefault();
+
+        axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
+        console.log("followerlist");
+        console.log(response.data);
+
+    }).catch((err) => {
+        alert("not valid data");
+    });
+    this.setState({ ftoken: "Follow Author" });
+    }
             
-        });
+       
 
     }
 
@@ -238,7 +266,7 @@ class Books extends Component {
              
              {/* <Button variant="outline-info"  onClick={this.searchbook}>
         Search </Button>*/}
-            {this.searchbook()}
+            {/* this.props.searchname!=='' ?this.searchbook() :null*/}
             {this.refresh()}
              {this.state.books.length >0 ?
                 <CardDeck>
@@ -250,8 +278,12 @@ class Books extends Component {
                          
                        <Card >
                         <Card.Body > 
-
-                            <Booklist handlewish={this.handlewish}  books={this.state.books} />
+                        <div >
+     
+                        <input type="submit" value={this.state.token} onClick={this.handlewish} />
+                        
+                        </div>
+                            <Booklist val={this.state.token} handlewish={this.handlewish}  books={this.state.books} />
                             </Card.Body> 
                             </Card> 
                            
@@ -263,9 +295,10 @@ class Books extends Component {
 
                            
                         
-                             <Auth handlefollow={this.handlefollow}  newauth={this.state.newAuthor}
+                             <Auth  val={this.state.ftoken} handlefollow={this.handlefollow}  newauth={this.state.newAuthor}
                              userid={this.state.authornew}
                               ownid={this.state.usernew}
+                             
                               />
         
                         </Card.Body>

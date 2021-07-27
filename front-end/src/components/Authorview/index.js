@@ -39,11 +39,12 @@ class AprofileView extends Component {
       userfriends: [],
       genras: [],
       token: '',
+      ftoken:'',
       id: ''
     }
     // console.log("inside profile")
     this.handleAddFriend = this.handleAddFriend.bind(this);
-
+    this.handlefollow=this.handlefollow.bind(this);
   }
 
 
@@ -57,15 +58,27 @@ class AprofileView extends Component {
     var link = 'http://localhost:4000/authors/' + window.location.pathname.split('/')[2]
     console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
     this.setState({id:window.location.pathname.split('/')[3]})
-     console.log('link',link)
-     console.log('this.state.id : ',this.state.id)
+    // console.log('link',link)
+    // console.log('this.state.id : ',this.state.id)
 
 
     axios.get('http://localhost:4000/authors/' + window.location.pathname.split('/')[2])
       .then((res) => {
-        console.log('1st query',res.data)
+       
         this.setState({ user: res.data})
         this.setState({ userfriends: this.state.user.followers })
+        console.log('follo',this.state.userfriends);
+        this.state.userfriends.map((f,i)=>{
+         // console.log('this.state.id : ',this.state.id)
+          if(f.includes(this.state.id))
+          {
+            this.setState({ftoken:"Unfollow Author"});
+          }
+          else
+          {
+            this.setState({ftoken:"Follow Author"});
+          }
+        })
         axios.get(link)
           .then((res) => {
 
@@ -127,15 +140,17 @@ class AprofileView extends Component {
 
   //handle following author
   handlefollow = (event) => {
-    event.preventDefault();
+   // event.preventDefault();
     
     let userid = window.location.pathname.split('/')[3];
     let follower;
     let writer= window.location.pathname.split('/')[2];;
-    console.log(userid);
+  //  console.log(userid);
    
         follower={followers:userid};
-
+        if (this.state.ftoken === "Follow Author") 
+        {
+          event.preventDefault();
         axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
         console.log("followerlist");
         console.log(response.data);
@@ -143,6 +158,20 @@ class AprofileView extends Component {
     }).catch((err) => {
         alert("not valid data");
     });
+    this.setState({ ftoken: "Unfollow Author" });
+  }
+  else
+  {
+    event.preventDefault();
+    axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
+    console.log("followerlist");
+    console.log(response.data);
+
+}).catch((err) => {
+    alert("not valid data");
+});
+this.setState({ ftoken: "Follow Author" });
+  }
         
     
 
@@ -170,11 +199,10 @@ class AprofileView extends Component {
                     <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2>
                     
                     <div >
-                    <Form inline onSubmit={this.handlefollow}  action="">
+                    <input type="submit" value={this.state.ftoken} onClick={this.handlefollow} />
                     
-                    <Button label="Follow" style = {{backgroundColor:"#925024"}} className="mx-auto my-2" type="submit" >Follow Author</Button>
                     
-                    </Form>
+                    
                     </div>
 
                       

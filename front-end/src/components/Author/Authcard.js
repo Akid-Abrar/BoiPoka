@@ -18,7 +18,7 @@ const Authcard = (props) => {
         
     
        
-        <Followauth  handlefollow={props.handle} />
+        <Followauth val={props.val} handlefollow={props.handle} />
         <Image
         height={100}
         width={100}
