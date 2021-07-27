@@ -40,8 +40,8 @@ class Books extends Component {
             newAuthor: [],
             authornew: '',
             usernew: '',
-            token: '',
-            ftoken:'',
+            token: 'Add to wishlist',
+            ftoken:'Follow Author',
         }
         this.handlewish = this.handlewish.bind(this);
         this.handlefollow=this.handlefollow.bind(this);
@@ -51,7 +51,7 @@ class Books extends Component {
     componentDidMount() {
         
         
-       
+        this.searchbook();
         let suggestion = [];
         this.GetReader(this.props.authUser.email);
         axios.get("http://localhost:4000/books").then((res)=>
@@ -64,7 +64,7 @@ class Books extends Component {
         }).catch(() => {
             alert("Data Unavailabe in book's componentDidMount")
         })
-        this.searchbook();
+      //  this.searchbook();
 
     }
 
@@ -95,17 +95,30 @@ class Books extends Component {
             this.setState({ books: response.data });
 
             
-            this.state.user[0].wishlist.map((wish,i)=>{
+          //  this.state.user[0].wishlist.map((wish,i)=>{
                // console.log('wih',wish);
-                if(wish.includes(this.state.books[0]._id))
+               // console.log('id',this.state.books[0]._id);
+              /*  if(wish===this.state.books[0]._id)
                 {
+                    console.log('state',this.state.token);
+                    console.log('true',wish);
                     this.setState({ token: "Remove from list" });
                 }
                 else
                 {
                     this.setState({ token: "Add to wishlist" });
                 }
-            });
+            }); */
+
+            if(this.state.user[0].wishlist.includes(this.state.books[0]._id))
+                {
+                    
+                    this.setState({ token: "Remove from list" });
+                }
+                else
+                {
+                    this.setState({ token: "Add to wishlist" });
+                }
 
             const author =  response.data[0].author ;
             
@@ -116,7 +129,7 @@ class Books extends Component {
                 this.setState({ newAuthor: [res.data] });
 
                 this.setState({authornew:res.data._id});
-                this.state.newAuthor[0].followers.map((a,i)=>{
+               /* this.state.newAuthor[0].followers.map((a,i)=>{
                     console.log('usernew',this.state.usernew);
                     if(a.includes(this.state.usernew))
                     {
@@ -126,8 +139,16 @@ class Books extends Component {
                     {
                         this.setState({ftoken:"Follow Author"});
                     }
-                }); 
-                
+                }); */
+
+                if(this.state.newAuthor[0].followers.includes(this.state.usernew))
+                    {
+                        this.setState({ftoken:"Unfollow Author"});
+                    }
+                    else
+                    {
+                        this.setState({ftoken:"Follow Author"});
+                    }
              
                 
                
