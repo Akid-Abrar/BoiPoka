@@ -34,13 +34,12 @@ function Upload(props) {
 					const reader={
 						image:imageurl
 					};
-					console.log("reader",reader);
 		
 					axios.get('http://localhost:4000/readers/email/' + props.id).then((response) => {
-						console.log("id",response.data[0]._id);
+						//console.log("id",response.data[0]._id);
 						axios.patch('http://localhost:4000/readers/' + response.data[0]._id, reader).then((response) => {
 						// console.log("wishlist");
-						 console.log("patch",response);
+						 //console.log("patch",response);
 			 
 					 }).catch((err) => {
 						 alert("not valid data")

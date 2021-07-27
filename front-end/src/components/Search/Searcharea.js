@@ -140,7 +140,6 @@ componentDidMount(){
     if (this.state.suggest.length === 0 && this.state.searchtext !== "" ) {
       return(
         <div class="no-suggestions">
-          <em>No suggestions, you're on your own!</em>
         </div>
       );
     }

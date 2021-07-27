@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Image } from 'react-bootstrap'
 
-import { ListGroup, Card, Form, Button, OverlayTrigger, Popover, Row, Col } from 'react-bootstrap';
+import { ListGroup, Card, Form, Button, Container, Popover, Row, Col } from 'react-bootstrap';
 import Addwish from '../wishlist/addwish';
 
 
@@ -18,36 +18,38 @@ const Bookcard = (props) => {
                         rounded
                         src={props.bookimage}
                     />
-                    <h5>Avg_rating:{props.avg_rating}</h5>
 
-                    {/*<Addwish handlewish={props.wish} />*/}
-                    <a href={`/review/${props.id}`}>
-                        <Button className="btn btn-dark m-2">
-                            Add Review
-                        </Button>
-                    </a>
+
+
+
+                    <h5>Avg_rating:{(props.avg_rating!==null || props.avg_rating!==undefined)?props.avg_rating:0}</h5>
+
+                    {/* <Addwish val={props.val} handlewish={props.wish} /> */}
+                    
                 </Col>
                 <Col className="col-6">
-                <p>Genre:</p>
-                <ul>
-                    <ListGroup variant="flush" >
-                        {props.genre.map((value, index) => {
+                    <p>Genre:</p>
+                    <ul>
+                        <ListGroup variant="flush" >
+                            {props.genre.map((value, index) => {
 
-                            return <ListGroup.Item style = {{backgroundColor:"#ebdb82d8"}} key={index}>{value}</ListGroup.Item>
-                        })}
-                    </ListGroup>
-                </ul>
-                <Card bg={'light'} text={'dark'}  style={{ width: '28rem' }} className="mb-2">
-                    <Card.Header style = {{backgroundColor:"#925024"}}>{props.nam}</Card.Header>
-                    <Card.Body>
-                        <Card.Title > Description </Card.Title>
-                        <Card.Text style = {{backgroundColor:"#ebdb82d8"}}>
-                            {props.des}
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                                return <ListGroup.Item style={{ backgroundColor: "#ebdb82d8" }} key={index}>{value}</ListGroup.Item>
+                            })}
+                        </ListGroup>
+                    </ul>
+                    <Card bg={'light'} text={'dark'} style={{ width: '28rem' }} className="mb-2">
+                        <Card.Header style={{ backgroundColor: "#925024" }}>{props.nam}</Card.Header>
+                        <Card.Body>
+                            <Card.Title > Description </Card.Title>
+                            <Card.Text style={{ backgroundColor: "#ebdb82d8" }}>
+                                {props.des}
+                            </Card.Text>
+                        </Card.Body>
+                    </Card>
                 </Col>
             </Row>
+            <br/><br/>
+            
         </div>
     )
 
