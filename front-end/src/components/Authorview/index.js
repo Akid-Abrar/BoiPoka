@@ -184,11 +184,11 @@ this.setState({ ftoken: "Follow Author" });
         <Container>
 
           <Row>
-            <Col sm={6}>
-              <Card style={{ width: '25rem', height: '9rem', backgroundColor: "#d1ecf0d8", border: "0px" }}  >
+            <Col sm={8}>
+              <Card style={{ width: '25rem', height: '9rem',  border: "0px" }}  >
                 <Card.Body>
                   <Row>
-                    <Col sm={5}>
+                    <Col sm={4}>
                       <Image
                         height={100}
                         width={100}
@@ -196,10 +196,10 @@ this.setState({ ftoken: "Follow Author" });
                         src={reader.image}
                       />
                     </Col>
-                    <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2>
+                    <Col sm={7}><h3 style={{ justifyContent: 'center', marginTop: "25px" }}>{reader.first_name} {reader.last_name}</h3>
                     
                     <div >
-                    <input type="submit" value={this.state.ftoken} onClick={this.handlefollow} />
+                    <Button type="submit" style={{backgroundColor:"#6E9B7A"}}  onClick={this.handlefollow}>{this.state.ftoken} </Button>
                     
                     
                     
@@ -237,7 +237,7 @@ this.setState({ ftoken: "Follow Author" });
                     <th align="center"><font style={{ color: "#ebdb82d8" }} size="5">Books</font></th>
                   </tr>
                 </thead>
-                <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
+                <tbody align="left" style={{ backgroundColor: "#ebdb82d8" }}>
                   <p></p>
                   <tr>
                     {this.displayBook(reader.books)}
@@ -248,16 +248,16 @@ this.setState({ ftoken: "Follow Author" });
               </Table>
 
             </Col>
-            <Col sm={3}>
+            <Col sm={5}>
               <Table border="7" bordercolor="#925024">
                 <thead bgcolor="#925024" align="center">
                   <tr align="center">
                     <th><font style={{ color: "#ebdb82d8" }} size="5">Bio-graphy</font></th>
                   </tr>
                 </thead>
-                <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
+                <tbody align="left" style={{ backgroundColor: "#ebdb82d8"  }}>
                   <br></br>
-                  <div className="card-text" style = {{backgroundColor:"#ebdb82d8"}}>{reader.biography}  </div>
+                  <div className="card-text" style = {{backgroundColor:"#ebdb82d8" ,margin:"10px"}}>{reader.biography}  </div>
                 </tbody>
               </Table>
             </Col>
@@ -294,10 +294,10 @@ this.setState({ ftoken: "Follow Author" });
 
     if (friendIds !== undefined) {
       return friendIds.length !== 0 ? (friendIds.map((friendId, index) => (
-        <Col key={index} className="friend__display" sm={3}>
+        <Col key={index} className="friend__display" sm={2}>
           <FollowerPrint friendid={friendId} userid={this.state.id} />
         </Col>
-      ))) : (<Col className="friend__display" sm={3}>
+      ))) : (<Col className="friend__display" sm={2}>
         <Container style={{ paddingBottom: "20px" }}>No Followers</Container>
       </Col>)
     } else {
@@ -315,7 +315,7 @@ this.setState({ ftoken: "Follow Author" });
   render() {
 
     return (
-      <div style={{ backgroundColor: "#d1ecf0d8" }}>
+      <div >
         <div className="display" >
           {this.displayReader(this.state.reader)}
         </div>

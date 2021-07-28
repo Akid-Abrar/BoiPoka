@@ -52,7 +52,7 @@ class FollowerPrint extends Component
                     <a href={`/profile/${this.state.friends._id}/${this.props.userid}`}>
                     <Button
                         variant="light"
-                        style = {{backgroundColor:"#d1ecf0d8" , border:"0px"}}
+                        style = {{  border:"0px"}}
                         {...triggerHandler}
                         className="d-inline-flex align-items-center"
                     >

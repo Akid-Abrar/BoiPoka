@@ -24,14 +24,14 @@ const AccountPage = () => (
           <br></br><br></br>
         <Row>
           <Col sm={5}>
-            <Row><h6 align="center">Account: {authUser.email}</h6></Row>
+            <Row><h6 align="center">E-mail: {authUser.email}</h6></Row>
             <br></br><br></br>
             <Row><Upload id = {authUser.email}/></Row>
             <br></br><br></br>
             <center>
             <Row>
             
-              <Button variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
+              <Button style={{align:"center"}} variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
             
             </Row>
             </center>
