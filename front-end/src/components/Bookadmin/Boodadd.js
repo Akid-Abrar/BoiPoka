@@ -168,8 +168,9 @@ class Bookadd extends Component {
                 </td>
                 <td>
                   <Button color="danger" size="sm" onClick={this.deleteBook.bind(this, book._id)}>Delete</Button>
-                 { <Button color="success" size="sm" className="mr-2" onClick={this.bookauthor.bind(this,book.author,book._id)}>Add to author</Button>}
-                </td>
+                  </td>
+                 <td> <Button color="success" size="sm" className="mr-2" onClick={this.bookauthor.bind(this,book.author,book._id)}>Add to author</Button></td>
+                
                 
                 <td>
                   <Upload id={book._id}/>

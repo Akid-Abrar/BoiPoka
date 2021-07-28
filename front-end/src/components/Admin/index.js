@@ -13,20 +13,22 @@ const AdminPage = () => (
     <br></br>
     <br></br>
     <br></br>
-    <Row>
-      <Col >
-        <Button href={ROUTES.BOOKADMIN}>Book Add</Button> 
-      </Col>
-      <Col >
+        <center>
+        <Button className='hover-zoom'href={ROUTES.BOOKADMIN}>Book Add</Button> 
+        </center>
+      <br></br> <br></br>
+      <center>
         <Button href={ROUTES.AUTHORADMIN}>Author Add</Button>  
-      </Col>
-      <Col >
+      </center>
+      <br></br> <br></br>
+      <center>
         <Button href={ROUTES.POSTADMIN}>Post Monitor</Button>  
-      </Col>
-      <Col>
+      </center>
+      <br></br> <br></br>
+      <center>
         <Button href={ROUTES.USERADMIN}>User</Button>
-      </Col>
-    </Row>
+      </center>
+    
     <br></br>
       <br></br>
       <br></br>

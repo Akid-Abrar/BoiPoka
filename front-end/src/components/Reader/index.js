@@ -106,15 +106,15 @@ class Reader extends Component {
                 <br></br>
               </Row>
               <Row>
-                <Card style={{ width: '10rem', backgroundColor: "#925024", border: "0px" }} >
-                  <Card.Header>
-                    <font style={{color:"#ebdb82d8"}}><b>Favourite Genres</b></font>
+              <Card style={{ width: '20rem', backgroundColor: "#925024", border: "0px" }} >
+                  <Card.Header align="center" >
+                    <font size="5" style={{color:"#ebdb82d8"}}><b>Favourite Genres</b></font>
                   </Card.Header>
 
                   {
                     reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
-                      <Card.Body style={{backgroundColor: "#ebdb82d8", border: "0px" }}key={index} className="genre__display" >
-                        <h4>{Genre}</h4>
+                      <Card.Body align="center" style={{backgroundColor: "#ebdb82d8", border: "0px" }}key={index} className="genre__display" >
+                        <h5>{Genre}</h5>
                       </Card.Body >
                     )) : (<Card.Body className="genre__display" >
                       <h4>No Genre</h4>

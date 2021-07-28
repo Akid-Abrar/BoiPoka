@@ -9,7 +9,7 @@ import * as ROUTES from '../../constants/routes';
 import {Row,Col,Button,Container} from 'react-bootstrap'
 
 const UserPage = () => (
-    <div>
+    <div className='m-5'>
         <Row>
             <Col>
                 <Switch>
