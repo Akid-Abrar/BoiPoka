@@ -180,10 +180,10 @@ class Reader extends Component {
         <br></br>
       </div>
     )) : (<div className="book__display">
-      <div>No Books</div>
+      <div align="center">No Books</div>
       <br></br>
     </div>)) : (<div className="book__display">
-      <div>No Books</div>
+      <div align="center">No Books</div>
       <br></br>
     </div>))
   };

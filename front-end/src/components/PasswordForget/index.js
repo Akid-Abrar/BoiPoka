@@ -63,8 +63,8 @@ class PasswordForgetFormBase extends Component {
                 placeholder="Email Address"
               />
             </Form.Group>
-            <Button variant="primary" disabled={isInvalid} type="submit">
-              Reset My Password
+            <Button  variant="primary" disabled={isInvalid} type="submit">
+            <font style={{color:"black"}}>  Reset My Password </font>
             </Button>
 
             {error && <p>{error.message}</p>}

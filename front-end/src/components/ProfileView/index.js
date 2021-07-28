@@ -11,7 +11,7 @@ import {
 // import { withRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles.css'
-import { Container, Row, Col, Table, Card, Image } from 'react-bootstrap'
+import { Container, Row, Col, Table, Card, Image ,Button} from 'react-bootstrap'
 import BookPrint from './BookPrint'
 import FriendPrint from './FriendPrint'
 import AuthorPrint from './AuthorPrint'
@@ -131,11 +131,11 @@ class ProfileView extends Component {
         <Container>
 
           <Row>
-            <Col sm={6}>
-              <Card style={{ width: '25rem', height: '9rem', backgroundColor: "#d1ecf0d8", border: "0px" }}  >
+            <Col sm={8}>
+              <Card style={{ width: '25rem', height: '9rem',  border: "0px" }}  >
                 <Card.Body>
                   <Row>
-                    <Col sm={5}>
+                    <Col sm={4}>
                       <Image
                         height={100}
                         width={100}
@@ -143,10 +143,11 @@ class ProfileView extends Component {
                         src={reader.image}
                       />
                     </Col>
-                    <Col sm={7}><h2>{reader.first_name} {reader.last_name}</h2>
-                    {this.state.id !== this.state.reader._id ? <input type="submit" value={this.state.token} onClick={this.handleAddFriend} /> : <></>}
-                      
+                    <Col sm={8}><h3 style={{ justifyContent: 'center', marginTop: "25px" }}>{reader.first_name} {reader.last_name}</h3>
+                    
+                    {this.state.id !== this.state.reader._id ?<Button type="submit"  style={{backgroundColor:"#6E9B7A"}} onClick={this.handleAddFriend}>{this.state.token}</Button>: <></>}
                     </Col>
+
                   </Row>
                 </Card.Body>
               </Card>
@@ -161,68 +162,68 @@ class ProfileView extends Component {
                 <br></br>
               </Row>
               <br></br>
-                <font style = {{color:"black"}} size="5"><b>Following</b></font>
-                <br></br>
-                <br></br>
-                <Row>
-                  <br></br>
-                  {/* {console.log(reader.friends)} */}
-                  {this.displayAuthor(reader.following)}
-                  <br></br>
-                </Row>
+              <font style={{ color: "black" }} size="5"><b>Following</b></font>
+              <br></br>
+              <br></br>
               <Row>
-                <Card style={{ width: '10rem', backgroundColor: "#d1ecf0d8", border: "0px" }} >
-                  <Card.Header>
-                    Favourite Genras
+                <br></br>
+                {/* {console.log(reader.friends)} */}
+                {this.displayAuthor(reader.following)}
+                <br></br>
+              </Row>
+              <Row>
+                <Card style={{ width: '20rem', backgroundColor: "#925024", border: "0px" }} >
+                  <Card.Header align="center" >
+                    <font size="5" style={{color:"#ebdb82d8"}}><b>Favourite Genres</b></font>
                   </Card.Header>
 
                   {
                     reader.genre !== undefined ? (reader.genre !== null ? reader.genre.map((Genre, index) => (
-                      <Card.Body key={index} className="genre__display" >
-                        <h4>{Genre}</h4>
+                      <Card.Body align="center" style={{backgroundColor: "#ebdb82d8", border: "0px" }}key={index} className="genre__display" >
+                        <h5>{Genre}</h5>
                       </Card.Body >
                     )) : (<Card.Body className="genre__display" >
                       <h4>No Genre</h4>
                     </Card.Body >)) : (<Card.Body className="genre__display" >
                       <h4>No Genre</h4>
                     </Card.Body >)
+
                   }
                 </Card>
               </Row>
 
               <Row>
-
+                
               </Row>
               <br></br>
             </Col>
-            <Col sm={3}>
-              <Table width="700px" border="7" bordercolor="#925024" >
-                <thead className="tableheader-style">
-                  <tr align="center">
-                    <th align="center"><font style={{ color: "#ebdb82d8" }} size="5">Books Read</font></th>
-                  </tr>
-                </thead>
-                <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
-                  <p></p>
-                  <tr>
-                    {this.displayBook(reader.books_read)}
-
-                  </tr>
-
-                </tbody>
-              </Table>
-
-            </Col>
-            <Col sm={3}>
-              <Table border="7" bordercolor="#925024">
+            
+            <Col sm={4}>
+              <Table width="900px" border="7" bordercolor="#925024">
                 <thead bgcolor="#925024" align="center">
                   <tr align="center">
                     <th><font style={{ color: "#ebdb82d8" }} size="5">Wish List</font></th>
                   </tr>
                 </thead>
-                <tbody align="center" style={{ backgroundColor: "#ebdb82d8" }}>
+                <tbody align="left" style={{ backgroundColor: "#ebdb82d8" }}>
                   <br></br>
                   {this.displayBook(reader.wishlist)}
+                </tbody>
+              </Table>
+
+              <Table width="300px" border="7" bordercolor="#925024" >
+                <thead className="tableheader-style">
+                  <tr align="center">
+                    <th align="center"><font style={{ color: "#ebdb82d8" }} size="5">Books Read</font></th>
+                  </tr>
+                </thead>
+                <tbody align="left" style={{ backgroundColor: "#ebdb82d8" }}>
+                  <br></br>
+                  <tr>
+                    {this.displayBook(reader.books_read)}
+
+                  </tr>
+
                 </tbody>
               </Table>
             </Col>
@@ -245,10 +246,10 @@ class ProfileView extends Component {
         <br></br>
       </div>
     )) : (<div className="book__display">
-      <div>No Books</div>
+      <div align="center">No Books</div>
       <br></br>
     </div>)) : (<div className="book__display">
-      <div>No Books</div>
+      <div align="center" >No Books</div>
       <br></br>
     </div>))
   };
@@ -297,7 +298,7 @@ class ProfileView extends Component {
   render() {
 
     return (
-      <div style={{ backgroundColor: "#d1ecf0d8" }}>
+      <div >
         <div className="display" >
           {this.displayReader(this.state.reader)}
         </div>

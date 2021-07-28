@@ -116,6 +116,7 @@ class Genre extends Component
               <Col sm={3}></Col>
               <Col sm={6}>
               <Select isMulti options={Genras} onChange={handler}></Select>
+              <br/>
               <Button onClick={submit}>Submit</Button>
               </Col>
             </Row>

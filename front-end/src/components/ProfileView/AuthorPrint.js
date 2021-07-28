@@ -52,7 +52,7 @@ class AuthorPrint extends Component
                     <a href={`/authprofile/${this.props.authorid}/${this.props.user}`}>
                     <Button
                         variant="light"
-                        style = {{backgroundColor:"#d1ecf0d8" , border:"0px"}}
+                        style = {{  border:"0px"}}
                         {...triggerHandler}
                         className="d-inline-flex align-items-center"
                     >

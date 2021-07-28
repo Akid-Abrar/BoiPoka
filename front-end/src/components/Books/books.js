@@ -332,18 +332,18 @@ class Books extends Component {
                                             <Col sm={4} >
                                                 <center>
 
-                                                <Button type="submit" onClick={this.handlewish} >{this.state.token}</Button>
+                                                <Button style={{backgroundColor:"#53755C"}} type="submit" onClick={this.handlewish} >{this.state.token}</Button>
                                                 </center>
                                             </Col>
                                             <Col sm={4} >
                                                 <center>
-                                                    <Button type="submit" onClick={this.handleread} >{this.state.rtoken}</Button>
+                                                    <Button style={{backgroundColor:"#53755C"}} type="submit" onClick={this.handleread} >{this.state.rtoken}</Button>
                                                 </center>
                                             </Col>
                                             <Col sm={4}>
                                             <center>
                                                 <a href={`/review/${this.state.books[0]._id}`}>
-                                                    <Button className="btn btn-dark m-2">
+                                                    <Button style={{backgroundColor:"#53755C"}}>
                                                         Add Review
                                                     </Button>
                                                 </a>

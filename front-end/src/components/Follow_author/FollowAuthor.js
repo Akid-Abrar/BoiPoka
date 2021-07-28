@@ -13,7 +13,7 @@ const Followauth =(props) =>
     return(
         <div >
     
-        <Button type="submit" onClick={props.handlefollow} >{props.val}</Button>
+        <Button style={{backgroundColor:"#6E9B7A"}} type="submit" onClick={props.handlefollow} >{props.val}</Button>
     
     </div>
     )
