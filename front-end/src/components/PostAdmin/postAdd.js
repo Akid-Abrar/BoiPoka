@@ -32,7 +32,7 @@ class PostAdd extends Component {
       deletePost(_id) 
       {
         axios.delete('http://localhost:4000/posts/' + _id).then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           this._refresPosts();
         });
       }
@@ -40,15 +40,15 @@ class PostAdd extends Component {
       {
         ///post/:postId/comment/:commentId
         var link = 'http://localhost:4000/posts/post/'+_postid+'/comment/'+_commentid;
-        console.log('link',link)
+        //('link',link)
         axios.delete(link).then((response) => {
-          console.log(response.data);
+         // console.log(response.data);
           this._refresPosts();
         });
       }
       _refresPosts() {
         axios.get('http://localhost:4000/posts').then((response) => {
-          console.log('data',response.data);
+          //console.log('data',response.data);
           this.setState({
             posts: response.data
             
@@ -64,7 +64,7 @@ class PostAdd extends Component {
               <tr >
                 <td>
                   {post.content}
-                  {console.log('comments',post.comments)}
+                  {/* {console.log('comments',post.comments)} */}
                 </td>
                 <td>
                   <Button color="danger" size="sm" onClick={this.deletePost.bind(this, post._id)}>Delete Post</Button>
@@ -76,7 +76,7 @@ class PostAdd extends Component {
                       
                       <div key={index} className="comm__display">
                         
-                          {console.log('singlecomment',comment)}
+                          {/* {console.log('singlecomment',comment)} */}
                           <td>{comment.comment}</td>
                           <td><Button color="danger" size="sm" onClick={this.deleteComment.bind(this, post._id,comment._id)}>Delete Comment</Button></td>
                       </div>

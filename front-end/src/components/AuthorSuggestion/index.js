@@ -102,8 +102,8 @@ class AuthorSuggestion extends Component {
     return (
 
       <div>
-        <div className="m-4 p-2" style={{backgroundColor: "#925024", color: "white"}} align="center">
-          <h5>Authors you may follow</h5>
+        <div className="m-4 p-2" style={{backgroundColor: "#ebdb82d8"}} align="center">
+        <h5><font style={{color: "#925024"}}><b>Authors you may follow</b></font></h5>
         </div>
         <div className="mt-3">
           {this.displayUser()}

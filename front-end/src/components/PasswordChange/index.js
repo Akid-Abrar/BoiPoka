@@ -65,7 +65,7 @@ class PasswordChangeForm extends Component {
           placeholder="Confirm New Password"
         />
         </Form.Group>
-        <Button variant="primary" disabled={isInvalid} type="submit">
+        <Button variant="primary" disabled={isInvalid} type="submit" style={{backgroundColor:"#1A3E24" }}>
           Change My Password
         </Button>
 

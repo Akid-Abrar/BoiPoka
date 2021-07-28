@@ -60,14 +60,8 @@ class Author extends Component
           const responseOne = responses[0]
         
           const responseTwo = responses[1]
-
-          console.log("responseTwo")
-          console.log(responseTwo.data)
-
-
           this.setState({authorName : responseOne.data[0]})
           this.setState({authors : responseTwo.data})
-          console.log(this.state.authors)
         })).catch(errors => {
         
           // react on errors.
@@ -119,8 +113,7 @@ class Author extends Component
                 <font style = {{color:"black"}} size="5"><b>Followers</b></font>
                 <br></br>
                 <br></br>
-                <Row>
-                  {console.log("followers",this.state.authors.followers)} 
+                <Row> 
                   {callFollower}
                   <br></br>
                 </Row>
@@ -138,7 +131,6 @@ class Author extends Component
                     <tbody align="center" style = {{backgroundColor:"#ebdb82d8"}}>
                       <br></br>
                       <tr>
-                        {console.log("books",this.state.authors.books)} 
                         {callBooks}     
                       </tr>
                       
@@ -168,7 +160,6 @@ class Author extends Component
     };
 
     displayFollower(followerIds) {
-      console.log("from displayfriend",followerIds)
 
       return followerIds.map((followerId, index) => (
         <Col key={index} className="friend__display_1" sm={3}>

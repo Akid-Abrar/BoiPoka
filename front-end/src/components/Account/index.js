@@ -19,58 +19,37 @@ import info from '../Reader'
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
-      <div style = {{backgroundColor:"#d1ecf0d8", marginBottom: "27px"}}>
+      <div style = {{ marginBottom: "27px"}}>
         <Container>
+          <br></br><br></br>
         <Row>
-          <Col sm={3}></Col>
-          <Col><h1 align="center">Account: {authUser.email}</h1></Col>
-        </Row>
-        <Row><Col></Col></Row>
-        <Row >
-          <Col sm={3}>
-          <ImageUpload />
-          </Col>
-          <Col sm={7}>
+          <Col sm={5}>
+            <Row><h6 align="center">Account: {authUser.email}</h6></Row>
+            <br></br><br></br>
+            <Row><Upload id = {authUser.email}/></Row>
+            <br></br><br></br>
+            <center>
+            <Row>
+            
+              <Button variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
+            
+            </Row>
+            </center>
             
           </Col>
-        </Row>
-        <br/><br />
-        <br></br>
-        <Row >
-          <Col sm={3} align="center">
-          <Button variant="secondary" href={ROUTES.GENRE}>Click To Choose Genre</Button>
+          <Col sm={7}>
+            <PasswordForgetForm />
+            <PasswordChangeForm />
           </Col>
         </Row>
         </Container>
         <br/><br/>
-        <PasswordForgetForm />
-        <PasswordChangeForm />
+        
         <br/><br/>
       </div>
     )}
   </AuthUserContext.Consumer>
 );
-
-class ImageUpload extends Component {
-  constructor(props)
-    {
-        super(props)
-        this.state = {
-          image : ''
-        }
-    }
-  render(){
-    return(
-      <AuthUserContext.Consumer>
-      {authUser => (
-      <div>
-        <Upload id = {authUser.email}/>
-      </div>
-      )}
-      </AuthUserContext.Consumer>
-    )
-  }
-}
 
 const condition = authUser => !!authUser;
 

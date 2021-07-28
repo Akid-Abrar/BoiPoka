@@ -55,9 +55,11 @@ function Upload(props) {
 	return (
 		<div>
 			<center>
-				<Card style={{ width: '15rem' , height : '9rem' , backgroundColor:"#d1ecf0d8" ,  border:"0px"}}>
-				<Card.Header><h4>Upload Image</h4></Card.Header>
-				<Card.Header>
+				<Card style={{ width: '15rem' , height : '12rem'  ,  border:"0px"}}>
+				<Card.Header style={{backgroundColor:"#925024"}}>
+					<h4><font style={{color:"#ebdb82d8"}}><b>Upload Image</b></font></h4>
+				</Card.Header>
+				<Card.Header >
 					<input type="file" onChange={(e) => { setImage(e.target.files[0]) }} />
 				</Card.Header>
 				<Card.Body>

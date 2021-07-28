@@ -56,7 +56,7 @@ class AprofileView extends Component {
     // const {id} = window.location.href
     // console.log(window.location.pathname.split('/')[2])
     var link = 'http://localhost:4000/authors/' + window.location.pathname.split('/')[2]
-    console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
+    //console.log('this.state.id(before) : ',window.location.pathname.split('/')[3])
     this.setState({id:window.location.pathname.split('/')[3]})
     // console.log('link',link)
     // console.log('this.state.id : ',this.state.id)
@@ -67,7 +67,7 @@ class AprofileView extends Component {
        
         this.setState({ user: res.data})
         this.setState({ userfriends: this.state.user.followers })
-        console.log('follo',this.state.userfriends);
+       // console.log('follo',this.state.userfriends);
         this.state.userfriends.map((f,i)=>{
          // console.log('this.state.id : ',this.state.id)
           if(f.includes(this.state.id))
@@ -112,8 +112,8 @@ class AprofileView extends Component {
         friends: this.state.userfriends
       }
       axios.patch('http://localhost:4000/readers/updatefriend/' + this.state.id, friend).then((response) => {
-        console.log(friend)
-        console.log(this.state.id)
+        //console.log(friend)
+        //console.log(this.state.id)
       }).catch((err) => {
         alert("not valid data")
       })
@@ -152,8 +152,8 @@ class AprofileView extends Component {
         {
           event.preventDefault();
         axios.patch('http://localhost:4000/authors/updateauthor/' +writer , follower).then((response) => {
-        console.log("followerlist");
-        console.log(response.data);
+        //console.log("followerlist");
+        //console.log(response.data);
 
     }).catch((err) => {
         alert("not valid data");
@@ -164,8 +164,8 @@ class AprofileView extends Component {
   {
     event.preventDefault();
     axios.patch('http://localhost:4000/authors/pullauthor/' +writer , follower).then((response) => {
-    console.log("followerlist");
-    console.log(response.data);
+    //console.log("followerlist");
+    //console.log(response.data);
 
 }).catch((err) => {
     alert("not valid data");

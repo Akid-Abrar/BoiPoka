@@ -27,18 +27,18 @@ function Upload(props) {
 			() => {
 				// complete function ....
 				storage.ref().child(`/Book/images/${props.id}.${image.name}`).getDownloadURL().then(url => {
-					 console.log(url);
+					 //console.log(url);
 					imageurl=url;
 					// this.setState({ url });
 					const book={
 						bookimage:imageurl
 					};
-					console.log("book",book);
+					//console.log("book",book);
 		
 					
 						axios.patch('http://localhost:4000/books/image/' + props.id, book).then((response) => {
 						// console.log("wishlist");
-						 console.log("patch",response);
+						 //console.log("patch",response);
 			 
 					 }).catch((err) => {
 						 alert("not valid data")

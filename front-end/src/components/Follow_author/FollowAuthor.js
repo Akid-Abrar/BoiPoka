@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form,Button,OverlayTrigger,Popover} from 'react-bootstrap'
+import {Form,Button,Popover} from 'react-bootstrap'
 const popover = (
     <Popover id="popover-basic">
       <Popover.Title as="h3"></Popover.Title>
@@ -13,7 +13,7 @@ const Followauth =(props) =>
     return(
         <div >
     
-        <input type="submit" value={props.val} onClick={props.handlefollow} />
+        <Button type="submit" onClick={props.handlefollow} >{props.val}</Button>
     
     </div>
     )

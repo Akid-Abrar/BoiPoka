@@ -52,7 +52,7 @@ class BookPrint extends Component
                     <Button
                         variant="light"
                         borderless
-                        style = {{backgroundColor:"#ebdb82d8" , border:"0px"}}
+                        style = {{backgroundColor:"#ebdb82d8" , border:"0px"}}  
                         {...triggerHandler}
                         className="d-inline-flex align-items-center"
                     >

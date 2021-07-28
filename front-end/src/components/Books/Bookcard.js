@@ -13,22 +13,24 @@ const Bookcard = (props) => {
             <Row style={{ padding: 20 }}>
                 <Col className="col-6">
                     <Image
-                        height={100}
-                        width={100}
+                        height={200}
+                        width={130}
                         rounded
                         src={props.bookimage}
                     />
-
-
-
-
-                    <h5>Avg_rating:{(props.avg_rating!==null || props.avg_rating!==undefined)?props.avg_rating:0}</h5>
-
+                    <br></br><br></br>
+                    <div style={{backgroundColor:"#ebdb82d8" , width:"130px" , height:"32px"}}>
+                    <center>
+                        <h5>Avg_rating:{(props.avg_rating!==null || props.avg_rating!==undefined)?props.avg_rating:0}</h5>
+                    </center>
+                    </div>
                     {/* <Addwish val={props.val} handlewish={props.wish} /> */}
                     
                 </Col>
                 <Col className="col-6">
-                    <p>Genre:</p>
+                <div >
+                    <p><font style={{color:"#925024"}}><b>Genre:</b></font></p>
+                 </div>   
                     <ul>
                         <ListGroup variant="flush" >
                             {props.genre.map((value, index) => {
@@ -38,7 +40,10 @@ const Bookcard = (props) => {
                         </ListGroup>
                     </ul>
                     <Card bg={'light'} text={'dark'} style={{ width: '28rem' }} className="mb-2">
-                        <Card.Header style={{ backgroundColor: "#925024" }}>{props.nam}</Card.Header>
+                        <Card.Header style={{ backgroundColor: "#925024" }}>
+                            
+                            <font style={{color:"#ebdb82d8"}}><b>{props.nam}</b></font>
+                        </Card.Header>
                         <Card.Body>
                             <Card.Title > Description </Card.Title>
                             <Card.Text style={{ backgroundColor: "#ebdb82d8" }}>

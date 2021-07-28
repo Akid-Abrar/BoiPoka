@@ -126,7 +126,7 @@ class ReviewPost extends Component {
     const book = { reviews }
 
     axios.patch('http://localhost:4000/books/addreview/' + this.state.book._id, book).then((response) => {
-      console.log('review', response);
+      //console.log('review', response);
       var rating_giver1 = this.state.book.rating_giver;
       rating_giver1.push(this.state.id);
       var ratings = (this.state.book.ratings === null || this.state.book.ratings === undefined) ? 0 :this.state.book.ratings;
@@ -141,7 +141,7 @@ class ReviewPost extends Component {
       }
 
       axios.patch('http://localhost:4000/books/rating/' + this.state.book._id, book1).then((response) => {
-        console.log('rating', response);
+        // console.log('rating', response);
         this.setState({ token: "Saved" })
         window.location.href = "http://localhost:3000/home"
       }).catch((err) => {
@@ -167,7 +167,7 @@ class ReviewPost extends Component {
           <img src={this.state.book.bookimage} style={{ height: "130px" }} />
           <h6 className="mt-2">Rate <b>{this.state.book.name}</b></h6>
           <HoverRating rate={this.state.rate} onChangeName={this.handleRateChange} />
-          {console.log(this.state.rate)}
+          {/*console.log(this.state.rate)*/}
         </div>
         <div>
           <h6>Give a Review</h6>
@@ -180,7 +180,7 @@ class ReviewPost extends Component {
               className="textarea m-2 p-2"
             />
             <div>
-              <input type="submit" value={this.state.token} />
+              <Button type="submit" style={{backgroundColor:"#925024" , border:"0px"}}>{this.state.token}</Button>
             </div>
 
           </Form>

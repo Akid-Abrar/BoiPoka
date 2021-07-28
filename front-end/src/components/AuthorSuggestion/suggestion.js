@@ -106,7 +106,7 @@ class Suggestion extends Component {
                     <a href={`/authprofile/${this.props.id}/${this.props.user}`}>
                         <div><img className="profile m-2" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
                     </a>
-                    <input type="submit" value={this.state.token} onClick={this.handleAddFriend} />
+                    <Button type="submit" onClick={this.handleAddFriend} style={{backgroundColor:"#427F77" , border:"0px"}}>{this.state.token}</Button>
                 </div>
             </Card>
         );

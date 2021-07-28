@@ -123,8 +123,8 @@ class Recommendation extends Component {
     return (
 
       <div>
-        <div className="m-4 p-2" style={{backgroundColor: "#925024", color: "white"}} align="center">
-          <h5>Book Recommendation</h5>
+        <div className="m-4 p-2" style={{backgroundColor: "#ebdb82d8"}} align="center">
+          <h5><font style={{color: "#925024"}}><b>Book recommendation for you</b></font></h5>
         </div>
         <div className="mt-3">
           {this.displayUser()}

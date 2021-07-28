@@ -58,7 +58,7 @@ class Authoradd extends Component {
     addAuthor() {
         //baki
         axios.post('http://localhost:4000/authors', this.state.newAuthorData).then((response) => {
-           console.log(response.data);
+          
             let { authors } = this.state;
 
             authors.push(response.data);
@@ -103,7 +103,6 @@ class Authoradd extends Component {
                     followers,
                   
         }).then((response) => {
-          console.log(response.data);
             this._refreshAuthors();
 
             this.setState({
@@ -129,7 +128,7 @@ class Authoradd extends Component {
       //baki
       deleteAuthor(_id) {
         axios.delete('http://localhost:4000/authors/' + _id).then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           this._refreshAuthors();
         });
       }

@@ -102,8 +102,8 @@ class FriendSuggestion extends Component {
     return (
 
       <div>
-        <div className="m-4 p-2" style={{backgroundColor: "#925024", color: "white"}} align="center">
-          <h5>People you may know</h5>
+        <div className="m-4 p-2"  align="center" style={{backgroundColor: "#ebdb82d8"}}>
+          <h5><font style={{color: "#925024"}}><b>People you may know</b></font></h5>
         </div>
         <div className="mt-3">
           {this.displayUser()}

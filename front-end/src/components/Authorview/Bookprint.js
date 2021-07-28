@@ -27,7 +27,7 @@ class BookPrint extends Component
     GetBook (bookid)
     {
           var link = 'http://localhost:4000/books/'+bookid
-          console.log(link)
+          //console.log(link)
           axios.get(link)
             .then((res) => {
               this.setState({books : res.data})

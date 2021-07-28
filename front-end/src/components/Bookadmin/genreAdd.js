@@ -33,7 +33,7 @@ class Genre extends Component
     GetBook (bookid)
     {
           var link = 'http://localhost:4000/books/'+bookid
-          console.log(link)
+          //console.log(link)
           axios.get(link)
             .then((res) => {
               this.setState({books : res.data})
@@ -46,7 +46,7 @@ class Genre extends Component
     }
     choose() {
 
-      console.log('choose called with id',this.state.books._id);
+      //console.log('choose called with id',this.state.books._id);
         var Genras=[
           {value:'1',label:'Drama'},
           {value:'2',label:'Thriller'},
@@ -67,7 +67,7 @@ class Genre extends Component
         var submit = () =>
         {
         
-          console.log('id',this.state.books._id)
+          //console.log('id',this.state.books._id)
           var link='http://localhost:4000/books/updategenre/' + this.state.books._id
           var G 
 
@@ -79,17 +79,17 @@ class Genre extends Component
                 if(g1 === g)
                 {
                    bool='true';
-                   console.log('match for',g)
+                   //console.log('match for',g)
                 } 
               });
 
               if(bool==='false')
               {
-                console.log('false for ',g)
+                //console.log('false for ',g)
                 G={genre:g}
                 axios.patch(link,G).then((response) => {
-                  console.log("genre added ",G);
-                  console.log(response.data);
+                  //console.log("genre added ",G);
+                  //console.log(response.data);
       
                 }).catch((err) => {
                   alert("not valid data")

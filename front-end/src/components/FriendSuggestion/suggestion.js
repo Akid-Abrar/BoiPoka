@@ -86,12 +86,12 @@ class Suggestion extends Component {
     render() {
 
         return (
-            <Card className="friend">
+            <Card className="friend" style={{ width: '300px'}}>
                 <div className="friend">
                     <a href={`/profile/${this.props.id}/${this.props.user}`}>
                         <div><img className="profile m-2" src={this.state.image} />{this.state.first_name} {this.state.last_name}</div>
                     </a>
-                    <input type="submit" value={this.state.token} onClick={this.handleAddFriend} />
+                    <Button type="submit" onClick={this.handleAddFriend} style={{backgroundColor:"#6E9B7A" , border:"0px"}}>{this.state.token}</Button>
                 </div>
             </Card>
         );

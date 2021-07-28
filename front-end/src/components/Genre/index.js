@@ -43,11 +43,11 @@ class Genre extends Component
     GetReader (email)
     {
         var link = 'http://localhost:4000/readers/email/'+email
-        console.log(link)
+        //console.log(link)
         axios.get(link)
           .then((res) => {
             this.setState({reader : res.data[0]})
-            console.log('reader',res.data[0])
+            //console.log('reader',res.data[0])
           }
           )
           .catch(() => {
@@ -56,7 +56,7 @@ class Genre extends Component
     }
     choose(reader) {
 
-      console.log('choose called');
+      //console.log('choose called');
         var Genras=[
           {value:'1',label:'drama'},
           {value:'2',label:'thriller'},
@@ -85,17 +85,17 @@ class Genre extends Component
                 if(g1 === g)
                 {
                    bool='true';
-                   console.log('match for',g)
+                   //console.log('match for',g)
                 } 
               });
 
               if(bool==='false')
               {
-                console.log('false for ',g)
+                //console.log('false for ',g)
                 G={genre:g}
                 axios.patch(link,G).then((response) => {
-                  console.log("genre added ",G);
-                  console.log(response.data);
+                  //console.log("genre added ",G);
+                  //console.log(response.data);
       
                 }).catch((err) => {
                   alert("not valid data")

@@ -68,7 +68,7 @@ class Books extends Component {
 
     GetReader(email) {
         var link = 'http://localhost:4000/readers/email/' + email;
-        console.log(link)
+        //console.log(link)
         axios.get(link)
 
             .then((res) => {
@@ -132,7 +132,7 @@ class Books extends Component {
     }
 
     handlesearch = (e) => {
-        console.log(e.target.value);
+        //console.log(e.target.value);
     }
 
     handlewish = (e) => {
@@ -145,7 +145,7 @@ class Books extends Component {
         if (this.state.token === "Add to wishlist") {
             e.preventDefault();
             axios.patch('http://localhost:4000/readers/updatebook/' + userid, book).then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
             }).catch((err) => {
                 console.log(err);
             });
@@ -175,7 +175,7 @@ class Books extends Component {
         if (this.state.rtoken === "Read") {
             e.preventDefault();
             axios.patch('http://localhost:4000/readers/updateBookRead/' + userid, book).then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
             }).catch((err) => {
                 console.log(err);
             });
@@ -190,11 +190,11 @@ class Books extends Component {
 
         }
         else {
-            console.log('inside else')
+            //console.log('inside else')
             e.preventDefault();
             axios.patch('http://localhost:4000/readers/pullReadBook/' + userid, book).then((response) => {
 
-                console.log(response.data);
+                //console.log(response.data);
             }).catch((err) => {
                 console.log(err);
             });
@@ -206,7 +206,7 @@ class Books extends Component {
     //handle following author
     handlefollow = (e) => {
         //e.preventDefault();
-        console.log('hlloo');
+        // console.log('hlloo');
         let follower;
         let userid = this.state.user[0]._id;
 
@@ -225,8 +225,8 @@ class Books extends Component {
                 alert("not valid data");
             });
             axios.patch('http://localhost:4000/readers/updatefollow/' + userid, folauth).then((response) => {
-                console.log("followinglist");
-                console.log(response.data);
+                //console.log("followinglist");
+                //console.log(response.data);
 
             }).catch((err) => {
                 alert("not valid data");
@@ -237,16 +237,16 @@ class Books extends Component {
             e.preventDefault();
 
             axios.patch('http://localhost:4000/authors/pullauthor/' + writer, follower).then((response) => {
-                console.log("followerlist");
-                console.log(response.data);
+                //console.log("followerlist");
+                //console.log(response.data);
 
             }).catch((err) => {
                 alert("not valid data");
             });
 
             axios.patch('http://localhost:4000/readers/removefollow/' + userid, folauth).then((response) => {
-                console.log("followinglist");
-                console.log(response.data);
+                // console.log("followinglist");
+                //console.log(response.data);
 
             }).catch((err) => {
                 alert("not valid data");
@@ -323,34 +323,34 @@ class Books extends Component {
                 {this.state.books.length > 0 ?
                     <CardDeck>
                         <Row style={{ padding: 20 }}>
-
-
-
                             <Col className="col">
-
                                 <Card >
                                     <Card.Body >
+                                        <Booklist val={this.state.token} handlewish={this.handlewish} books={this.state.books} user={this.state.usernew} />
+
                                         <Row>
-                                            <Col sm={6} >
+                                            <Col sm={4} >
+                                                <center>
 
                                                 <Button type="submit" onClick={this.handlewish} >{this.state.token}</Button>
-
+                                                </center>
                                             </Col>
-                                            <Col sm={6} >
-                                                <Button type="submit" onClick={this.handleread} >{this.state.rtoken}</Button>
+                                            <Col sm={4} >
+                                                <center>
+                                                    <Button type="submit" onClick={this.handleread} >{this.state.rtoken}</Button>
+                                                </center>
+                                            </Col>
+                                            <Col sm={4}>
+                                            <center>
+                                                <a href={`/review/${this.state.books[0]._id}`}>
+                                                    <Button className="btn btn-dark m-2">
+                                                        Add Review
+                                                    </Button>
+                                                </a>
+                                            </center>
+                                                
                                             </Col>
                                         </Row>
-                                        <Booklist val={this.state.token} handlewish={this.handlewish} books={this.state.books} user={this.state.usernew} />
-                                        <a href={`/review/${this.state.books[0]._id}`}>
-                                            <Button className="btn btn-dark m-2">
-                                                Add Review
-                                            </Button>
-                                        </a>
-                                        {/* <a href={`/seereview/${this.state.books[0]._id}`}>
-                                            <Button className="btn btn-dark m-2">
-                                                View Reviews
-                        </Button>
-                                        </a> */}
                                     </Card.Body>
 
 
@@ -374,9 +374,6 @@ class Books extends Component {
                             <Col className="col-4">
                                 <Card>
                                     <Card.Body >
-
-
-
                                         <Auth val={this.state.ftoken} handlefollow={this.handlefollow} newauth={this.state.newAuthor}
                                             userid={this.state.authornew}
                                             ownid={this.state.usernew}

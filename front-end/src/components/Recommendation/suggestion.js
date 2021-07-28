@@ -8,6 +8,7 @@ import { Card} from 'react-bootstrap'
 // import ProfileView from '../ProfileView'
 // import { PROFILE } from '../../constants/routes';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 // import { useEffect, useRef } from "react";
 
@@ -89,7 +90,7 @@ class Suggestion extends Component {
                 <Link to={'./info/'+ this.state.name}>
                         <div><img className="m-2" src={this.state.image} style={{height:"90px"}}/>{this.state.name}</div>
                     </Link>
-                    <input type="submit" value={this.state.token} onClick={this.handleAdd} />
+                    <Button type="submit" onClick={this.handleAdd} style={{backgroundColor:"#5E3272" , border:"0px"}}>{this.state.token}</Button>
                 </div>
             </Card>
         );
